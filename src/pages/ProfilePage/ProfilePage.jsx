@@ -1,16 +1,17 @@
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import ProfileInfo from './../../components/ProfileInfo/ProfileInfo'
 
 const ProfilePage = () => {
 
     return (
 
-        <Container className="CommunityPage">
+        <Container className="ProfilePage">
 
             <Row>
 
                 <Col md={{ span: 8, offset: 2 }}>
 
-                    <h1>ProfilePage Test</h1>
+                    <ProfileInfo />
 
                 </Col>
 

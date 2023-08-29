@@ -1,8 +1,11 @@
 import { useState } from "react"
-import { Form, Button } from "react-bootstrap"
+import { Link } from 'react-router-dom'
+import { Form, Button, Nav, Container, Row, Col } from "react-bootstrap"
+
+// import login services goes here
 
 
-const LoginForm = () => {
+const LoginForm = ({ fireSignupActions }) => {
 
     const [loginData, setLoginData] = useState({
         email: '',
@@ -17,6 +20,8 @@ const LoginForm = () => {
     const handleSubmit = e => {
 
         e.preventDefault()
+
+        // login services goes here
 
     }
 
@@ -38,9 +43,16 @@ const LoginForm = () => {
                 <Button variant="primary" type="submit">Login</Button>
             </div>
 
-            <div>Don't have an account yet? Sign in </div>
-
-            {/* sign in link closes current modal and open a new one */}
+            <Container>
+                <Row>
+                    <Col>
+                        <div>Don't have an account yet?</div>
+                    </Col>
+                    <Col>
+                        <Link className='nav-link' onClick={fireSignupActions}> Sign up</Link>
+                    </Col>
+                </Row>
+            </Container>
 
         </Form >
     )

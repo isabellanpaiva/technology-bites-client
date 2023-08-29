@@ -35,6 +35,9 @@ const Navigation = () => {
                             <Link to={'/community'} className='nav-link'>Community</Link>
 
                             <Nav.Link className='nav-link' onClick={() => setShowLoginModal(true)}>Login</Nav.Link>
+
+                            <Link to={'/profile'} className='nav-link'>My profile</Link>
+
                         </Nav>
                     </Navbar.Collapse>
 
@@ -49,11 +52,9 @@ const Navigation = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <LoginForm fireSignupActions={fireSignupActions} />
+                    <LoginForm fireSignupActions={fireSignupActions} setShowLoginModal={setShowLoginModal} />
                 </Modal.Body>
 
-                <Modal.Footer>
-                </Modal.Footer>
 
             </Modal>
 
@@ -66,11 +67,8 @@ const Navigation = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <SignupForm />
+                    <SignupForm setShowSignupModal={setShowSignupModal} />
                 </Modal.Body>
-
-                <Modal.Footer>
-                </Modal.Footer>
 
             </Modal>
 

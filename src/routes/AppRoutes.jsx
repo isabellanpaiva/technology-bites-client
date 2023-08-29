@@ -3,6 +3,7 @@ import HomePage from './../pages/HomePage/HomePage'
 import ChallengePage from '../pages/ChallengePage/ChallengePage'
 import DojoPage from '../pages/DojoPage/DogoPage'
 import CommunityPage from '../pages/CommunityPage/CommunityPage'
+import ProfilePage from '../pages/ProfilePage/ProfilePage'
 import NotFoundPage from './../pages/NotFoundPage/NotFoundPage'
 
 const AppRoutes = () => {
@@ -15,6 +16,7 @@ const AppRoutes = () => {
             <Route path={'/challenges'} element={<ChallengePage />} />
             <Route path={'/dojo'} element={<DojoPage />} />
             <Route path={'/community'} element={<CommunityPage />} />
+            <Route path={'/profile'} element={<ProfilePage />} />
 
             <Route path={'*'} element={<NotFoundPage />} />
 

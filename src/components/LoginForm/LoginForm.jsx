@@ -1,16 +1,18 @@
 import { useState } from "react"
 import { Link } from 'react-router-dom'
 import { Form, Button, Nav, Container, Row, Col } from "react-bootstrap"
+import authService from "../../services/auth.services"
+import { useNavigate } from "react-router-dom"
 
-// import login services goes here
 
-
-const LoginForm = ({ fireSignupActions }) => {
+const LoginForm = ({ fireSignupActions, setShowLoginModal }) => {
 
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     })
+
+    const navigate = useNavigate()
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -21,7 +23,15 @@ const LoginForm = ({ fireSignupActions }) => {
 
         e.preventDefault()
 
-        // login services goes here
+        authService
+            .login(loginData)
+            .then(({ data }) => {
+                // storeToken(data.authToken)
+                // authenticateUser()
+                setShowLoginModal(false)
+                navigate('/challenges')
+            })
+            .catch(err => console.log(err))
 
     }
 

@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap"
+import authService from "../../services/auth.services"
+import { useNavigate } from "react-router-dom"
 
-// import signup services goes here
-
-const SignupForm = () => {
+const SignupForm = ({ setShowSignupModal }) => {
 
     const [signupData, setSignupData] = useState({
         firstName: '',
@@ -46,24 +46,29 @@ const SignupForm = () => {
 
     })
 
+    const navigate = useNavigate()
+
     const handleInputChange = e => {
         const { value, name } = e.target
         setSignupData({ ...signupData, [name]: value })
     }
 
-    const handleSubmit = e => {
+    const handleFormSubmit = e => {
 
         e.preventDefault()
 
-        // signup services goes here
-
+        authService
+            .signup(signupData)
+            .then(() => {
+                setShowSignupModal(false)
+                navigate('/community')
+            })
+            .catch(err => console.log(err))
     }
 
     return (
 
-        <Form onSubmit={handleSubmit}>
-
-            <br></br>
+        <Form onSubmit={handleFormSubmit}>
 
             <h5> Personal information</h5>
 

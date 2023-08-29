@@ -16,7 +16,7 @@ const AppRoutes = () => {
             <Route path={'/challenges'} element={<ChallengePage />} />
             <Route path={'/dojo'} element={<DojoPage />} />
             <Route path={'/community'} element={<CommunityPage />} />
-            <Route path={'/profile'} element={<ProfilePage />} />
+            <Route path={'/profile/:user_id'} element={<ProfilePage />} />
 
             <Route path={'*'} element={<NotFoundPage />} />
 

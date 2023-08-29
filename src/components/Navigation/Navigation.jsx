@@ -36,7 +36,7 @@ const Navigation = () => {
 
                             <Nav.Link className='nav-link' onClick={() => setShowLoginModal(true)}>Login</Nav.Link>
 
-                            <Link to={'/profile'} className='nav-link'>My profile</Link>
+                            <Link to={`/profile/:user_id`} className='nav-link'>My profile</Link>
 
                         </Nav>
                     </Navbar.Collapse>

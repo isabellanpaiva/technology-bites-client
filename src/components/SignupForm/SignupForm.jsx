@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Form, Button, Row, Col, InputGroup } from "react-bootstrap"
+import { Form, Button, Row, Col } from "react-bootstrap"
 import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
 
@@ -12,35 +12,6 @@ const SignupForm = ({ setShowSignupModal }) => {
         password: '',
         jobPosition: '',
         description: '',
-
-        // in progress 
-
-        // linkedin: '',
-
-        //or
-
-        // socials: [
-        //     {
-        //         platform: 'LinkedIn',
-        //         link: ''
-        //     },
-        //     {
-        //         platform: 'Github',
-        //         link: ''
-        //     },
-        //     {
-        //         platform: 'Instagram',
-        //         link: ''
-        //     },
-        //     {
-        //         platform: 'Facebook',
-        //         link: ''
-        //     },
-        //     {
-        //         platform: 'X',
-        //         link: ''
-        //     },
-        // ]
 
         // add cloudinary avatar 
 
@@ -106,19 +77,6 @@ const SignupForm = ({ setShowSignupModal }) => {
             </Form.Group>
 
             <br></br>
-
-            {/* // social information */}
-
-            {/* <h5> Social information</h5>
-
-            <br></br>
-
-            <InputGroup className="mb-3">
-                <InputGroup.Text type="text" > Linkedin </InputGroup.Text>
-                <Form.Control type="text" value={signupData.linkedin} onChange={handleInputChange} name="linkedin" />
-            </InputGroup>
-
-            <br></br> */}
 
             {/* // account setup */}
 

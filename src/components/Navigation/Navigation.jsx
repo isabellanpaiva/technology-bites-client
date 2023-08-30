@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react'
-import { Navbar, Nav, Container, Modal } from 'react-bootstrap'
+import { Navbar, Nav, Container, Modal, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import LoginForm from '../LoginForm/LoginForm'
 import SignupForm from '../SignupForm/SignupForm'
 import { AuthContext } from '../../contexts/auth.context'
 
 const Navigation = () => {
+
 	const { loggedUser, logout } = useContext(AuthContext)
 
 	const [showLoginModal, setShowLoginModal] = useState(false)

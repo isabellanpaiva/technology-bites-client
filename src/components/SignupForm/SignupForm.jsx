@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Form, Button, Row, Col, InputGroup } from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import authService from '../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,34 +12,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 		jobPosition: '',
 		description: '',
 
-		// in progress
-
-		// linkedin: '',
-
-		//or
-
-		// socials: [
-		//     {
-		//         platform: 'LinkedIn',
-		//         link: ''
-		//     },
-		//     {
-		//         platform: 'Github',
-		//         link: ''
-		//     },
-		//     {
-		//         platform: 'Instagram',
-		//         link: ''
-		//     },
-		//     {
-		//         platform: 'Facebook',
-		//         link: ''
-		//     },
-		//     {
-		//         platform: 'X',
-		//         link: ''
-		//     },
-		// ]
+		// add cloudinary avatar
 	})
 
 	const [loadingImage, setLoadingImage] = useState(false)
@@ -107,6 +80,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 					</Form.Group>
 				</Col>
 			</Row>
+
 			<Form.Group className='mb-3' controlId='email'>
 				<Form.Label>E-mail * </Form.Label>
 				<Form.Control
@@ -116,6 +90,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 					name='email'
 				/>
 			</Form.Group>
+
 			<Form.Group className='mb-3' controlId='jobPosition'>
 				<Form.Label>Job position</Form.Label>
 				<Form.Control
@@ -125,6 +100,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 					name='jobPosition'
 				/>
 			</Form.Group>
+
 			<Form.Group className='mb-3' controlId='description'>
 				<Form.Label>Tell us about yourself</Form.Label>
 				<Form.Control
@@ -134,26 +110,18 @@ const SignupForm = ({ setShowSignupModal }) => {
 					name='description'
 				/>
 			</Form.Group>
+
 			<Form.Group className='mb-3' controlId='avatar'>
 				<Form.Label>Avatar</Form.Label>
 				<Form.Control type='file' onChange={handleFileUpload} />
 			</Form.Group>
-			<br></br>
-			//TODO PARA ESTO A LO MEJOR PODEMOS USAR FormData
+
 			{/* // social information */}
-			{/* <h5> Social information</h5>
 
-            <br></br>
-
-            <InputGroup className="mb-3">
-                <InputGroup.Text type="text" > Linkedin </InputGroup.Text>
-                <Form.Control type="text" value={signupData.linkedin} onChange={handleInputChange} name="linkedin" />
-            </InputGroup>
-
-            <br></br> */}
 			{/* // account setup */}
+
 			<h5> Account setup</h5>
-			<br></br>
+
 			<Form.Group className='mb-3' controlId='password'>
 				<Form.Label>Password * </Form.Label>
 				<Form.Control
@@ -163,6 +131,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 					name='password'
 				/>
 			</Form.Group>
+
 			<div className='d-grid mb-3'>
 				<Button variant='primary' type='submit' disabled={loadingImage}>
 					{loadingImage ? 'Loading image...' : 'Sign up'}

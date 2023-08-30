@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import authService from '../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
+import uploadServices from '../../services/upload.services'
 
-const SignupForm = ({ setShowSignupModal }) => {
+const SignupForm = ({ setModalData }) => {
+
 	const [signupData, setSignupData] = useState({
 		firstName: '',
 		lastName: '',
@@ -11,8 +13,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 		password: '',
 		jobPosition: '',
 		description: '',
-
-		// add cloudinary avatar
+		avatar: ''
 	})
 
 	const { firstName, lastName, email, password, jobPosition, description } = signupData
@@ -36,7 +37,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 			.uploadimage(formData)
 			.then(res => {
 				setSignupData({ ...signupData, avatar: res.data.cloudinary_url })
-				setLoadingImage(true)
+				setLoadingImage(false)
 			})
 			.catch(err => console.log(err))
 	}
@@ -47,13 +48,14 @@ const SignupForm = ({ setShowSignupModal }) => {
 		authService
 			.signup(signupData)
 			.then(() => {
-				setShowSignupModal(false)
-				navigate('/community')
+				setModalData({ show: false, content: 'signupModal' })
+				navigate('/')
 			})
 			.catch(err => console.log(err))
 	}
 
 	return (
+
 		<Form onSubmit={handleFormSubmit}>
 			<h5> Personal information</h5>
 			<br></br>

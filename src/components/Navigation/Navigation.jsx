@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
-import { Navbar, Nav, Container, Modal, Form } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Navbar, Nav, Container, Modal } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
 import LoginForm from '../LoginForm/LoginForm'
 import SignupForm from '../SignupForm/SignupForm'
 import { AuthContext } from '../../contexts/auth.context'
@@ -8,22 +8,23 @@ import { AuthContext } from '../../contexts/auth.context'
 const Navigation = () => {
 	const { loggedUser, logout } = useContext(AuthContext)
 
-	const loggedUser_id = loggedUser ? loggedUser._id : ''
+	const [modalData, setModalData] = useState({
+		show: false,
+		content: '',
+	})
 
-	const [showLoginModal, setShowLoginModal] = useState(false)
+	const navigate = useNavigate()
 
-	const [showSignupModal, setShowSignupModal] = useState(false)
-
-	const fireSignupActions = () => {
-		setShowLoginModal(false)
-		setShowSignupModal(true)
+	const logoutUser = () => {
+		logout()
+		navigate('/')
 	}
 
 	return (
 		<>
 			<Navbar bg='dark' variant='dark' expand='lg' fixed='top'>
 				<Container>
-					<Link className='navbar-brand'>Tech Bites</Link>
+					<Link className='navbar-brand'>{import.meta.env.VITE_APP_NAME}</Link>
 
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='me-auto'>
@@ -40,20 +41,27 @@ const Navigation = () => {
 								Community
 							</Link>
 
+							{/* login button  */}
+
 							{!loggedUser && (
 								<Nav.Link
 									className='nav-link'
-									onClick={() => setShowLoginModal(true)}>
+									onClick={() =>
+										setModalData({ show: true, content: 'loginModal' })
+									}>
 									Login
 								</Nav.Link>
 							)}
+
+							{/* logout button  */}
 
 							{loggedUser && (
 								<>
 									<Link to={`/profile/${loggedUser_id}`} className='nav-link'>
 										My profile
 									</Link>
-									<span className='nav-link' onClick={logout}>
+
+									<span className='nav-link' onClick={logoutUser}>
 										Logout
 									</span>
 								</>
@@ -63,28 +71,20 @@ const Navigation = () => {
 				</Container>
 			</Navbar>
 
-			<Modal show={showLoginModal} onHide={() => setShowLoginModal(false)}>
+			<Modal show={modalData.show} onHide={() => setModalData({ ...modalData, show: false })}>
 				<Modal.Header closeButton>
-					<Modal.Title>Login</Modal.Title>
+					<Modal.Title>
+						{modalData.content === 'loginModal' ? 'Login' : 'Signup'}
+					</Modal.Title>
 				</Modal.Header>
 
 				<Modal.Body>
-					<LoginForm
-						fireSignupActions={fireSignupActions}
-						setShowLoginModal={setShowLoginModal}
-					/>
-				</Modal.Body>
-			</Modal>
-
-			{/* add new modal for sign up form  */}
-
-			<Modal show={showSignupModal} onHide={() => setShowSignupModal(false)}>
-				<Modal.Header closeButton>
-					<Modal.Title>Sign up</Modal.Title>
-				</Modal.Header>
-
-				<Modal.Body>
-					<SignupForm setShowSignupModal={setShowSignupModal} />
+					{modalData.content === 'loginModal' && (
+						<LoginForm setModalData={setModalData} />
+					)}
+					{modalData.content === 'signupModal' && (
+						<SignupForm setModalData={setModalData} />
+					)}
 				</Modal.Body>
 			</Modal>
 		</>

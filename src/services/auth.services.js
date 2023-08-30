@@ -25,8 +25,8 @@ class AuthService {
         return this.api.post('/login', userData)
     }
 
-    verify(authToken) {
-        return this.api.get('/verify', { headers: { Authorization: `Bearer ${authToken}` } })
+    verify() {
+        return this.api.get('/verify')
     }
 
 }

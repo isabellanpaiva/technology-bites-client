@@ -11,6 +11,8 @@ const LoginForm = ({ fireSignupActions, setShowLoginModal }) => {
 		password: '',
 	})
 
+	const { email, password } = loginData
+
 	const navigate = useNavigate()
 
 	const { authenticateUser, storeToken } = useContext(AuthContext)
@@ -40,7 +42,7 @@ const LoginForm = ({ fireSignupActions, setShowLoginModal }) => {
 				<Form.Label>E-mail</Form.Label>
 				<Form.Control
 					type='email'
-					value={loginData.email}
+					value={email}
 					onChange={handleInputChange}
 					name='email'
 				/>
@@ -50,7 +52,7 @@ const LoginForm = ({ fireSignupActions, setShowLoginModal }) => {
 				<Form.Label>Password</Form.Label>
 				<Form.Control
 					type='password'
-					value={loginData.password}
+					value={password}
 					onChange={handleInputChange}
 					name='password'
 				/>

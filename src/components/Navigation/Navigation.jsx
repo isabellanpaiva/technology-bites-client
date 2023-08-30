@@ -6,8 +6,9 @@ import SignupForm from '../SignupForm/SignupForm'
 import { AuthContext } from '../../contexts/auth.context'
 
 const Navigation = () => {
-
 	const { loggedUser, logout } = useContext(AuthContext)
+
+	const loggedUser_id = loggedUser ? loggedUser._id : ''
 
 	const [showLoginModal, setShowLoginModal] = useState(false)
 
@@ -49,7 +50,7 @@ const Navigation = () => {
 
 							{loggedUser && (
 								<>
-									<Link to={`/profile/${loggedUser._id}`} className='nav-link'>
+									<Link to={`/profile/${loggedUser_id}`} className='nav-link'>
 										My profile
 									</Link>
 									<span className='nav-link' onClick={logout}>

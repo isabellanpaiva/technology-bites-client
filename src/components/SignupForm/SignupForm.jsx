@@ -15,6 +15,8 @@ const SignupForm = ({ setShowSignupModal }) => {
 		// add cloudinary avatar
 	})
 
+	const { firstName, lastName, email, password, jobPosition, description } = signupData
+
 	const [loadingImage, setLoadingImage] = useState(false)
 
 	const navigate = useNavigate()
@@ -61,7 +63,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 						<Form.Label>First name *</Form.Label>
 						<Form.Control
 							type='text'
-							value={signupData.firstName}
+							value={firstName}
 							onChange={handleInputChange}
 							name='firstName'
 						/>
@@ -73,7 +75,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 						<Form.Label>Last name * </Form.Label>
 						<Form.Control
 							type='text'
-							value={signupData.lastName}
+							value={lastName}
 							onChange={handleInputChange}
 							name='lastName'
 						/>
@@ -85,7 +87,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 				<Form.Label>E-mail * </Form.Label>
 				<Form.Control
 					type='email'
-					value={signupData.email}
+					value={email}
 					onChange={handleInputChange}
 					name='email'
 				/>
@@ -95,7 +97,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 				<Form.Label>Job position</Form.Label>
 				<Form.Control
 					type='text'
-					value={signupData.jobPosition}
+					value={jobPosition}
 					onChange={handleInputChange}
 					name='jobPosition'
 				/>
@@ -105,7 +107,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 				<Form.Label>Tell us about yourself</Form.Label>
 				<Form.Control
 					type='text'
-					value={signupData.description}
+					value={description}
 					onChange={handleInputChange}
 					name='description'
 				/>
@@ -126,7 +128,7 @@ const SignupForm = ({ setShowSignupModal }) => {
 				<Form.Label>Password * </Form.Label>
 				<Form.Control
 					type='password'
-					value={signupData.password}
+					value={password}
 					onChange={handleInputChange}
 					name='password'
 				/>

@@ -4,7 +4,7 @@ const DojoPage = () => {
 
     return (
 
-        <Container className="Home">
+        <Container className="DojoPage">
 
             <Row>
 

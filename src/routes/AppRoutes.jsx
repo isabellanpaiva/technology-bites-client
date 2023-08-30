@@ -10,7 +10,7 @@ const AppRoutes = () => {
 
     return (
 
-        <Routes className="margin">
+        <Routes className="AppRoutes">
 
             <Route path={'/'} element={<HomePage />} />
             <Route path={'/challenges'} element={<ChallengePage />} />
@@ -19,6 +19,8 @@ const AppRoutes = () => {
             <Route path={'/profile/:user_id'} element={<ProfilePage />} />
 
             <Route path={'*'} element={<NotFoundPage />} />
+
+            {/* add PrivateRoutes >>> */}
 
         </Routes>
 

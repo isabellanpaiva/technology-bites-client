@@ -1,12 +1,10 @@
 import { useContext, useState, useEffect } from 'react'
 import { Form, Button, Row, Col } from "react-bootstrap"
 import userService from "../../services/user.services"
-import { useParams, useNavigate } from "react-router-dom"
-import { AuthContext } from '../../contexts/auth.context'
+import { useParams } from "react-router-dom"
+import uploadServices from '../../services/upload.services'
 
-const ProfileEditForm = () => {
-
-    const loggedUser = useContext(AuthContext)
+const ProfileEditForm = ({ fireFinalActions }) => {
 
     const { user_id } = useParams()
 
@@ -17,10 +15,11 @@ const ProfileEditForm = () => {
         password: '',
         jobPosition: '',
         description: '',
-
-        // add password recovering? 
+        avatar: '',
 
     })
+
+    const [loadingImage, setLoadingImage] = useState(false)
 
     useEffect(() => {
         loadUserDetails()
@@ -34,11 +33,24 @@ const ProfileEditForm = () => {
             .catch(err => console.log(err))
     }
 
-    const navigate = useNavigate()
-
     const handleInputChange = e => {
         const { value, name } = e.target
         setUserData({ ...userData, [name]: value })
+    }
+
+    const handleFileUpload = e => {
+        setLoadingImage(true)
+
+        const formData = new FormData()
+        formData.append('imageData', e.target.files[0])
+
+        uploadServices
+            .uploadimage(formData)
+            .then(res => {
+                setUserData({ ...userData, avatar: res.data.cloudinary_url })
+                setLoadingImage(false)
+            })
+            .catch(err => console.log(err))
     }
 
     const handleFormSubmit = e => {
@@ -48,8 +60,7 @@ const ProfileEditForm = () => {
         userService
             .editUser(user_id, userData)
             .then(() => {
-                // setShowSignupModal(false)
-                navigate(`/profile/${loggedUser._id}`)
+                fireFinalActions()
             })
             .catch(err => console.log(err))
     }
@@ -58,11 +69,16 @@ const ProfileEditForm = () => {
 
         <Form onSubmit={handleFormSubmit}>
 
-            {/* <h5> Personal information</h5>
-
-            <br></br> */}
-
             <Row>
+
+                <div className="d-flex avatar-container">
+                    <img
+                        src={userData.avatar}
+                        alt="User avatar"
+                        className="avatar-img"
+                    />
+                </div>
+
                 <Col>
                     <Form.Group className="mb-3" controlId="firstName">
                         <Form.Label>First name *</Form.Label>
@@ -93,19 +109,15 @@ const ProfileEditForm = () => {
                 <Form.Control type="text" value={userData.description} onChange={handleInputChange} name="description" />
             </Form.Group>
 
-            <br></br>
-
-            {/* <h5> Account setup</h5>
-
-            <br></br> */}
-
-            {/* <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Password * </Form.Label>
-                <Form.Control type="password" value={userData.password} onChange={handleInputChange} name="password" />
-            </Form.Group> */}
+            <Form.Group className='mb-3' controlId='avatar'>
+                <Form.Label>Avatar</Form.Label>
+                <Form.Control type='file' onChange={handleFileUpload} />
+            </Form.Group>
 
             <div className="d-grid mb-3">
-                <Button variant="primary" type="submit">Save updates</Button>
+                <Button variant='primary' type='submit' disabled={loadingImage}>
+                    {loadingImage ? 'Loading image...' : 'Save updates'}
+                </Button>
             </div>
 
         </Form >

@@ -4,8 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import LoginForm from '../LoginForm/LoginForm'
 import SignupForm from '../SignupForm/SignupForm'
 import { AuthContext } from '../../contexts/auth.context'
+import { MessageContext } from '../../contexts/message.context'
 
 const Navigation = () => {
+	const { emitMessage } = useContext(MessageContext)
 	const { loggedUser, logout } = useContext(AuthContext)
 
 	const loggedUser_id = loggedUser ? loggedUser._id : ''
@@ -20,13 +22,13 @@ const Navigation = () => {
 	const logoutUser = () => {
 		logout()
 		navigate('/')
+		emitMessage('See you soon!')
 	}
 
 	return (
 		<>
 			<Navbar bg='dark' variant='dark' expand='lg' fixed='top'>
 				<Container>
-
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='me-auto'>
 							<Link to={'/'} className='nav-link'>

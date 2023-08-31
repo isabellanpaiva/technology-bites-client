@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import authService from '../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 import uploadServices from '../../services/upload.services'
 import FormError from '../FormError/FormError'
 import Spinner from 'react-bootstrap/Spinner'
+import { MessageContext } from '../../contexts/message.context'
 
 const SignupForm = ({ setModalData }) => {
+	const { emitMessage } = useContext(MessageContext)
+
 	const [errors, setErrors] = useState([])
 	const [loadingImage, setLoadingImage] = useState(false)
 	const navigate = useNavigate()
@@ -50,6 +53,7 @@ const SignupForm = ({ setModalData }) => {
 			.then(() => {
 				setModalData({ show: false, content: 'signupModal' })
 				navigate('/')
+				emitMessage(`Nice! You're now officially a biter`)
 			})
 			.catch(err => setErrors(err.response.data.errorMessages))
 	}

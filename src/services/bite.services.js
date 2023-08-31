@@ -6,9 +6,9 @@ class BiteServices {
 			baseURL: `${import.meta.env.VITE_API_URL}/bite`,
 		})
 		this.api.interceptors.request.use(config => {
-			const storedToken = localStorage.getItem('authToken')
-			if (storedToken) {
-				config.headers = { Authorization: `Bearer ${storedToken}` }
+			const password = 'FORM RESPONSE' //add form response
+			if (password) {
+				config.headers = { Authorization: `Basic ${password}` }
 			}
 			return config
 		})
@@ -23,7 +23,7 @@ class BiteServices {
 	}
 
 	getOneRandom() {
-		return this.api.post('/getOneRandom')
+		return this.api.get('/getOneRandom')
 	}
 }
 

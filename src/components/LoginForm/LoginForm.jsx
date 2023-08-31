@@ -5,9 +5,12 @@ import authService from '../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import FormError from '../FormError/FormError'
+import { MessageContext } from '../../contexts/message.context'
 
 const LoginForm = ({ setModalData }) => {
 	const { authenticateUser, storeToken } = useContext(AuthContext)
+	const { emitMessage } = useContext(MessageContext)
+
 	const navigate = useNavigate()
 	const [errors, setErrors] = useState([])
 
@@ -32,7 +35,7 @@ const LoginForm = ({ setModalData }) => {
 				storeToken(data.authToken)
 				authenticateUser()
 				setModalData({ show: false, content: 'loginModal' })
-				navigate('/challenges')
+				emitMessage('Welcome!')
 			})
 			.catch(err => setErrors(err.response.data.errorMessages))
 	}

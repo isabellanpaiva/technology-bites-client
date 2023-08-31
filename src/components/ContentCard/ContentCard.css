@@ -1,3 +1,29 @@
 .ContentCard {
-    background-color: red
+    height: 10em;
+    width: 60em;
+    margin: 3em auto;
+    padding: 2em;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    text-align: center;
+    line-height: 2.5em;
+}
+
+.CardTitle {
+    padding-bottom: 1em;
+    font-size: 1.75em !important;
+}
+
+.CardText {
+    padding-bottom: 1em;
+    padding-right: 4em;
+    padding-left: 4em;
+    font-size: 1.25em !important;
+}
+
+.CardButton {
+    padding: 2em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }

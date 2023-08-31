@@ -15,9 +15,7 @@ const ChallengePage = () => {
 
                     <h1>ChallengesPage Test</h1>
 
-                    <ContentCard>
-                        {/* states props goes here */}
-                    </ContentCard>
+                    {/* <ContentCard /> */}
 
                 </Col>
 

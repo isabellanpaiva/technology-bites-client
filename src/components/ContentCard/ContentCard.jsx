@@ -1,42 +1,33 @@
 import './ContentCard.css'
 import { Button, Card } from 'react-bootstrap'
 
-const ContentCard = ({ children }) => {
-
-    // home add props 
+const ContentCard = ({ bites, children, fireFinalActions }) => {
 
     return (
 
-        <>
-            <br></br>
+        <Card className="ContentCard">
 
-            <Card className="text-center">
+            <Card.Body>
 
-                <Card.Body>
+                {/* bite: concept / challenge: question / dojo: concept */}
+                <Card.Title className="CardTitle">
+                    {bites.category}
+                </Card.Title>
 
-                    <Card.Title>
-                        {/* bite: concept / challenge: question / dojo: concept */}
-                        {/* Sample: Internet */}
-                    </Card.Title>
+                {/* bite: random bite / challenge: submit user response / dojo: true or false */}
+                <Card.Text className="CardText">
 
+                    {children}
 
-                    <Card.Text>
-                        {/* bite: definition / challenge: placehold for user response / dojo: question */}
-                        {/* Sample: The global network of connected computers and servers that enables communication, information sharing, and access to online resources. */}
-                    </Card.Text>
-
-
-                    <Button variant="primary">
-                        {/* bite: random bite / challenge: submit user response / dojo: true or false */}
-                        {/* Sample: Get another bite */}
+                    <Button variant="dark" className="CardButton" onClick={fireFinalActions}>
+                        Get another bite
                     </Button>
 
+                </Card.Text>
 
-                </Card.Body>
+            </Card.Body>
 
-            </Card>
-
-        </>
+        </Card>
 
     )
 }

@@ -12,6 +12,16 @@ const HomePage = () => {
 
                     <h1>HomePage Test</h1>
 
+                    <section>
+
+                        <h1>Tech bites</h1>
+
+                    </section>
+
+                    <section>
+
+                    </section>
+
                 </Col>
 
             </Row>

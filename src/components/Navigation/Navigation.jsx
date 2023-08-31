@@ -8,6 +8,8 @@ import { AuthContext } from '../../contexts/auth.context'
 const Navigation = () => {
 	const { loggedUser, logout } = useContext(AuthContext)
 
+	const loggedUser_id = loggedUser ? loggedUser._id : ''
+
 	const [modalData, setModalData] = useState({
 		show: false,
 		content: '',

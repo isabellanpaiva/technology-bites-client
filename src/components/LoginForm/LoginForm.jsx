@@ -4,8 +4,12 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import authService from '../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
+import FormError from '../FormError/FormError'
 
 const LoginForm = ({ setModalData }) => {
+	const { authenticateUser, storeToken } = useContext(AuthContext)
+	const navigate = useNavigate()
+	const [errors, setErrors] = useState([])
 
 	const [loginData, setLoginData] = useState({
 		email: '',
@@ -13,10 +17,6 @@ const LoginForm = ({ setModalData }) => {
 	})
 
 	const { email, password } = loginData
-
-	const navigate = useNavigate()
-
-	const { authenticateUser, storeToken } = useContext(AuthContext)
 
 	const handleInputChange = e => {
 		const { value, name } = e.target
@@ -34,13 +34,11 @@ const LoginForm = ({ setModalData }) => {
 				setModalData({ show: false, content: 'loginModal' })
 				navigate('/challenges')
 			})
-			.catch(err => console.log(err))
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	return (
-
 		<Form onSubmit={handleSubmit}>
-
 			<Form.Group className='mb-3' controlId='email'>
 				<Form.Label>E-mail</Form.Label>
 				<Form.Control
@@ -61,6 +59,15 @@ const LoginForm = ({ setModalData }) => {
 				/>
 			</Form.Group>
 
+			{errors.length > 0 &&
+				errors.map(elm => (
+					<FormError>
+						<p key={elm} style={{ margin: 0 }}>
+							{elm}
+						</p>
+					</FormError>
+				))}
+
 			{/* login  */}
 
 			<div className='d-grid mb-3'>
@@ -73,17 +80,17 @@ const LoginForm = ({ setModalData }) => {
 
 			<Container>
 				<Row>
-
 					<Col>
 						<div>Don't have an account yet?</div>
 					</Col>
 
 					<Col>
-						<Link className='nav-link' onClick={() => setModalData({ show: true, content: 'signupModal' })}>
+						<Link
+							className='nav-link'
+							onClick={() => setModalData({ show: true, content: 'signupModal' })}>
 							Sign up
 						</Link>
 					</Col>
-
 				</Row>
 			</Container>
 		</Form>

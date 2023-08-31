@@ -3,8 +3,13 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import authService from '../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 import uploadServices from '../../services/upload.services'
+import FormError from '../FormError/FormError'
+import Spinner from 'react-bootstrap/Spinner'
 
 const SignupForm = ({ setModalData }) => {
+	const [errors, setErrors] = useState([])
+	const [loadingImage, setLoadingImage] = useState(false)
+	const navigate = useNavigate()
 
 	const [signupData, setSignupData] = useState({
 		firstName: '',
@@ -13,14 +18,10 @@ const SignupForm = ({ setModalData }) => {
 		password: '',
 		jobPosition: '',
 		description: '',
-		avatar: ''
+		avatar: null,
 	})
 
 	const { firstName, lastName, email, password, jobPosition, description } = signupData
-
-	const [loadingImage, setLoadingImage] = useState(false)
-
-	const navigate = useNavigate()
 
 	const handleInputChange = e => {
 		const { value, name } = e.target
@@ -32,14 +33,13 @@ const SignupForm = ({ setModalData }) => {
 
 		const formData = new FormData()
 		formData.append('imageData', e.target.files[0])
-
 		uploadServices
 			.uploadimage(formData)
 			.then(res => {
 				setSignupData({ ...signupData, avatar: res.data.cloudinary_url })
 				setLoadingImage(false)
 			})
-			.catch(err => console.log(err))
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	const handleFormSubmit = e => {
@@ -51,14 +51,11 @@ const SignupForm = ({ setModalData }) => {
 				setModalData({ show: false, content: 'signupModal' })
 				navigate('/')
 			})
-			.catch(err => console.log(err))
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	return (
-
 		<Form onSubmit={handleFormSubmit}>
-			<h5> Personal information</h5>
-			<br></br>
 			<Row>
 				<Col>
 					<Form.Group className='mb-3' controlId='firstName'>
@@ -85,15 +82,30 @@ const SignupForm = ({ setModalData }) => {
 				</Col>
 			</Row>
 
-			<Form.Group className='mb-3' controlId='email'>
-				<Form.Label>E-mail * </Form.Label>
-				<Form.Control
-					type='email'
-					value={email}
-					onChange={handleInputChange}
-					name='email'
-				/>
-			</Form.Group>
+			<Row>
+				<Col>
+					<Form.Group className='mb-3' controlId='email'>
+						<Form.Label>E-mail * </Form.Label>
+						<Form.Control
+							type='email'
+							value={email}
+							onChange={handleInputChange}
+							name='email'
+						/>
+					</Form.Group>
+				</Col>
+				<Col>
+					<Form.Group className='mb-3' controlId='password'>
+						<Form.Label>Password * </Form.Label>
+						<Form.Control
+							type='password'
+							value={password}
+							onChange={handleInputChange}
+							name='password'
+						/>
+					</Form.Group>
+				</Col>
+			</Row>
 
 			<Form.Group className='mb-3' controlId='jobPosition'>
 				<Form.Label>Job position</Form.Label>
@@ -120,27 +132,25 @@ const SignupForm = ({ setModalData }) => {
 				<Form.Control type='file' onChange={handleFileUpload} />
 			</Form.Group>
 
-			{/* // social information */}
-
-			{/* // account setup */}
-
-			<h5> Account setup</h5>
-
-			<Form.Group className='mb-3' controlId='password'>
-				<Form.Label>Password * </Form.Label>
-				<Form.Control
-					type='password'
-					value={password}
-					onChange={handleInputChange}
-					name='password'
-				/>
-			</Form.Group>
-
 			<div className='d-grid mb-3'>
 				<Button variant='primary' type='submit' disabled={loadingImage}>
-					{loadingImage ? 'Loading image...' : 'Sign up'}
+					{loadingImage ? (
+						<Spinner animation='border' size='sm' role='status' />
+					) : (
+						'Sign up'
+					)}
 				</Button>
 			</div>
+
+			{errors.length > 0 && (
+				<FormError>
+					{errors.map(elm => (
+						<p key={elm} style={{ margin: 0, fontSize: '.8em' }}>
+							{elm}
+						</p>
+					))}
+				</FormError>
+			)}
 		</Form>
 	)
 }

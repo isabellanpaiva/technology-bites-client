@@ -1,107 +1,92 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from 'react'
 import userService from '../../services/user.services'
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
-import { AuthContext } from "../../contexts/auth.context"
+import { AuthContext } from '../../contexts/auth.context'
 
 const ProfilePage = () => {
+	const { user_id } = useParams()
 
-    const { logout } = useContext(AuthContext)
+	const { logout } = useContext(AuthContext)
+	const [user, setUser] = useState({})
+	const [showProfileEditModal, setProfileEditModal] = useState(false)
 
-    const [showProfileEditModal, setProfileEditModal] = useState(false)
+	const { firstName, lastName, avatar, email, jobPosition, description } = user
 
-    const { user_id } = useParams()
+	useEffect(() => {
+		loadUserDetails()
+	}, [])
 
-    const [user, setUser] = useState({})
+	const fireFinalActions = () => {
+		loadUserDetails()
+		setProfileEditModal(false)
+	}
 
-    useEffect(() => {
-        loadUserDetails()
-    }, [])
+	const loadUserDetails = () => {
+		userService
+			.getOneUser(user_id)
+			.then(({ data }) => setUser(data))
+			.catch(err => console.log(err))
+	}
 
-    const fireFinalActions = () => {
-        loadUserDetails()
-        setProfileEditModal(false)
-    }
+	const navigate = useNavigate()
 
-    const loadUserDetails = () => {
+	const deleteProfile = () => {
+		const shouldDelete = confirm(
+			'Are you sure you want to delete your profile? This action cannot be undone.'
+		)
 
-        userService
-            .getOneUser(user_id)
-            .then(({ data }) => setUser(data))
-            .catch(err => console.log(err))
-    }
+		if (shouldDelete) {
+			userService
+				.deleteUser(user_id)
+				.then(() => {
+					alert('Profile deleted')
+					logout()
+					navigate('/')
+				})
+				.catch(err => console.log(err))
+		}
+	}
 
-    const navigate = useNavigate()
+	return (
+		<Container className='ProfilePage'>
+			<Row>
+				<Col md={{ span: 8, offset: 2 }}>
+					<h3>Welcome, {firstName}</h3>
 
-    const deleteProfile = () => {
+					<div className='d-flex avatar-container'>
+						<img src={avatar} alt='User avatar' className='avatar-img' />
+					</div>
+					<p>
+						{' '}
+						{firstName} {lastName}{' '}
+					</p>
+					<p> {email} </p>
+					<p> {jobPosition} </p>
+					<p> {description}</p>
+					<Button onClick={() => setProfileEditModal(true)}> Edit profile </Button>
 
-        const shouldDelete = confirm("Are you sure you want to delete your profile? This action cannot be undone.")
+					<h5> Danger zone </h5>
 
-        if (shouldDelete) {
+					<Button variant='danger' onClick={deleteProfile}>
+						{' '}
+						Delete profile{' '}
+					</Button>
 
-            userService
-                .deleteUser(user_id)
-                .then(() => {
-                    alert("Profile deleted")
-                    logout()
-                    navigate('/')
-                })
-                .catch(err => console.log(err))
+					<Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
+						<Modal.Header closeButton>
+							<Modal.Title>Edit personal information</Modal.Title>
+						</Modal.Header>
 
-        }
-    }
-
-    return (
-
-        <Container className="ProfilePage">
-
-            <Row>
-
-                <Col md={{ span: 8, offset: 2 }}>
-
-                    <h3>Welcome, {user.firstName}</h3>
-
-                    <div className="d-flex avatar-container">
-                        <img
-                            src={user.avatar}
-                            alt="User avatar"
-                            className="avatar-img"
-                        />
-                    </div>
-
-                    <p> {user.firstName} {user.lastName} </p>
-
-                    <p> {user.email} </p>
-
-                    <p> {user.jobPosition} </p>
-
-                    <p> {user.description}</p>
-
-                    <Button onClick={() => setProfileEditModal(true)}> Edit profile </Button>
-
-                    <h5> Danger zone </h5>
-
-                    <Button variant="danger" onClick={deleteProfile} > Delete profile </Button>
-
-                    <Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
-
-                        <Modal.Header closeButton>
-                            <Modal.Title>Edit personal information</Modal.Title>
-                        </Modal.Header>
-
-                        <Modal.Body>
-                            <ProfileEditForm fireFinalActions={fireFinalActions} />
-                        </Modal.Body>
-
-                    </Modal>
-
-                </Col>
-
-            </Row>
-
-        </Container>
-    )
+						<Modal.Body>
+							<ProfileEditForm fireFinalActions={fireFinalActions} />
+						</Modal.Body>
+					</Modal>
+				</Col>
+			</Row>
+		</Container>
+	)
 }
 
 export default ProfilePage

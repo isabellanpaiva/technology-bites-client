@@ -1,23 +1,38 @@
-import { Container, Row, Col, Toast, ToastContainer } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+import ContentCard from './../../components/ContentCard/ContentCard'
 
 const HomePage = () => {
+
+	const appName = import.meta.env.VITE_APP_NAME
+
+	// states and services goes here
+
 	return (
+
 		<Container className='Home'>
+
 			<Row>
 				<Col md={{ span: 8, offset: 2 }}>
-					<h1>HomePage Test</h1>
+
+					<section>
+
+						<h1>{appName}</h1>
+
+						<h3>Explanation about what we do</h3>
+
+						<ContentCard>
+							{/* states props goes here */}
+						</ContentCard>
+
+					</section>
+
 				</Col>
 			</Row>
-			{/* <ToastContainer position='top-end' style={{ paddingTop: '80px', paddingRight: '20px' }}>
-				<Toast>
-					<Toast.Header>
-						<strong className='me-auto'>TechBites</strong>
-					</Toast.Header>
-					<Toast.Body>Logged in successfully!</Toast.Body>
-				</Toast>
-			</ToastContainer> */}
-		</Container>
+
+		</Container >
+
 	)
+
 }
 
 export default HomePage

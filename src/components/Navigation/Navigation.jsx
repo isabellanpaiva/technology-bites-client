@@ -26,7 +26,6 @@ const Navigation = () => {
 		<>
 			<Navbar bg='dark' variant='dark' expand='lg' fixed='top'>
 				<Container>
-					<Link className='navbar-brand'>{import.meta.env.VITE_APP_NAME}</Link>
 
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='me-auto'>

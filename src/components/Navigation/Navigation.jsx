@@ -24,7 +24,7 @@ const Navigation = () => {
 
 	return (
 		<>
-			<Navbar bg='dark' variant='dark' expand='lg' fixed='top'>
+			<Navbar bg='light' variant='light' expand='lg' fixed='top'>
 				<Container>
 
 					<Navbar.Collapse id='basic-navbar-nav'>

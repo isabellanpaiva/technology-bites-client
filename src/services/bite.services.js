@@ -23,7 +23,7 @@ class BiteServices {
 	}
 
 	getOneRandom() {
-		return this.api.post('/getOneRandom')
+		return this.api.get('/getOneRandom')
 	}
 }
 

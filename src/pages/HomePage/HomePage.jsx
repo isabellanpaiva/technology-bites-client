@@ -42,6 +42,7 @@ const HomePage = () => {
 				</Row>
 			</section>
 
+
 			{/* <section>
 
 				<Row>

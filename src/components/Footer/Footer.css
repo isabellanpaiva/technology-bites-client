@@ -6,15 +6,15 @@
     background-color: #191919;
     color: white;
     font-size: 2em;
+}
 
-    h1 {
-        margin-bottom: 1em;
-    }
+.Footer h1 {
+    margin-bottom: 1em;
+}
 
-    p {
-        font-size: 0.65em;
-        font-weight: 250
-    }
+.Footer p {
+    font-size: 0.65em;
+    font-weight: 250
 }
 
 .FooterEmail {

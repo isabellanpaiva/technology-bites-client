@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
+import SocialCard from '../../components/SocialCard/SocialCard'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -50,42 +51,77 @@ const ProfilePage = () => {
 	}
 
 	return (
+
 		<Container className='ProfilePage'>
-			<Row>
-				<Col md={{ span: 8, offset: 2 }}>
-					<h3>Welcome, {firstName}</h3>
 
-					<div className='d-flex avatar-container'>
-						<img src={avatar} alt='User avatar' className='avatar-img' />
-					</div>
-					<p>
-						{' '}
-						{firstName} {lastName}{' '}
-					</p>
-					<p> {email} </p>
-					<p> {jobPosition} </p>
-					<p> {description}</p>
-					<Button onClick={() => setProfileEditModal(true)}> Edit profile </Button>
+			<section className=" ProfileInformation mb-5">
 
-					<h5> Danger zone </h5>
+				<Row>
+					<Col md={{ span: 8, offset: 2 }}>
+						<h3>Welcome, {firstName}</h3>
 
-					<Button variant='danger' onClick={deleteProfile}>
-						{' '}
-						Delete profile{' '}
-					</Button>
+						<div className='d-flex avatar-container'>
+							<img src={avatar} alt='User avatar' className='avatar-img' />
+						</div>
+						<p>
+							{' '}
+							{firstName} {lastName}{' '}
+						</p>
+						<p> {email} </p>
+						<p> {jobPosition} </p>
+						<p> {description}</p>
+						<Button onClick={() => setProfileEditModal(true)}> Edit profile </Button>
+					</Col>
 
-					<Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
-						<Modal.Header closeButton>
-							<Modal.Title>Edit personal information</Modal.Title>
-						</Modal.Header>
+				</Row>
 
-						<Modal.Body>
-							<ProfileEditForm fireFinalActions={fireFinalActions} />
-						</Modal.Body>
-					</Modal>
-				</Col>
-			</Row>
-		</Container>
+				<Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
+					<Modal.Header closeButton>
+						<Modal.Title>Edit personal information</Modal.Title>
+					</Modal.Header>
+
+					<Modal.Body>
+						<ProfileEditForm fireFinalActions={fireFinalActions} />
+					</Modal.Body>
+				</Modal>
+
+			</section>
+
+			<section className=" ProfileCards mt-5">
+
+				<Row>
+					<Col md={{ span: 8, offset: 2 }}>
+
+						<h3>Your library</h3>
+
+						<SocialCard />
+
+					</Col>
+
+				</Row>
+
+			</section>
+
+			<section>
+
+				<Row>
+
+					<Col md={{ span: 8, offset: 2 }}>
+
+						<h5> Danger zone </h5>
+
+						<Button variant='danger' onClick={deleteProfile}>
+							{' '}
+							Delete profile{' '}
+						</Button>
+
+					</Col>
+
+				</Row >
+
+			</section>
+
+		</Container >
 	)
 }
 

@@ -11,7 +11,7 @@ const UserMessage = () => {
 			show={showToast}
 			delay={3000}
 			autohide
-			style={{ position: 'fixed', top: 70, right: 10 }}>
+			style={{ position: 'fixed', top: 130, right: 30, zIndex: 30 }}>
 			<Toast.Header closeButton={false}>
 				<strong className='me-auto'>Bite Team</strong>
 			</Toast.Header>

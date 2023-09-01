@@ -19,7 +19,7 @@ const ContentCard = ({ bites, children, fireFinalActions }) => {
 
                     {children}
 
-                    <Button variant="dark" className="CardButton" onClick={fireFinalActions}>
+                    <Button variant="dark" onClick={fireFinalActions}>
                         Get another bite
                     </Button>
 

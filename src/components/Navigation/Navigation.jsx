@@ -1,3 +1,4 @@
+import './Navigation.css'
 import { useContext, useState } from 'react'
 import { Navbar, Nav, Container, Modal } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,6 +8,7 @@ import { AuthContext } from '../../contexts/auth.context'
 import { MessageContext } from '../../contexts/message.context'
 
 const Navigation = () => {
+
 	const { emitMessage } = useContext(MessageContext)
 	const { loggedUser, logout } = useContext(AuthContext)
 
@@ -27,52 +29,55 @@ const Navigation = () => {
 
 	return (
 		<>
-			<Navbar bg='light' variant='light' expand='lg' fixed='top'>
-				<Container>
-					<Navbar.Collapse id='basic-navbar-nav'>
-						<Nav className='me-auto'>
-							<Link to={'/'} className='nav-link'>
-								Home
-							</Link>
-							<Link to={'/challenges'} className='nav-link'>
-								Challenges
-							</Link>
-							<Link to={'/dojo'} className='nav-link'>
-								Dojo
-							</Link>
-							<Link to={'/community'} className='nav-link'>
-								Community
-							</Link>
+			<Navbar variant='light' expand='lg' fixed='top' className="Navigation">
 
-							{/* login button  */}
+				<Navbar.Collapse>
 
-							{!loggedUser && (
-								<Nav.Link
-									className='nav-link'
-									onClick={() =>
-										setModalData({ show: true, content: 'loginModal' })
-									}>
-									Login
-								</Nav.Link>
-							)}
+					<Nav>
 
-							{/* logout button  */}
+						<Link to={'/'} className='nav-link'>
+							Home
+						</Link>
+						<Link to={'/challenges'} className='nav-link'>
+							Challenges
+						</Link>
+						<Link to={'/dojo'} className='nav-link'>
+							Dojo
+						</Link>
+						<Link to={'/community'} className='nav-link'>
+							Community
+						</Link>
 
-							{loggedUser && (
-								<>
-									<Link to={`/profile/${loggedUser_id}`} className='nav-link'>
-										My profile
-									</Link>
+					</Nav>
 
-									<span className='nav-link' onClick={logoutUser}>
-										Logout
-									</span>
-								</>
-							)}
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
+					<Nav className="Column2">
+
+						{!loggedUser && (
+							<Nav.Link
+								className='nav-link'
+								onClick={() =>
+									setModalData({ show: true, content: 'loginModal' })
+								}>
+								Login
+							</Nav.Link>
+						)}
+
+						{loggedUser && (
+							<>
+								<Link to={`/profile/${loggedUser_id}`} className='nav-link'>
+									My profile
+								</Link>
+
+								<span className='nav-link' onClick={logoutUser}>
+									Logout
+								</span>
+							</>
+						)}
+					</Nav>
+
+				</Navbar.Collapse>
+
+			</Navbar >
 
 			<Modal show={modalData.show} onHide={() => setModalData({ ...modalData, show: false })}>
 				<Modal.Header closeButton>

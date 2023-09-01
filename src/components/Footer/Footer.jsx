@@ -1,4 +1,4 @@
-import './Footer.css'
+import './Footer.scss'
 
 const Footer = () => {
 
@@ -8,12 +8,12 @@ const Footer = () => {
 
             <h1>Contact </h1>
 
-            <h3> Want to work together? </h3>
+            <p> Want to work together? </p>
 
-            {/* <p>
-                Technology Bites ©
+            <p className="FooterEmail">
+                Write us at
                 technologybites.hi@gmail.com
-            </p> */}
+            </p>
 
         </footer >
 

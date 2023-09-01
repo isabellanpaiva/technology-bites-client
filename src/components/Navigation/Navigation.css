@@ -1,0 +1,13 @@
+.Navigation {
+    padding: 2em !important;
+    padding-left: 6em !important;
+    background-color: white !important;
+    text-transform: uppercase !important;
+    font-size: 0.85em !important;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 15px;
+
+    color: black;
+}
+
+.Column2 {}

@@ -1,6 +1,6 @@
 import './HomePage.css'
 import { useState, useEffect } from 'react'
-import { Container, Row, Col, Figure } from 'react-bootstrap'
+import { Container, Row, Col, Button, Figure } from 'react-bootstrap'
 import ContentCard from './../../components/ContentCard/ContentCard'
 import biteServices from '../../services/bite.services'
 // import iphoneMockup from '../../assets/iphoneMockup'
@@ -20,30 +20,26 @@ const HomePage = () => {
 			.then(({ data }) => setBites(data[0]))
 			.catch(err => console.log(err))
 	}
-	const fireFinalActions = () => {
-		loadBites()
-	}
 
 	return (
-
 		<Container className='HomePage'>
-
 			<section>
-
 				<Row>
 					<Col>
-
 						<h1 className='PageHeading'>{appName}</h1>
 
 						<h3 className='PageSubHeading'>Learn. Validate. Connect. </h3>
 
-						<ContentCard bites={bites} fireFinalActions={fireFinalActions}>
-							<p>{bites.definition}</p>
+						<ContentCard bites={bites}>
+							<span className='mb-3' style={{ display: 'block' }}>
+								{bites.definition}
+							</span>
+							<Button variant='dark' type='submit' onClick={loadBites}>
+								Get Another Bite
+							</Button>
 						</ContentCard>
-
 					</Col>
 				</Row>
-
 			</section>
 
 			{/* <section>
@@ -81,7 +77,6 @@ const HomePage = () => {
 				</Row>
 
 			</section> */}
-
 		</Container>
 	)
 }

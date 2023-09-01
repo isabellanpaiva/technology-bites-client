@@ -25,6 +25,14 @@ class ChallengeServices {
 	getOneRandom() {
 		return this.api.get('/getOneRandom')
 	}
+
+	getOne(challenge_id) {
+		return this.api.get('/getOne', challenge_id)
+	}
+
+	saveResponse(responseInfo) {
+		return this.api.put('/saveResponse', responseInfo)
+	}
 }
 
 const challengeServices = new ChallengeServices()

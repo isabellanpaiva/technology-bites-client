@@ -21,6 +21,17 @@
     font-size: 1.25em !important;
 }
 
+.CardHeader {
+    background-color: transparent !important;
+    border: none !important;
+    color: rgb(164, 164, 164) !important;
+}
+
+.CardFooter {
+    background-color: transparent !important;
+    border: none !important;
+}
+
 /* .CardButton {
     padding: 2em;
     margin-top: 1em;

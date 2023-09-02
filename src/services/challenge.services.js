@@ -23,18 +23,22 @@ class ChallengeServices {
 		return this.api.post('/createManyChallenge', challengeJson)
 	}
 
-	getOneRandomChallenge() {
-		return this.api.get('/getOneRandomChallenge')
-	}
+	//in progress
 
 	getOneChallenge(challenge_id) {
-		console.log('--------->', challenge_id)
-		return this.api.get('/getOneChallenge', challenge_id)
+		return this.api.get(`/getOneChallenge/${challenge_id}`)
+	}
+
+	//in progress
+
+	getOneRandomChallenge() {
+		return this.api.get('/getOneRandomChallenge')
 	}
 
 	saveResponse(responseInfo) {
 		return this.api.put('/saveResponse', responseInfo)
 	}
+
 }
 
 const challengeServices = new ChallengeServices()

@@ -1,10 +1,10 @@
-import './SocialCard.css'
+import './ResponseCard.css'
 import { Card, Row, Col, Accordion } from 'react-bootstrap';
 import testImage from './../../../public/testImage.jpg'
 import CommentCard from '../CommentCard/CommentCard'
 import { useState } from 'react'
 
-const SocialCard = () => {
+const ResponseCard = () => {
 
     return (
 
@@ -49,4 +49,4 @@ const SocialCard = () => {
 
 }
 
-export default SocialCard
+export default ResponseCard

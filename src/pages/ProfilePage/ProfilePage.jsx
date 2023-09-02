@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
-import SocialCard from '../../components/SocialCard/SocialCard'
+import ResponseCard from '../../components/ResponseCard/ResponseCard'
 import CommentCard from '../../components/CommentCard/CommentCard'
 
 const ProfilePage = () => {
@@ -95,7 +95,7 @@ const ProfilePage = () => {
 
 						<h3>Your library</h3>
 
-						<SocialCard />
+						<ResponseCard />
 
 					</Col>
 

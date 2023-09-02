@@ -5,6 +5,7 @@ import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
 import SocialCard from '../../components/SocialCard/SocialCard'
+import CommentCard from '../../components/CommentCard/CommentCard'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -97,6 +98,12 @@ const ProfilePage = () => {
 						<SocialCard />
 
 					</Col>
+
+				</Row>
+
+				<Row>
+
+					<CommentCard />
 
 				</Row>
 

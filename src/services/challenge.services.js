@@ -5,29 +5,31 @@ class ChallengeServices {
 		this.api = axios.create({
 			baseURL: `${import.meta.env.VITE_API_URL}/challenge`,
 		})
+
 		this.api.interceptors.request.use(config => {
-			const password = 'FORM RESPONSE' //add form response
-			if (password) {
-				config.headers = { Authorization: `Basic ${password}` }
+			const storedToken = localStorage.getItem('authToken')
+			if (storedToken) {
+				config.headers = { Authorization: `Bearer ${storedToken}` }
 			}
 			return config
 		})
 	}
 
-	createOne(challengeData) {
-		return this.api.post('/create', challengeData)
+	createOneChallenge(challengeData) {
+		return this.api.post('/createChallenge', challengeData)
 	}
 
-	createMany(challengeJson) {
-		return this.api.post('/createMany', challengeJson)
+	createManyChallenge(challengeJson) {
+		return this.api.post('/createManyChallenge', challengeJson)
 	}
 
-	getOneRandom() {
-		return this.api.get('/getOneRandom')
+	getOneRandomChallenge() {
+		return this.api.get('/getOneRandomChallenge')
 	}
 
-	getOne(challenge_id) {
-		return this.api.get('/getOne', challenge_id)
+	getOneChallenge(challenge_id) {
+		console.log('--------->', challenge_id)
+		return this.api.get('/getOneChallenge', challenge_id)
 	}
 
 	saveResponse(responseInfo) {

@@ -16,7 +16,7 @@ const HomePage = () => {
 
 	const loadBites = () => {
 		biteServices
-			.getOneRandom()
+			.getOneRandomBite()
 			.then(({ data }) => setBites(data[0]))
 			.catch(err => console.log(err))
 	}
@@ -41,7 +41,6 @@ const HomePage = () => {
 					</Col>
 				</Row>
 			</section>
-
 
 			{/* <section>
 

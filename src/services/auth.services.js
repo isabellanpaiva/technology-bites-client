@@ -1,34 +1,31 @@
 import axios from 'axios'
 
 class AuthService {
+	constructor() {
+		this.api = axios.create({
+			baseURL: `${import.meta.env.VITE_API_URL}/auth`,
+		})
 
-    constructor() {
+		this.api.interceptors.request.use(config => {
+			const storedToken = localStorage.getItem('authToken')
+			if (storedToken) {
+				config.headers = { Authorization: `Bearer ${storedToken}` }
+			}
+			return config
+		})
+	}
 
-        this.api = axios.create({
-            baseURL: `${import.meta.env.VITE_API_URL}/auth`,
-        })
+	signup(userData) {
+		return this.api.post('/signup', userData)
+	}
 
-        this.api.interceptors.request.use(config => {
-            const storedToken = localStorage.getItem('authToken')
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` }
-            }
-            return config
-        })
-    }
+	login(userData) {
+		return this.api.post('/login', userData)
+	}
 
-    signup(userData) {
-        return this.api.post('/signup', userData)
-    }
-
-    login(userData) {
-        return this.api.post('/login', userData)
-    }
-
-    verify() {
-        return this.api.get('/verify')
-    }
-
+	verify() {
+		return this.api.get('/verify')
+	}
 }
 
 const authService = new AuthService()

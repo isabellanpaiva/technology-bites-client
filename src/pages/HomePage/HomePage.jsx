@@ -1,9 +1,8 @@
 import './HomePage.css'
 import { useState, useEffect } from 'react'
-import { Container, Row, Col, Button, Figure } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import ContentCard from './../../components/ContentCard/ContentCard'
 import biteServices from '../../services/bite.services'
-// import iphoneMockup from '../../assets/iphoneMockup'
 
 const HomePage = () => {
 	const appName = import.meta.env.VITE_APP_NAME
@@ -34,7 +33,7 @@ const HomePage = () => {
 							<span className='mb-3' style={{ display: 'block' }}>
 								{bites.definition}
 							</span>
-							<Button variant='dark' type='submit' onClick={loadBites}>
+							<Button className="callToAction" variant='dark' type='submit' onClick={loadBites}>
 								Get Another Bite
 							</Button>
 						</ContentCard>

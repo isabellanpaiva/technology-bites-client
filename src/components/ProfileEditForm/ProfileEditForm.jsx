@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import userService from '../../services/user.services'
 import { useParams } from 'react-router-dom'
@@ -131,7 +131,7 @@ const ProfileEditForm = ({ fireFinalActions }) => {
 			</Form.Group>
 
 			<div className='d-grid mb-3'>
-				<Button variant='primary' type='submit' disabled={loadingImage}>
+				<Button className="callToAction" variant='primary' type='submit' disabled={loadingImage}>
 					{loadingImage ? 'Loading image...' : 'Save updates'}
 				</Button>
 			</div>

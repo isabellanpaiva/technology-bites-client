@@ -1,7 +1,6 @@
-import './ResponseCard.css'
 import { Card, Row, Col, Accordion } from 'react-bootstrap'
 import testImage from './../../../public/testImage.jpg'
-import CommentCard from '../CommentCard/CommentCard'
+import CommentCardNested from '../CommentCard/CommentCard-nested'
 import { useEffect, useState } from 'react'
 import userService from '../../services/user.services'
 
@@ -33,15 +32,19 @@ const ResponseCard = ({ challenge, response }) => {
 
 			<Card.Footer className='CardFooter'>
 				<Row>
-					<Col>Icon 1</Col>
+					<Col>
+						<button className='socialActionButton'>Like</button>
+					</Col>
 
 					{/* this needs to trigger the commentCard */}
 					<Col>
-						<p>Icon 2</p>
+						<button className='socialActionButton'>Comment</button>
 					</Col>
 					{/* this needs to trigger the commentCard */}
 				</Row>
 			</Card.Footer>
+
+			<CommentCardNested />
 		</Card>
 	)
 }

@@ -6,7 +6,6 @@ import userService from '../../services/user.services'
 import challengeServices from '../../services/challenge.services'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
-import CommentCard from '../../components/CommentCard/CommentCard'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -78,7 +77,10 @@ const ProfilePage = () => {
 						<p> {email} </p>
 						<p> {jobPosition} </p>
 						<p> {description}</p>
-						<Button onClick={() => setProfileEditModal(true)}> Edit profile </Button>
+						<Button className='callToAction' onClick={() => setProfileEditModal(true)}>
+							{' '}
+							Edit profile{' '}
+						</Button>
 					</Col>
 				</Row>
 
@@ -120,7 +122,7 @@ const ProfilePage = () => {
 					<Col md={{ span: 8, offset: 2 }}>
 						<h5> Danger zone </h5>
 
-						<Button variant='danger' onClick={deleteProfile}>
+						<Button className='callToAction' variant='danger' onClick={deleteProfile}>
 							{' '}
 							Delete profile{' '}
 						</Button>

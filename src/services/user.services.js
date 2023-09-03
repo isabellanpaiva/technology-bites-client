@@ -5,7 +5,6 @@ class UserService {
 		this.api = axios.create({
 			baseURL: `${import.meta.env.VITE_API_URL}/user`,
 		})
-
 		this.api.interceptors.request.use(config => {
 			const storedToken = localStorage.getItem('authToken')
 			if (storedToken) {
@@ -17,6 +16,11 @@ class UserService {
 	getOneUser(user_id) {
 		return this.api.get(`/getOneUser/${user_id}`)
 	}
+
+	getAllUsers() {
+		return this.api.get('/getAllUsers')
+	}
+
 	deleteUser(user_id) {
 		return this.api.delete(`/deleteUser/${user_id}`)
 	}
@@ -25,6 +29,10 @@ class UserService {
 	}
 	updateFavorites(action, friend_id) {
 		return this.api.post(`/edit/${action}`, friend_id)
+	}
+
+	getCompletedChallenges(user_id) {
+		return this.axios.get(`/getCompletedChallenges/${user_id}`)
 	}
 }
 

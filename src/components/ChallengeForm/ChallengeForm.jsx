@@ -3,7 +3,7 @@ import challengeServices from '../../services/challenge.services'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/auth.context'
 
-const ChallengeForm = ({ challenge }) => {
+const ChallengeForm = ({ challenge, setIsCompleted, setMyResponse }) => {
 	const [userResponse, setUserResponse] = useState('')
 	const { loggedUser } = useContext(AuthContext)
 
@@ -25,8 +25,11 @@ const ChallengeForm = ({ challenge }) => {
 
 		challengeServices
 			.saveResponse(responseInfo)
-			.then(() => console.log(responseInfo))
+			.then(() => console.log('yas!'))
 			.catch(err => console.log(err))
+
+		setIsCompleted(true)
+		setMyResponse(userResponse)
 	}
 
 	return (

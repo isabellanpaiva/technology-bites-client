@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import ContentCard from './../../components/ContentCard/ContentCard'
 import { useEffect, useState } from 'react'
 import challengeServices from '../../services/challenge.services'

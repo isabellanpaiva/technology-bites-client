@@ -41,7 +41,9 @@ const LoginForm = ({ setModalData }) => {
 	}
 
 	return (
+
 		<Form onSubmit={handleSubmit}>
+
 			<Form.Group className='mb-3' controlId='email'>
 				<Form.Label>E-mail</Form.Label>
 				<Form.Control
@@ -70,33 +72,26 @@ const LoginForm = ({ setModalData }) => {
 						</p>
 					</FormError>
 				))}
-
-			{/* login  */}
-
 			<div className='d-grid mb-3'>
-				<Button variant='primary' type='submit'>
+				<Button variant='primary' className="callToAction" type='submit'>
 					Login
 				</Button>
 			</div>
 
-			{/* signup  */}
+			<Row>
 
-			<Container>
-				<Row>
-					<Col>
-						<div>Don't have an account yet?</div>
-					</Col>
+				<div>Don't have an account yet?</div>
 
-					<Col>
-						<Link
-							className='nav-link'
-							onClick={() => setModalData({ show: true, content: 'signupModal' })}>
-							Sign up
-						</Link>
-					</Col>
-				</Row>
-			</Container>
-		</Form>
+				<button
+					className='socialActionButton'
+					onClick={() => setModalData({ show: true, content: 'signupModal' })}>
+					Sign up
+				</button>
+
+			</Row>
+
+		</Form >
+
 	)
 }
 

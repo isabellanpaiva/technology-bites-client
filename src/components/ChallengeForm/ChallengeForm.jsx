@@ -39,7 +39,7 @@ const ChallengeForm = ({ challenge }) => {
 					value={userResponse}
 					onChange={handleInputChange}
 				/>
-				<Button variant='primary' type='submit' className='mt-3'>
+				<Button variant='primary' type='submit' className='callToAction mt-3'>
 					Submit answer
 				</Button>
 			</Form.Group>

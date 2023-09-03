@@ -5,7 +5,6 @@ import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
-import CommentCard from '../../components/CommentCard/CommentCard'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -71,7 +70,7 @@ const ProfilePage = () => {
 						<p> {email} </p>
 						<p> {jobPosition} </p>
 						<p> {description}</p>
-						<Button onClick={() => setProfileEditModal(true)}> Edit profile </Button>
+						<Button className="callToAction" onClick={() => setProfileEditModal(true)}> Edit profile </Button>
 					</Col>
 
 				</Row>
@@ -101,12 +100,6 @@ const ProfilePage = () => {
 
 				</Row>
 
-				<Row>
-
-					<CommentCard />
-
-				</Row>
-
 			</section>
 
 			<section>
@@ -117,7 +110,7 @@ const ProfilePage = () => {
 
 						<h5> Danger zone </h5>
 
-						<Button variant='danger' onClick={deleteProfile}>
+						<Button className="callToAction" variant='danger' onClick={deleteProfile}>
 							{' '}
 							Delete profile{' '}
 						</Button>

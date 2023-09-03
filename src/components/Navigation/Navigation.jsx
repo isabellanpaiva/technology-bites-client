@@ -1,6 +1,6 @@
 import './Navigation.css'
 import { useContext, useState } from 'react'
-import { Navbar, Nav, Container, Modal } from 'react-bootstrap'
+import { Navbar, Nav, Modal } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import LoginForm from '../LoginForm/LoginForm'
 import SignupForm from '../SignupForm/SignupForm'
@@ -41,12 +41,12 @@ const Navigation = () => {
 						<Link to={'/challenges'} className='nav-link'>
 							Challenges
 						</Link>
-						<Link to={'/dojo'} className='nav-link'>
+						{/* <Link to={'/dojo'} className='nav-link'>
 							Dojo
 						</Link>
 						<Link to={'/community'} className='nav-link'>
 							Community
-						</Link>
+						</Link> */}
 
 					</Nav>
 

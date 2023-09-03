@@ -137,7 +137,7 @@ const SignupForm = ({ setModalData }) => {
 			</Form.Group>
 
 			<div className='d-grid mb-3'>
-				<Button variant='primary' type='submit' disabled={loadingImage}>
+				<Button className="callToAction" variant='primary' type='submit' disabled={loadingImage}>
 					{loadingImage ? (
 						<Spinner animation='border' size='sm' role='status' />
 					) : (

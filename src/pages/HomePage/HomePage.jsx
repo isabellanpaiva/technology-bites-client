@@ -33,12 +33,15 @@ const HomePage = () => {
 						<h3 className='PageSubHeading'>Learn. Validate. Connect. </h3>
 
 						<ContentCard bites={bites}>
-							<span className='mb-3' style={{ display: 'block' }}>
+
+							<p className='plainText mb-3'>
 								{bites.definition}
-							</span>
+							</p>
+
 							<Button className="callToAction mt-4" type='submit' onClick={loadBites}>
 								Get Another Bite
 							</Button>
+
 						</ContentCard>
 					</Col>
 				</Row>

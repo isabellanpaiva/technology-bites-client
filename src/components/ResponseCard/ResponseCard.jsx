@@ -30,21 +30,29 @@ const ResponseCard = ({ challenge, response, type }) => {
 	}
 
 	return (
+
 		<Card className='ContentCard'>
-			{/* remove if it's your profile page */}
+
 			{type === 'challenge' && (
+
 				<Card.Header className='CardHeader'>
-					<img src={responseOwner?.avatar} alt='ProfileAvatar' className='mb-4' />
-					<h5>{responseOwner?.firstName} </h5>
+
+					<img src={responseOwner?.avatar} alt='ProfileAvatar' className='mb-2' />
+
+					<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
+						{responseOwner?.firstName}
+					</Card.Title>
+
 				</Card.Header>
+
 			)}
 
-			{/* remove if it's your profile page */}
 			<Card.Body className='CardBody'>
-				<Col>
-					<Card.Title className='CardTitle'>{challenge.question}</Card.Title>
-					<Card.Text className='CardText'>{response.response}</Card.Text>
-				</Col>
+
+				<Card.Title className='CardTitle'>{challenge.question}</Card.Title>
+
+				<Card.Text className='CardText'>{response.response}</Card.Text>
+
 			</Card.Body>
 
 			<Card.Footer className='CardFooter'>

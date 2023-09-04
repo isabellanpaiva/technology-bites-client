@@ -64,24 +64,34 @@ img {
 .CardHeader {
     background-color: transparent !important;
     border: none !important;
-    color: rgb(164, 164, 164) !important;
 }
 
 .CardTitle {
-    padding-bottom: 1em;
     font-size: 1.75em !important;
+    margin-top: 1em !important;
 }
 
 .CardText {
-    padding-bottom: 1em;
     padding-right: 4em;
     padding-left: 4em;
     font-size: 1.25em !important;
+    color: gray;
+    font-weight: bold;
 }
 
 .CardFooter {
     background-color: transparent !important;
     border: none !important;
+}
+
+.CardResponse {
+    color: gray;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.plainText {
+    line-height: 2.5em;
 }
 
 /* buttons settings */
@@ -120,7 +130,17 @@ img {
     box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }
 
-/* home animamtion */
+/* carousel */
+
+.CarouselPrevIcon {
+    background-image: url('/CarouselPrevIcon.webp');
+}
+
+.CarouselNextIcon {
+    background-image: url('/CarouselNextIcon.webp');
+}
+
+/* home animation */
 
 @keyframes typing {
     from {

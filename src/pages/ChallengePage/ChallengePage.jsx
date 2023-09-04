@@ -22,7 +22,7 @@ const ChallengePage = () => {
 
 	const loadChallenge = () => {
 		challengeServices
-			.getOneChallenge('64f5905da4a69300fd90e911')
+			.getOneChallenge('64f5905da4a69300fd90e90b')
 			.then(({ data }) => setChallenge(data))
 			.catch(err => console.log(err))
 	}
@@ -54,8 +54,8 @@ const ChallengePage = () => {
 					<ContentCard challenge={challenge}>
 						{myResponse ? (
 							<>
-								<p>You already answered this one!</p>
-								<p>{myResponse.response}</p>
+								<p className="plainText mt-5 mb-5">You already answered this one ✅</p>
+								<p className="CardResponse"> "{myResponse.response}"</p>
 							</>
 						) : (
 							<ChallengeForm challenge={challenge} setMyResponse={setMyResponse} />

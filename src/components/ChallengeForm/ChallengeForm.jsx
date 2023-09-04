@@ -31,19 +31,25 @@ const ChallengeForm = ({ challenge, setMyResponse }) => {
 	}
 
 	return (
+
 		<Form onSubmit={handleSubmitForm}>
-			<Form.Group className='mb-3' controlId='userResponse'>
-				<Form.Label>Response</Form.Label>
+
+			<Form.Group className='mt-5 mb-3' controlId='userResponse'>
+
 				<Form.Control
 					type='text'
 					name='userResponse'
 					value={userResponse}
+					placeholder="Type your answer here!"
 					onChange={handleInputChange}
 				/>
-				<Button variant='primary' type='submit' className='callToAction mt-3'>
+
+				<Button variant='primary' type='submit' className='callToAction mt-5'>
 					Submit answer
 				</Button>
+
 			</Form.Group>
+
 		</Form>
 	)
 }

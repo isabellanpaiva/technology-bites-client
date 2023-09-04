@@ -44,7 +44,7 @@ const CommunityPage = () => {
                 <Row>
 
                     {users.map(user => (
-                        <Col key={user.id} md={{ span: 4 }}>
+                        <Col md={{ span: 4 }} key={user._id}>
                             {/* <Col key={user.id} md={4}> */}
                             <CommunityCard user={user} />
                         </Col>

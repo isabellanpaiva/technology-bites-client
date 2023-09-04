@@ -74,38 +74,39 @@ const ProfilePage = () => {
 				<h3 className='PageSubHeading'>
 					{loggedUser && user._id === loggedUser._id
 						? 'Nice to have you here'
-						: 'How about sending a hi?'}
+						: 'Inspire and be inspired'}
 				</h3>
 			</section>
 
 			<section className=' ProfileInformation mb-5'>
+
 				<Card className='CommunityCard'>
+
 					<Card.Header className='CardHeader'>
+
 						<Row>
+
 							<Col>
 								<img src={avatar} alt='ProfileAvatar' className='mb-1' />
 							</Col>
-						</Row>
-					</Card.Header>
 
-					<Card.Body className='CardBody'>
-						<Col>
 							<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
 								{firstName} {lastName}
 							</Card.Title>
 
-							<Card.Text
-								className='CardText'
-								style={{ marginBottom: '0rem', color: 'grey' }}>
-								<strong>{jobPosition} </strong>
-							</Card.Text>
+						</Row>
 
-							<Card.Text className='CardText'>
-								<strong>{description}</strong>
-							</Card.Text>
+					</Card.Header>
 
-							<Card.Text className='CardText'>{email}</Card.Text>
-						</Col>
+					<Card.Body className='CardBody'>
+
+						<Card.Text className='CardText' > {jobPosition} </Card.Text>
+
+						<Card.Text className='CardText' style={{ color: 'black' }}>{email}</Card.Text>
+
+						<Card.Text className='CardText'> {description} </Card.Text>
+
+
 					</Card.Body>
 
 					<Card.Footer className='CardFooter'>
@@ -137,8 +138,8 @@ const ProfilePage = () => {
 
 			<section className=' ProfileCards mt-5'>
 				<Row>
-					{/* <Col md={{ span: 8, offset: 2 }}> */}
-					<h1 className='PageHeading' style={{ fontSize: '3em', marginTop: '2em' }}>
+
+					<h1 className='PageHeading' style={{ fontSize: '3em', marginTop: '2em', marginBottom: '0.5em' }}>
 						Library
 					</h1>
 
@@ -153,12 +154,16 @@ const ProfilePage = () => {
 								responses={userResponses}
 								type={'profile'}></CarouselChallenge>
 						) : (
-							<p>NO HAY NADA</p>
+							<h3 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
+								{loggedUser && user._id === loggedUser._id
+									? 'No challenges resolved yet. What about start now?'
+									: `Ops... ${firstName} don't have any responsers yet 🔎`}
+							</h3>
 						)
 					) : (
 						<p>Loading...</p>
 					)}
-					{/* </Col> */}
+
 				</Row>
 			</section>
 
@@ -188,7 +193,7 @@ const ProfilePage = () => {
 					<h3 className='PageSubHeading'></h3>
 				)}
 			</section>
-		</Container>
+		</Container >
 	)
 }
 export default ProfilePage

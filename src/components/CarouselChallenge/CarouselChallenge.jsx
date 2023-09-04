@@ -1,3 +1,4 @@
+import './../../App.css'
 import { useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import ResponseCard from '../ResponseCard/ResponseCard'
@@ -10,7 +11,14 @@ const CarouselChallenge = ({ responses, type }) => {
 	}
 
 	return (
-		<Carousel activeIndex={index} onSelect={handleSelect} data-bs-theme='dark'>
+
+		<Carousel
+			activeIndex={index}
+			onSelect={handleSelect}
+			data-bs-theme='light'
+			prevIcon={<span className="CarouselPrevIcon"></span>}
+			nextIcon={<span className="CarouselNextIcon"></span>}
+		>
 			{responses.map(eachResponse => {
 				return (
 					<Carousel.Item key={eachResponse._id}>

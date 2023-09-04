@@ -6,35 +6,38 @@ const CommunityCard = ({ user }) => {
     const navigate = useNavigate()
 
     const checkUserProfile = () => {
-        // alert("Button clicked")
-        console.log(user._id)
         navigate(`/profile/${user._id}`)
     }
 
     return (
+
         <Card className='CommunityCard'>
+
             <Card.Header className='CardHeader'>
+
                 <Row>
+
                     <Col>
+
                         <img src={user.avatar} alt='ProfileAvatar' className='mb-1' />
+
+                        <Card.Title
+                            className='CardTitle'>
+                            {user.firstName} {user.lastName}
+                        </Card.Title>
                     </Col>
+
+
                 </Row>
+
             </Card.Header>
 
             <Card.Body className='CardBody'>
-                <Col>
-                    <Card.Title
-                        className='CardTitle'
-                        style={{ marginBottom: '-1rem' }}>
-                        {user.firstName} {user.lastName}
-                    </Card.Title>
-                    <Card.Text
-                        className='CardText'
-                        style={{ marginBottom: '0rem', color: 'grey' }}>
-                        <strong>{user.jobPosition} </strong>
-                    </Card.Text>
-                    <Card.Text className='CardText'>{user.description}</Card.Text>
-                </Col>
+
+                <Card.Text className='CardText' > {user.jobPosition} </Card.Text>
+
+                <Card.Text className='plainText' style={{ fontSize: '1.3em' }}>{user.description}</Card.Text>
+
             </Card.Body>
 
             <Card.Footer className='CardFooter'>
@@ -47,7 +50,8 @@ const CommunityCard = ({ user }) => {
                     </Col>
                 </Row>
             </Card.Footer>
-        </Card>
+
+        </Card >
     );
 };
 

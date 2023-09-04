@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import userService from '../../services/user.services'
 import CommunityCard from '../../components/CommunityCard/CommunityCard'
+import { AuthContext } from './../../contexts/auth.context'
 
 const CommunityPage = () => {
+
+    const { loggedUser } = useContext(AuthContext)
 
     const [users, setUsers] = useState([])
 
@@ -15,9 +18,14 @@ const CommunityPage = () => {
 
         userService
             .getAllUsers()
-            .then(({ data }) => setUsers(data))
+            .then(({ data }) => {
+                const communityUsers = data.filter(user => user._id !== loggedUser._id)
+                setUsers(communityUsers)
+            })
             .catch(err => console.log(err))
     }
+
+    //call service updateFavorites 
 
     return (
 
@@ -29,17 +37,19 @@ const CommunityPage = () => {
 
                     <h1 className='PageHeading' style={{ fontSize: '3em' }}> Community </h1>
 
-                    <h3 className='PageSubHeading'>Check who's around </h3>
+                    <h3 className='PageSubHeading'>Meet your neighbors </h3>
 
                 </section>
 
                 <Row>
+
                     {users.map(user => (
                         <Col key={user.id} md={{ span: 4 }}>
                             {/* <Col key={user.id} md={4}> */}
                             <CommunityCard user={user} />
                         </Col>
                     ))}
+
                 </Row>
 
             </Container >

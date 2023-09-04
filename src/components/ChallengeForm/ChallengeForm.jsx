@@ -26,10 +26,8 @@ const ChallengeForm = ({ challenge, setMyResponse }) => {
 
 		responseService
 			.createOneResponse(responseInfo)
-			.then(() => console.log('AIUDA')) //!kjdhiugwkhwwg
+			.then(() => setMyResponse(userResponse))
 			.catch(err => console.log(err))
-
-		setMyResponse(userResponse)
 	}
 
 	return (

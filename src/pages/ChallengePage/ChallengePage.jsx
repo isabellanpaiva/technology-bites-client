@@ -6,6 +6,7 @@ import ChallengeForm from '../../components/ChallengeForm/ChallengeForm'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
+import CarouselChallenge from '../../components/CarouselChallenge/CarouselChallenge'
 
 const ChallengePage = () => {
 	const [challenge, setChallenge] = useState(null)
@@ -21,7 +22,7 @@ const ChallengePage = () => {
 
 	const loadChallenge = () => {
 		challengeServices
-			.getOneChallenge('64f5905da4a69300fd90e880')
+			.getOneChallenge('64f5905da4a69300fd90e911')
 			.then(({ data }) => setChallenge(data))
 			.catch(err => console.log(err))
 	}
@@ -42,8 +43,7 @@ const ChallengePage = () => {
 		<Container className='PageContainer'>
 			<section style={{ marginBottom: '5em' }}>
 				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
-					{' '}
-					Challenges{' '}
+					Challenges
 				</h1>
 
 				<h3 className='PageSubHeading'> A new technology question everyday </h3>
@@ -55,7 +55,7 @@ const ChallengePage = () => {
 						{myResponse ? (
 							<>
 								<p>You already answered this one!</p>
-								{myResponse ? <p>{myResponse.response}</p> : <p>Loading...</p>}
+								<p>{myResponse.response}</p>
 							</>
 						) : (
 							<ChallengeForm challenge={challenge} setMyResponse={setMyResponse} />
@@ -65,17 +65,23 @@ const ChallengePage = () => {
 			</Row>
 
 			<Row>
-				{myResponse &&
-					responses.map(response => {
-						return (
-							<Col key={response._id}>
-								<ResponseCard
-									response={response}
-									challenge={challenge}
-									type={'challenge'}></ResponseCard>
-							</Col>
-						)
-					})}
+				{
+					myResponse && (
+						<CarouselChallenge
+							responses={responses}
+							type={'challenge'}></CarouselChallenge>
+					)
+					// responses.map(response => {
+					// 	return (
+					// 		<Col key={response._id}>
+					// 			<ResponseCard
+					// 				response={response}
+					// 				challenge={challenge}
+					// 				type={'challenge'}></ResponseCard>
+					// 		</Col>
+					// 	)
+					// })
+				}
 			</Row>
 		</Container>
 	)

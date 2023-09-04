@@ -10,7 +10,6 @@ import { MessageContext } from '../../contexts/message.context'
 import logo from './../../../public/test-logo.png'
 
 const Navigation = () => {
-
 	const { emitMessage } = useContext(MessageContext)
 	const { loggedUser, logout } = useContext(AuthContext)
 
@@ -31,18 +30,15 @@ const Navigation = () => {
 
 	return (
 		<>
-			<Navbar expand='lg' fixed='top' className="Navigation">
-
+			<Navbar expand='lg' fixed='top' className='Navigation'>
 				<Navbar.Collapse>
-
 					<Nav>
 						<Link to={'/'} className='nav-link'>
-							<img src={logo} alt="logo" style={{ width: '5em', height: 'auto' }} />
+							<img src={logo} alt='logo' style={{ width: '5em', height: 'auto' }} />
 						</Link>
 					</Nav>
 
-					<Nav className="AuthLinks">
-
+					<Nav className='AuthLinks'>
 						<Link to={'/'} className='nav-link'>
 							Bites
 						</Link>
@@ -55,17 +51,13 @@ const Navigation = () => {
 						<Link to={'/community'} className='nav-link'>
 							Community
 						</Link>
-
 					</Nav>
 
-					<Nav className="AuthLinks">
-
+					<Nav className='AuthLinks'>
 						{!loggedUser && (
 							<Nav.Link
 								className='nav-link'
-								onClick={() =>
-									setModalData({ show: true, content: 'loginModal' })
-								}>
+								onClick={() => setModalData({ show: true, content: 'loginModal' })}>
 								Login
 							</Nav.Link>
 						)}
@@ -82,13 +74,10 @@ const Navigation = () => {
 							</>
 						)}
 					</Nav>
-
 				</Navbar.Collapse>
-
-			</Navbar >
+			</Navbar>
 
 			<Modal show={modalData.show} onHide={() => setModalData({ ...modalData, show: false })}>
-
 				<Modal.Header closeButton>
 					<Modal.Title>
 						{modalData.content === 'loginModal' ? 'Login' : 'Signup'}
@@ -103,7 +92,6 @@ const Navigation = () => {
 						<SignupForm setModalData={setModalData} />
 					)}
 				</Modal.Body>
-
 			</Modal>
 		</>
 	)

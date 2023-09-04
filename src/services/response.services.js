@@ -30,6 +30,10 @@ class ResponseService {
 	getResponsesToChallenge(challenge_id) {
 		return this.api.get(`/getResponsesToChallenge/${challenge_id}`)
 	}
+
+	addResponseFav(response_id, user_id) {
+		return this.api.post(`/addResponseFav/${response_id}`, user_id)
+	}
 }
 
 const responseService = new ResponseService()

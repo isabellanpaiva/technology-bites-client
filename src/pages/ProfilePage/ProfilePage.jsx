@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
 import userService from '../../services/user.services'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Container, Row, Col, Button, Card, Modal } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card, Modal, Carousel } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
 import responseService from '../../services/response.services'
+import CarouselChallenge from '../../components/CarouselChallenge/CarouselChallenge'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -63,8 +64,7 @@ const ProfilePage = () => {
 		<Container className='PageContainer'>
 			<section style={{ marginBottom: '5em' }}>
 				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
-					{' '}
-					Welcome, {firstName}!{' '}
+					Welcome, {firstName}!
 				</h1>
 
 				<h3 className='PageSubHeading'> Nice to have you here </h3>
@@ -93,7 +93,6 @@ const ProfilePage = () => {
 							</Card.Text>
 
 							<Card.Text className='CardText'>
-								{' '}
 								<strong>{description}</strong>
 							</Card.Text>
 
@@ -130,22 +129,20 @@ const ProfilePage = () => {
 
 			<section className=' ProfileCards mt-5'>
 				<Row>
-					<Col md={{ span: 8, offset: 2 }}>
-						<h3>Your library</h3>
-						{userResponses ? (
-							userResponses.map(userResponse => {
-								return (
-									<ResponseCard
-										key={userResponse._id}
-										response={userResponse}
-										challenge={userResponse.relatedChallenge}
-									/>
-								)
-							})
+					{/* <Col md={{ span: 8, offset: 2 }}> */}
+					<h3>Your library</h3>
+					{userResponses ? (
+						userResponses.length > 0 ? (
+							<CarouselChallenge
+								responses={userResponses}
+								type={'profile'}></CarouselChallenge>
 						) : (
-							<p>Loading...</p>
-						)}
-					</Col>
+							<p>NO HYA NADA</p>
+						)
+					) : (
+						<p>Loading...</p>
+					)}
+					{/* </Col> */}
 				</Row>
 			</section>
 			<section>

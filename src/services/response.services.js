@@ -31,8 +31,8 @@ class ResponseService {
 		return this.api.get(`/getResponsesToChallenge/${challenge_id}`)
 	}
 
-	addResponseFav(response_id, user_id) {
-		return this.api.post(`/addResponseFav/${response_id}`, user_id)
+	handleResponseFav(response_id, user_id, action) {
+		return this.api.post(`/handleResponseFav/${response_id}`, { user_id, action })
 	}
 }
 

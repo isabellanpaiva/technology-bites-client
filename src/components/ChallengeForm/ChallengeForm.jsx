@@ -4,7 +4,7 @@ import { useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
 
-const ChallengeForm = ({ challenge, setMyResponse }) => {
+const ChallengeForm = ({ challenge, setMyResponse, getResponses }) => {
 	const [userResponse, setUserResponse] = useState('')
 	const { loggedUser } = useContext(AuthContext)
 
@@ -26,7 +26,7 @@ const ChallengeForm = ({ challenge, setMyResponse }) => {
 
 		responseService
 			.createOneResponse(responseInfo)
-			.then(createdResponse => setMyResponse(createdResponse.response))
+			.then(() => setMyResponse(userResponse))
 			.catch(err => console.log(err))
 	}
 

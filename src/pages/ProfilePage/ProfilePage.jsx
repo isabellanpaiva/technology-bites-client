@@ -4,27 +4,22 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button, Card, Modal, Carousel } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
-import ResponseCard from '../../components/ResponseCard/ResponseCard'
 import responseService from '../../services/response.services'
 import CarouselChallenge from '../../components/CarouselChallenge/CarouselChallenge'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
 
-	const { loggedUser } = useContext(AuthContext)
-	const { logout } = useContext(AuthContext)
+	const { loggedUser, logout } = useContext(AuthContext)
 
-	const [user, setUser] = useState({})
+	const [user, setUser] = useState(null)
 	const [showProfileEditModal, setProfileEditModal] = useState(false)
 	const [userResponses, setUserResponses] = useState([])
 
 	const navigate = useNavigate()
 
-	const { firstName, lastName, avatar, email, jobPosition, description } = user
-
 	useEffect(() => {
-		loadUserDetails()
-		loadUserResponses()
+		user ? loadUserResponses() : loadUserDetails()
 	}, [user])
 
 	const fireFinalActions = () => {
@@ -64,136 +59,144 @@ const ProfilePage = () => {
 
 	return (
 		<Container className='PageContainer'>
-			<section style={{ marginBottom: '5em' }}>
-				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
-					{loggedUser && user._id === loggedUser._id
-						? `Welcome, ${firstName}!`
-						: `${firstName} ${lastName} profile`}
-				</h1>
+			{!user ? (
+				<p> cargando.......</p>
+			) : (
+				<>
+					<section style={{ marginBottom: '5em' }}>
+						<h1 className='PageHeading' style={{ fontSize: '3em' }}>
+							{user && user._id === loggedUser._id
+								? `Welcome, ${user.firstName}!`
+								: `${user.firstName} ${user.lastName} profile`}
+						</h1>
 
-				<h3 className='PageSubHeading'>
-					{loggedUser && user._id === loggedUser._id
-						? 'Nice to have you here'
-						: 'Inspire and be inspired'}
-				</h3>
-			</section>
+						<h3 className='PageSubHeading'>
+							{user && user._id === loggedUser._id
+								? 'Nice to have you here'
+								: 'Inspire and be inspired'}
+						</h3>
+					</section>
 
-			<section className=' ProfileInformation mb-5'>
+					<section className=' ProfileInformation mb-5'>
+						<Card className='CommunityCard'>
+							<Card.Header className='CardHeader'>
+								<Row>
+									<Col>
+										<img
+											src={user.avatar}
+											alt='ProfileAvatar'
+											className='mb-1'
+										/>
+									</Col>
+								</Row>
+							</Card.Header>
 
-				<Card className='CommunityCard'>
+							<Card.Body className='CardBody'>
+								<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
+									{user.firstName} {user.lastName}
+								</Card.Title>
 
-					<Card.Header className='CardHeader'>
+								<Card.Text className='CardText'> {user.jobPosition} </Card.Text>
+								<Card.Text className='CardText' style={{ color: 'black' }}>
+									{user.email}
+								</Card.Text>
+								<Card.Text className='CardText'> {user.description} </Card.Text>
+							</Card.Body>
 
+							<Card.Footer className='CardFooter'>
+								<Row>
+									<Col>
+										{loggedUser && user._id === loggedUser._id ? (
+											<Button
+												className='callToAction'
+												onClick={() => setProfileEditModal(true)}>
+												Edit profile
+											</Button>
+										) : (
+											<button className='socialActionButton'>Follow</button>
+										)}
+									</Col>
+								</Row>
+							</Card.Footer>
+						</Card>
+
+						<Modal
+							show={showProfileEditModal}
+							onHide={() => setProfileEditModal(false)}>
+							<Modal.Header closeButton>
+								<Modal.Title>Edit personal information</Modal.Title>
+							</Modal.Header>
+							<Modal.Body>
+								<ProfileEditForm fireFinalActions={fireFinalActions} />
+							</Modal.Body>
+						</Modal>
+					</section>
+
+					<section className=' ProfileCards mt-5'>
 						<Row>
-
-							<Col>
-								<img src={avatar} alt='ProfileAvatar' className='mb-1' />
-							</Col>
-
-							<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
-								{firstName} {lastName}
-							</Card.Title>
-
-						</Row>
-
-					</Card.Header>
-
-					<Card.Body className='CardBody'>
-
-						<Card.Text className='CardText' > {jobPosition} </Card.Text>
-
-						<Card.Text className='CardText' style={{ color: 'black' }}>{email}</Card.Text>
-
-						<Card.Text className='CardText'> {description} </Card.Text>
-
-
-					</Card.Body>
-
-					<Card.Footer className='CardFooter'>
-						<Row>
-							<Col>
-								{loggedUser && user._id === loggedUser._id ? (
-									<Button
-										className='callToAction'
-										onClick={() => setProfileEditModal(true)}>
-										Edit profile
-									</Button>
-								) : (
-									<button className='socialActionButton'>Follow</button>
-								)}
-							</Col>
-						</Row>
-					</Card.Footer>
-				</Card>
-
-				<Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
-					<Modal.Header closeButton>
-						<Modal.Title>Edit personal information</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<ProfileEditForm fireFinalActions={fireFinalActions} />
-					</Modal.Body>
-				</Modal>
-			</section>
-
-			<section className=' ProfileCards mt-5'>
-				<Row>
-
-					<h1 className='PageHeading' style={{ fontSize: '3em', marginTop: '2em', marginBottom: '0.5em' }}>
-						Library
-					</h1>
-
-					<h3 className='PageSubHeading'>
-						{loggedUser && user._id === loggedUser._id
-							? 'Your previous responses'
-							: `Previous responses from ${firstName}`}
-					</h3>
-					{userResponses ? (
-						userResponses.length > 0 ? (
-							<CarouselChallenge
-								responses={userResponses}
-								type={'profile'}></CarouselChallenge>
-						) : (
-							<h3 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
-								{loggedUser && user._id === loggedUser._id
-									? 'No challenges resolved yet. What about start now?'
-									: `Ops... ${firstName} don't have any responsers yet 🔎`}
-							</h3>
-						)
-					) : (
-						<p>Loading...</p>
-					)}
-
-				</Row>
-			</section>
-
-			<section>
-				{loggedUser && user._id === loggedUser._id ? (
-					<Row>
-						<Col md={{ span: 8, offset: 2 }} className='text-center'>
 							<h1
 								className='PageHeading'
-								style={{ fontSize: '3em', marginTop: '2em' }}>
-								Danger zone
+								style={{
+									fontSize: '3em',
+									marginTop: '2em',
+									marginBottom: '0.5em',
+								}}>
+								Library
 							</h1>
 
-							<h3 className='PageSubHeading' style={{ color: 'red' }}>
-								We don't want you to go, but we respect your decisions.
+							<h3 className='PageSubHeading'>
+								{loggedUser && user._id === loggedUser._id
+									? 'Your previous responses'
+									: `Previous responses from ${user.firstName}`}
 							</h3>
+							{userResponses ? (
+								userResponses.length > 0 ? (
+									<CarouselChallenge
+										responses={userResponses}
+										type={'profile'}
+										data-bs-theme='dark'></CarouselChallenge>
+								) : (
+									<h3 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
+										{loggedUser && user._id === loggedUser._id
+											? 'No challenges resolved yet. What about start now?'
+											: `Ops... ${user.firstName} don't have any responsers yet 🔎`}
+									</h3>
+								)
+							) : (
+								<p>Loading...</p>
+							)}
+						</Row>
+					</section>
 
-							<Button
-								className='callToAction mt-5'
-								variant='danger'
-								onClick={deleteProfile}>
-								Delete profile
-							</Button>
-						</Col>
-					</Row>
-				) : (
-					<h3 className='PageSubHeading'></h3>
-				)}
-			</section>
-		</Container >
+					<section>
+						{loggedUser && user._id === loggedUser._id ? (
+							<Row>
+								<Col md={{ span: 8, offset: 2 }} className='text-center'>
+									<h1
+										className='PageHeading'
+										style={{ fontSize: '3em', marginTop: '2em' }}>
+										Danger zone
+									</h1>
+
+									<h3 className='PageSubHeading' style={{ color: 'red' }}>
+										We don't want you to go, but we respect your decisions.
+									</h3>
+
+									<Button
+										className='callToAction mt-5'
+										variant='danger'
+										onClick={deleteProfile}>
+										Delete profile
+									</Button>
+								</Col>
+							</Row>
+						) : (
+							<h3 className='PageSubHeading'></h3>
+						)}
+					</section>
+				</>
+			)}
+		</Container>
 	)
 }
 export default ProfilePage

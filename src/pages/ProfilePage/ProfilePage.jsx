@@ -1,27 +1,28 @@
 import { useContext, useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../contexts/auth.context'
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import userService from '../../services/user.services'
-import challengeServices from '../../services/challenge.services'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
+import { AuthContext } from '../../contexts/auth.context'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
+import responseService from '../../services/response.services'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
-	const navigate = useNavigate()
 
 	const { logout } = useContext(AuthContext)
 	const [user, setUser] = useState({})
 	const [showProfileEditModal, setProfileEditModal] = useState(false)
-	const [userRsponses, setUserResponses] = useState(null)
+	const [userResponses, setUserResponses] = useState([])
+
+	const navigate = useNavigate()
 
 	const { firstName, lastName, avatar, email, jobPosition, description } = user
 
 	useEffect(() => {
 		loadUserDetails()
 		loadUserResponses()
-	}, [])
+	}, [user])
 
 	const fireFinalActions = () => {
 		loadUserDetails()
@@ -36,18 +37,16 @@ const ProfilePage = () => {
 	}
 
 	const loadUserResponses = () => {
-		// userService
-		// 	.getCompletedChallenges(user_id)
-		// 	.then(response => console.log(response))
-		// 	.catch(err => console.log(err))
-		// setMyResponse(challenge?.responses?.filter(response => response.user === loggedUser._id))
+		responseService
+			.getUserResponses(user_id)
+			.then(({ data }) => setUserResponses(data))
+			.catch(err => console.log(err))
 	}
 
 	const deleteProfile = () => {
 		const shouldDelete = confirm(
 			'Are you sure you want to delete your profile? This action cannot be undone.'
 		)
-
 		if (shouldDelete) {
 			userService
 				.deleteUser(user_id)
@@ -66,65 +65,55 @@ const ProfilePage = () => {
 				<Row>
 					<Col md={{ span: 8, offset: 2 }}>
 						<h3>Welcome, {firstName}</h3>
-
 						<div className='d-flex avatar-container'>
 							<img src={avatar} alt='User avatar' className='avatar-img' />
 						</div>
 						<p>
-							{' '}
-							{firstName} {lastName}{' '}
+							{firstName} {lastName}
 						</p>
 						<p> {email} </p>
 						<p> {jobPosition} </p>
 						<p> {description}</p>
 						<Button className='callToAction' onClick={() => setProfileEditModal(true)}>
-							{' '}
-							Edit profile{' '}
+							Edit profile
 						</Button>
 					</Col>
 				</Row>
-
 				<Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit personal information</Modal.Title>
 					</Modal.Header>
-
 					<Modal.Body>
 						<ProfileEditForm fireFinalActions={fireFinalActions} />
 					</Modal.Body>
 				</Modal>
 			</section>
-
 			<section className=' ProfileCards mt-5'>
 				<Row>
 					<Col md={{ span: 8, offset: 2 }}>
 						<h3>Your library</h3>
-
-						{/* {challenge?.responses?.map(response => {
-							return (
-								<Col key={response._id} md={{ span: 4 }}>
+						{userResponses ? (
+							userResponses.map(userResponse => {
+								return (
 									<ResponseCard
-										response={response}
-										challenge={challenge}></ResponseCard>
-								</Col>
-							)
-						})} */}
+										key={userResponse._id}
+										response={userResponse}
+										challenge={userResponse.relatedChallenge}
+									/>
+								)
+							})
+						) : (
+							<p>Loading...</p>
+						)}
 					</Col>
 				</Row>
-
-				<Row>
-					<CommentCard />
-				</Row>
 			</section>
-
 			<section>
 				<Row>
 					<Col md={{ span: 8, offset: 2 }}>
 						<h5> Danger zone </h5>
-
 						<Button className='callToAction' variant='danger' onClick={deleteProfile}>
-							{' '}
-							Delete profile{' '}
+							Delete profile
 						</Button>
 					</Col>
 				</Row>
@@ -132,5 +121,4 @@ const ProfilePage = () => {
 		</Container>
 	)
 }
-
 export default ProfilePage

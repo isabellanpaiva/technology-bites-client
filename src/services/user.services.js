@@ -24,15 +24,13 @@ class UserService {
 	deleteUser(user_id) {
 		return this.api.delete(`/deleteUser/${user_id}`)
 	}
+
 	editUser(user_id, userData) {
 		return this.api.put(`/editUser/${user_id}`, userData)
 	}
+
 	updateFavorites(action, friend_id) {
 		return this.api.post(`/edit/${action}`, friend_id)
-	}
-
-	getCompletedChallenges(user_id) {
-		return this.axios.get(`/getCompletedChallenges/${user_id}`)
 	}
 }
 

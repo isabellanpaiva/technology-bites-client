@@ -31,8 +31,13 @@ class ChallengeServices {
 		return this.api.get('/getOneRandomChallenge')
 	}
 
-	saveResponse(responseInfo) {
-		return this.api.put('/saveResponse', responseInfo)
+	getChallengeResponses(challenge_id) {
+		console.log('oooooooo', challenge_id)
+		return this.api.get(`/getChallengeResponses/${challenge_id}`)
+	}
+
+	saveResponse(challenge_id, response_id) {
+		return this.api.post(`/saveResponse/${challenge_id}`, { response_id })
 	}
 }
 

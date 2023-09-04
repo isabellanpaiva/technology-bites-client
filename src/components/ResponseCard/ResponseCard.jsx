@@ -4,7 +4,7 @@ import CommentCardNested from '../CommentCard/CommentCard-nested'
 import { useEffect, useState } from 'react'
 import userService from '../../services/user.services'
 
-const ResponseCard = ({ challenge, response }) => {
+const ResponseCard = ({ challenge, response, type }) => {
 	const [responseOwner, setResponseOwner] = useState(null)
 
 	useEffect(() => {
@@ -17,10 +17,12 @@ const ResponseCard = ({ challenge, response }) => {
 	return (
 		<Card className='ContentCard'>
 			{/* remove if it's your profile page */}
-			<Card.Header className='CardHeader'>
-				<img src={responseOwner?.avatar} alt='ProfileAvatar' className='mb-4' />
-				<h5>{responseOwner?.firstName} </h5>
-			</Card.Header>
+			{type === 'challenge' && (
+				<Card.Header className='CardHeader'>
+					<img src={responseOwner?.avatar} alt='ProfileAvatar' className='mb-4' />
+					<h5>{responseOwner?.firstName} </h5>
+				</Card.Header>
+			)}
 
 			{/* remove if it's your profile page */}
 			<Card.Body className='CardBody'>
@@ -44,7 +46,7 @@ const ResponseCard = ({ challenge, response }) => {
 				</Row>
 			</Card.Footer>
 
-			<CommentCardNested />
+			{type !== 'challenge' && <CommentCardNested />}
 		</Card>
 	)
 }

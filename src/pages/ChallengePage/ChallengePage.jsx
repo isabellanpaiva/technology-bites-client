@@ -5,36 +5,37 @@ import challengeServices from '../../services/challenge.services'
 import ChallengeForm from '../../components/ChallengeForm/ChallengeForm'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
 import { AuthContext } from '../../contexts/auth.context'
+import responseService from '../../services/response.services'
 
 const ChallengePage = () => {
 	const [challenge, setChallenge] = useState(null)
-	const [isCompleted, setIsCompleted] = useState(false)
 	const [myResponse, setMyResponse] = useState(null)
+	const [responses, setResponses] = useState([])
 
 	const { loggedUser } = useContext(AuthContext)
 
 	useEffect(() => {
 		loadChallenge()
-		getMyResponse()
-	}, [isCompleted])
-
-	useEffect(() => {
-		checkIfCompleted()
+		challenge && getResponses()
 	}, [challenge])
 
 	const loadChallenge = () => {
 		challengeServices
-			.getOneChallenge('64f38d0a199beddab624fe68')
+			.getOneChallenge('64f5905da4a69300fd90e880')
 			.then(({ data }) => setChallenge(data))
 			.catch(err => console.log(err))
 	}
 
-	const checkIfCompleted = () => {
-		setIsCompleted(challenge?.responses?.some(response => response.user === loggedUser._id))
-	}
-
-	const getMyResponse = () => {
-		setMyResponse(challenge?.responses?.filter(response => response.user === loggedUser._id))
+	const getResponses = () => {
+		responseService
+			.getResponsesToChallenge(challenge._id)
+			.then(({ data }) => {
+				let myResp = data.filter(eachResponse => eachResponse.user === loggedUser._id)
+				let restResp = data.filter(eachResponse => eachResponse.user !== loggedUser._id)
+				setResponses(restResp)
+				setMyResponse(myResp[0])
+			})
+			.catch(err => console.log(err))
 	}
 
 	return (
@@ -44,34 +45,31 @@ const ChallengePage = () => {
 					<h1 className='PageHeading'>Daily Challenge</h1>
 
 					<ContentCard challenge={challenge}>
-						{isCompleted ? (
+						{myResponse ? (
 							<>
 								<p>You already answered this one!</p>
-								{myResponse ? <p>{myResponse[0].response}</p> : <p>Loading...</p>}
+								{myResponse ? <p>{myResponse.response}</p> : <p>Loading...</p>}
 							</>
 						) : (
-							<ChallengeForm
-								challenge={challenge}
-								setIsCompleted={setIsCompleted}
-								setMyResponse={setMyResponse}
-							/>
+							<ChallengeForm challenge={challenge} setMyResponse={setMyResponse} />
 						)}
 					</ContentCard>
 				</Col>
 			</Row>
-			{challenge && (
-				<Row>
-					{challenge?.responses?.map(response => {
+
+			<Row>
+				{myResponse &&
+					responses.map(response => {
 						return (
-							<Col key={response._id} md={{ span: 4 }}>
+							<Col key={response._id}>
 								<ResponseCard
 									response={response}
-									challenge={challenge}></ResponseCard>
+									challenge={challenge}
+									type={'challenge'}></ResponseCard>
 							</Col>
 						)
 					})}
-				</Row>
-			)}
+			</Row>
 		</Container>
 	)
 }

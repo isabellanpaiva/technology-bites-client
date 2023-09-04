@@ -2,8 +2,9 @@ import { Button, Form } from 'react-bootstrap'
 import challengeServices from '../../services/challenge.services'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/auth.context'
+import responseService from '../../services/response.services'
 
-const ChallengeForm = ({ challenge, setIsCompleted, setMyResponse }) => {
+const ChallengeForm = ({ challenge, setMyResponse }) => {
 	const [userResponse, setUserResponse] = useState('')
 	const { loggedUser } = useContext(AuthContext)
 
@@ -19,16 +20,15 @@ const ChallengeForm = ({ challenge, setIsCompleted, setMyResponse }) => {
 
 		const responseInfo = {
 			user_id,
-			challenge_id,
 			userResponse,
+			challenge_id,
 		}
 
-		challengeServices
-			.saveResponse(responseInfo)
-			.then(() => console.log('yas!'))
+		responseService
+			.createOneResponse(responseInfo)
+			.then(() => console.log('AIUDA')) //!kjdhiugwkhwwg
 			.catch(err => console.log(err))
 
-		setIsCompleted(true)
 		setMyResponse(userResponse)
 	}
 

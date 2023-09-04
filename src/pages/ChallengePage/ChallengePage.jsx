@@ -16,13 +16,12 @@ const ChallengePage = () => {
 	const { loggedUser } = useContext(AuthContext)
 
 	useEffect(() => {
-		loadChallenge()
-		challenge && getResponses()
+		challenge ? getResponses() : loadChallenge()
 	}, [challenge])
 
 	const loadChallenge = () => {
 		challengeServices
-			.getOneChallenge('64f5905da4a69300fd90e911')
+			.getOneChallenge('64f5905da4a69300fd90e80a')
 			.then(({ data }) => setChallenge(data))
 			.catch(err => console.log(err))
 	}
@@ -65,23 +64,9 @@ const ChallengePage = () => {
 			</Row>
 
 			<Row>
-				{
-					myResponse && (
-						<CarouselChallenge
-							responses={responses}
-							type={'challenge'}></CarouselChallenge>
-					)
-					// responses.map(response => {
-					// 	return (
-					// 		<Col key={response._id}>
-					// 			<ResponseCard
-					// 				response={response}
-					// 				challenge={challenge}
-					// 				type={'challenge'}></ResponseCard>
-					// 		</Col>
-					// 	)
-					// })
-				}
+				{myResponse && responses.length !== 0 && (
+					<CarouselChallenge responses={responses} type={'challenge'}></CarouselChallenge>
+				)}
 			</Row>
 		</Container>
 	)

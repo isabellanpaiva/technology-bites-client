@@ -12,6 +12,7 @@ const ResponseCard = ({ challenge, response, type }) => {
 	const [responseOwner, setResponseOwner] = useState(null)
 	const [showComments, setShowComments] = useState(false)
 	const [isFav, setFav] = useState(false)
+	const [favCount, setFavCount] = useState(0)
 
 	useEffect(() => {
 		userService
@@ -19,14 +20,19 @@ const ResponseCard = ({ challenge, response, type }) => {
 			.then(({ data }) => setResponseOwner(data))
 			.catch(err => console.log(err))
 		checkFavs(response)
+		setFavCount(response.likes.length)
 	}, [])
 
 	const checkFavs = response => {
 		setFav(response.likes.includes(loggedUser._id))
 	}
 
-	const addFav = response_id => {
-		responseService.addResponseFav(response_id, loggedUser._id)
+	const handleFav = (response_id, { action }) => {
+		responseService
+			.handleResponseFav(response_id, loggedUser._id, action)
+			.then(() => setFav(true))
+			.catch(err => console.log(err))
+		setFavCount(response.likes.length + 1)
 	}
 
 	return (
@@ -50,8 +56,15 @@ const ResponseCard = ({ challenge, response, type }) => {
 			<Card.Footer className='CardFooter'>
 				<Row>
 					<Col>
-						<button className='socialActionButton' onClick={addFav(response._id)}>
-							{response.likes.length} ♥️ Like
+						<button
+							className='socialActionButton'
+							onClick={
+								!isFav
+									? () => handleFav(response._id, { action: 'add' })
+									: () => handleFav(response._id, { action: 'remove' })
+							}>
+							{favCount} <span style={{ color: isFav ? 'red' : 'white' }}>♥️</span>{' '}
+							Like
 						</button>
 					</Col>
 

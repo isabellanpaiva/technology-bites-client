@@ -5,57 +5,49 @@ import CommunityCard from '../../components/CommunityCard/CommunityCard'
 import { AuthContext } from './../../contexts/auth.context'
 
 const CommunityPage = () => {
+	const { loggedUser } = useContext(AuthContext)
 
-    const { loggedUser } = useContext(AuthContext)
+	const [users, setUsers] = useState([])
 
-    const [users, setUsers] = useState([])
+	useEffect(() => {
+		loadCommunityDetails()
+	}, [])
 
-    useEffect(() => {
-        loadCommunityDetails()
-    }, [])
+	const loadCommunityDetails = () => {
+		userService
+			.getAllUsers()
+			.then(({ data }) => {
+				const communityUsers = data.filter(user => user._id !== loggedUser._id)
+				setUsers(communityUsers)
+			})
+			.catch(err => console.log(err))
+	}
 
-    const loadCommunityDetails = () => {
+	//call service updateFavorites
 
-        userService
-            .getAllUsers()
-            .then(({ data }) => {
-                const communityUsers = data.filter(user => user._id !== loggedUser._id)
-                setUsers(communityUsers)
-            })
-            .catch(err => console.log(err))
-    }
+	return (
+		<>
+			<Container fluid className='PageContainer'>
+				<section style={{ marginBottom: '5em' }}>
+					<h1 className='PageHeading' style={{ fontSize: '3em' }}>
+						{' '}
+						Community{' '}
+					</h1>
 
-    //call service updateFavorites 
+					<h3 className='PageSubHeading'>Meet your neighbors </h3>
+				</section>
 
-    return (
-
-        <>
-
-            <Container fluid className="PageContainer">
-
-                <section style={{ marginBottom: '5em' }}>
-
-                    <h1 className='PageHeading' style={{ fontSize: '3em' }}> Community </h1>
-
-                    <h3 className='PageSubHeading'>Meet your neighbors </h3>
-
-                </section>
-
-                <Row>
-
-                    {users.map(user => (
-                        <Col key={user.id} md={{ span: 4 }}>
-                            {/* <Col key={user.id} md={4}> */}
-                            <CommunityCard user={user} />
-                        </Col>
-                    ))}
-
-                </Row>
-
-            </Container >
-
-        </>
-    )
+				<Row>
+					{users.map(user => (
+						<Col key={user._id} md={{ span: 4 }}>
+							{/* <Col key={user.id} md={4}> */}
+							<CommunityCard user={user} />
+						</Col>
+					))}
+				</Row>
+			</Container>
+		</>
+	)
 }
 
 export default CommunityPage

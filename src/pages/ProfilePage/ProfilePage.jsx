@@ -1,26 +1,22 @@
 import { useContext, useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../contexts/auth.context'
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import userService from '../../services/user.services'
-import challengeServices from '../../services/challenge.services'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Container, Row, Col, Button, Card, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
+import { AuthContext } from '../../contexts/auth.context'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
-	const navigate = useNavigate()
 
 	const { logout } = useContext(AuthContext)
 	const [user, setUser] = useState({})
 	const [showProfileEditModal, setProfileEditModal] = useState(false)
-	const [userRsponses, setUserResponses] = useState(null)
 
 	const { firstName, lastName, avatar, email, jobPosition, description } = user
 
 	useEffect(() => {
 		loadUserDetails()
-		loadUserResponses()
 	}, [])
 
 	const fireFinalActions = () => {
@@ -35,13 +31,7 @@ const ProfilePage = () => {
 			.catch(err => console.log(err))
 	}
 
-	const loadUserResponses = () => {
-		// userService
-		// 	.getCompletedChallenges(user_id)
-		// 	.then(response => console.log(response))
-		// 	.catch(err => console.log(err))
-		// setMyResponse(challenge?.responses?.filter(response => response.user === loggedUser._id))
-	}
+	const navigate = useNavigate()
 
 	const deleteProfile = () => {
 		const shouldDelete = confirm(
@@ -61,28 +51,63 @@ const ProfilePage = () => {
 	}
 
 	return (
-		<Container className='ProfilePage'>
-			<section className=' ProfileInformation mb-5'>
-				<Row>
-					<Col md={{ span: 8, offset: 2 }}>
-						<h3>Welcome, {firstName}</h3>
 
-						<div className='d-flex avatar-container'>
-							<img src={avatar} alt='User avatar' className='avatar-img' />
-						</div>
-						<p>
-							{' '}
-							{firstName} {lastName}{' '}
-						</p>
-						<p> {email} </p>
-						<p> {jobPosition} </p>
-						<p> {description}</p>
-						<Button className='callToAction' onClick={() => setProfileEditModal(true)}>
-							{' '}
-							Edit profile{' '}
-						</Button>
-					</Col>
-				</Row>
+		<Container className='PageContainer'>
+
+			<section style={{ marginBottom: '5em' }}>
+
+				<h1 className='PageHeading' style={{ fontSize: '3em' }}> Welcome, {firstName}! </h1>
+
+				<h3 className='PageSubHeading'> Nice to have you here </h3>
+
+			</section>
+
+			<section className=" ProfileInformation mb-5">
+
+				<Card className='CommunityCard'>
+					<Card.Header className='CardHeader'>
+						<Row>
+							<Col>
+								<img src={avatar} alt='ProfileAvatar' className='mb-1' />
+							</Col>
+						</Row>
+					</Card.Header>
+
+					<Card.Body className='CardBody'>
+
+						<Col>
+
+							<Card.Title
+								className='CardTitle'
+								style={{ marginBottom: '-1rem' }}>
+								{firstName} {lastName}
+							</Card.Title>
+
+							<Card.Text
+								className='CardText'
+								style={{ marginBottom: '0rem', color: 'grey' }}>
+								<strong>{jobPosition} </strong>
+							</Card.Text>
+
+							<Card.Text className='CardText'> <strong>{description}</strong></Card.Text>
+
+							<Card.Text className='CardText'>{email}</Card.Text>
+						</Col>
+					</Card.Body>
+
+					<Card.Footer className='CardFooter'>
+
+						<Row>
+							<Col>
+								<Button className="callToAction" onClick={() => setProfileEditModal(true)}> Edit profile </Button>
+							</Col>
+							{/* <Col>
+								<button className='socialActionButton'>Follow</button>
+							</Col> */}
+						</Row>
+
+					</Card.Footer>
+				</Card>
 
 				<Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
 					<Modal.Header closeButton>
@@ -93,43 +118,46 @@ const ProfilePage = () => {
 						<ProfileEditForm fireFinalActions={fireFinalActions} />
 					</Modal.Body>
 				</Modal>
+
 			</section>
 
-			<section className=' ProfileCards mt-5'>
+			<section className=" ProfileCards mt-5">
+
 				<Row>
 					<Col md={{ span: 8, offset: 2 }}>
+
 						<h3>Your library</h3>
 
-						{/* {challenge?.responses?.map(response => {
-							return (
-								<Col key={response._id} md={{ span: 4 }}>
-									<ResponseCard
-										response={response}
-										challenge={challenge}></ResponseCard>
-								</Col>
-							)
-						})} */}
+						{/* <ResponseCard /> */}
+
 					</Col>
+
 				</Row>
 
-				<Row>
-					<CommentCard />
-				</Row>
 			</section>
 
 			<section>
-				<Row>
-					<Col md={{ span: 8, offset: 2 }}>
-						<h5> Danger zone </h5>
 
-						<Button className='callToAction' variant='danger' onClick={deleteProfile}>
+				<Row>
+
+					<Col md={{ span: 8, offset: 2 }}>
+
+						<h3 className="mb-4"> Danger zone </h3>
+
+						<p className="mb-4">We don't want you to go, but we respect your decisions. </p>
+
+						<Button className="callToAction" variant='danger' onClick={deleteProfile}>
 							{' '}
 							Delete profile{' '}
 						</Button>
+
 					</Col>
-				</Row>
+
+				</Row >
+
 			</section>
-		</Container>
+
+		</Container >
 	)
 }
 

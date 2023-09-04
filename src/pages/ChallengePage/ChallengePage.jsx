@@ -38,41 +38,52 @@ const ChallengePage = () => {
 	}
 
 	return (
-		<Container className='ChallengesPage'>
-			<Row>
-				<Col md={{ span: 8, offset: 2 }}>
-					<h1 className='PageHeading'>Daily Challenge</h1>
 
-					<ContentCard challenge={challenge}>
-						{isCompleted ? (
-							<>
-								<p>You already answered this one!</p>
-								{myResponse ? <p>{myResponse[0].response}</p> : <p>Loading...</p>}
-							</>
-						) : (
-							<ChallengeForm
-								challenge={challenge}
-								setIsCompleted={setIsCompleted}
-								setMyResponse={setMyResponse}
-							/>
-						)}
-					</ContentCard>
-				</Col>
+		<Container className='PageContainer'>
+
+			<section style={{ marginBottom: '5em' }}>
+
+				<h1 className='PageHeading' style={{ fontSize: '3em' }}> Challenges </h1>
+
+				<h3 className='PageSubHeading'> A new technology question everyday </h3>
+
+			</section>
+
+			<Row>
+
+				<ContentCard challenge={challenge}>
+
+					{isCompleted ? (
+						<>
+							<p>You already answered this one!</p>
+							{myResponse ? <p>{myResponse[0].response}</p> : <p>Loading...</p>}
+						</>
+					) : (
+						<ChallengeForm
+							challenge={challenge}
+							setIsCompleted={setIsCompleted}
+							setMyResponse={setMyResponse}
+						/>
+					)}
+				</ContentCard>
+
 			</Row>
-			{challenge && (
-				<Row>
-					{challenge?.responses?.map(response => {
-						return (
-							<Col key={response._id} md={{ span: 4 }}>
-								<ResponseCard
-									response={response}
-									challenge={challenge}></ResponseCard>
-							</Col>
-						)
-					})}
-				</Row>
-			)}
-		</Container>
+			{
+				challenge && (
+					<Row>
+						{challenge?.responses?.map(response => {
+							return (
+								<Col key={response._id} md={{ span: 4 }}>
+									<ResponseCard
+										response={response}
+										challenge={challenge}></ResponseCard>
+								</Col>
+							)
+						})}
+					</Row>
+				)
+			}
+		</Container >
 	)
 }
 

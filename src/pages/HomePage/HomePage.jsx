@@ -21,11 +21,14 @@ const HomePage = () => {
 	}
 
 	return (
-		<Container className='HomePage'>
+
+		<Container className='PageContainer'>
 			<section>
 				<Row>
 					<Col>
-						<h1 className='PageHeading'>{appName}</h1>
+						<h1 className='PageHeading'>
+							<span className='typing-animation'>{appName}.</span>
+						</h1>
 
 						<h3 className='PageSubHeading'>Learn. Validate. Connect. </h3>
 
@@ -33,7 +36,7 @@ const HomePage = () => {
 							<span className='mb-3' style={{ display: 'block' }}>
 								{bites.definition}
 							</span>
-							<Button className="callToAction" variant='dark' type='submit' onClick={loadBites}>
+							<Button className="callToAction mt-4" type='submit' onClick={loadBites}>
 								Get Another Bite
 							</Button>
 						</ContentCard>

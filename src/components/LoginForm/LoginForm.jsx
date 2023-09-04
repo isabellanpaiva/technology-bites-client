@@ -1,17 +1,15 @@
 import { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import authService from '../../services/auth.services'
-import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import FormError from '../FormError/FormError'
 import { MessageContext } from '../../contexts/message.context'
 
 const LoginForm = ({ setModalData }) => {
+
 	const { authenticateUser, storeToken } = useContext(AuthContext)
 	const { emitMessage } = useContext(MessageContext)
 
-	const navigate = useNavigate()
 	const [errors, setErrors] = useState([])
 
 	const [loginData, setLoginData] = useState({
@@ -79,15 +77,17 @@ const LoginForm = ({ setModalData }) => {
 			</div>
 
 			<Row>
-
-				<div>Don't have an account yet?</div>
-
-				<button
-					className='socialActionButton'
-					onClick={() => setModalData({ show: true, content: 'signupModal' })}>
-					Sign up
-				</button>
-
+				<Col md={{ span: 8 }}>
+					<div>Don't have an account yet?</div>
+				</Col>
+				<Col md={{ span: 4 }}>
+					<button
+						className='socialActionButton'
+						onClick={() => setModalData({ show: true, content: 'signupModal' })}
+					>
+						Sign up
+					</button>
+				</Col>
 			</Row>
 
 		</Form >

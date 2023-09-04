@@ -1,4 +1,6 @@
 import './Footer.css'
+import logo from './../../../public/test-logo.png'
+import { Row, Col } from 'react-bootstrap'
 
 const Footer = () => {
 
@@ -6,14 +8,28 @@ const Footer = () => {
 
         <footer className="Footer">
 
-            <h1>Contact </h1>
+            <Row>
 
-            <p> Want to work together? </p>
+                <Col md={{ span: 10 }}>
 
-            <p className="FooterEmail">
-                Write us at
-                technologybites.hi@gmail.com
-            </p>
+                    <h1>Contact </h1>
+
+                    <p> Want to work together? </p>
+
+                    <p className="FooterEmail">
+                        Write us at
+                        technologybites.hi@gmail.com
+                    </p>
+
+                </Col>
+
+                <Col md={{ span: 2 }}>
+
+                    <img src={logo} alt="logo" />
+
+                </Col>
+
+            </Row>
 
         </footer >
 

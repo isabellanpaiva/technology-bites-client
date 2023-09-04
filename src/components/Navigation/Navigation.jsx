@@ -1,4 +1,5 @@
 import './Navigation.css'
+import './../../App.css'
 import { useContext, useState } from 'react'
 import { Navbar, Nav, Modal } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,6 +7,7 @@ import LoginForm from '../LoginForm/LoginForm'
 import SignupForm from '../SignupForm/SignupForm'
 import { AuthContext } from '../../contexts/auth.context'
 import { MessageContext } from '../../contexts/message.context'
+import logo from './../../../public/test-logo.png'
 
 const Navigation = () => {
 
@@ -29,28 +31,34 @@ const Navigation = () => {
 
 	return (
 		<>
-			<Navbar variant='light' expand='lg' fixed='top' className="Navigation">
+			<Navbar expand='lg' fixed='top' className="Navigation">
 
 				<Navbar.Collapse>
 
 					<Nav>
+						<Link to={'/'} className='nav-link'>
+							<img src={logo} alt="logo" style={{ width: '5em', height: 'auto' }} />
+						</Link>
+					</Nav>
+
+					<Nav className="AuthLinks">
 
 						<Link to={'/'} className='nav-link'>
-							Home
+							Bites
 						</Link>
 						<Link to={'/challenges'} className='nav-link'>
 							Challenges
 						</Link>
 						{/* <Link to={'/dojo'} className='nav-link'>
 							Dojo
-						</Link>
+						</Link>*/}
 						<Link to={'/community'} className='nav-link'>
 							Community
-						</Link> */}
+						</Link>
 
 					</Nav>
 
-					<Nav className="Column2">
+					<Nav className="AuthLinks">
 
 						{!loggedUser && (
 							<Nav.Link
@@ -80,6 +88,7 @@ const Navigation = () => {
 			</Navbar >
 
 			<Modal show={modalData.show} onHide={() => setModalData({ ...modalData, show: false })}>
+
 				<Modal.Header closeButton>
 					<Modal.Title>
 						{modalData.content === 'loginModal' ? 'Login' : 'Signup'}
@@ -94,6 +103,7 @@ const Navigation = () => {
 						<SignupForm setModalData={setModalData} />
 					)}
 				</Modal.Body>
+
 			</Modal>
 		</>
 	)

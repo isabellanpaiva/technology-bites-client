@@ -1,7 +1,7 @@
 /* global settings */
 
 body {
-    padding-top: 15em;
+    /* padding-top: 15em; */
     letter-spacing: 0.1em;
 }
 
@@ -12,6 +12,29 @@ img {
     border-radius: 50%;
     object-fit: cover
 }
+
+.PageContainer {
+    padding-top: 15em;
+    margin-left: 15em;
+    /* background-color: red; */
+}
+
+.PageSubHeading {
+    color: #0070f3;
+}
+
+.modal {
+    padding: 5em;
+}
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 15px;
+}
+
 
 /* card settings */
 
@@ -26,6 +49,24 @@ img {
     line-height: 2.5em;
 }
 
+.CommunityCard {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    margin-left: 4em;
+    margin-right: 4em;
+    padding: 2em;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    text-align: center;
+    line-height: 2.5em;
+}
+
+.CardHeader {
+    background-color: transparent !important;
+    border: none !important;
+    color: rgb(164, 164, 164) !important;
+}
+
 .CardTitle {
     padding-bottom: 1em;
     font-size: 1.75em !important;
@@ -38,12 +79,6 @@ img {
     font-size: 1.25em !important;
 }
 
-.CardHeader {
-    background-color: transparent !important;
-    border: none !important;
-    color: rgb(164, 164, 164) !important;
-}
-
 .CardFooter {
     background-color: transparent !important;
     border: none !important;
@@ -51,44 +86,57 @@ img {
 
 /* buttons settings */
 
-.callToAction {
-    position: relative;
-    background-color: rgb(50, 113, 248);
-    border-radius: 5px;
-    box-shadow: rgb(18, 39, 121) 0px 4px 0px 0px;
-    padding: 15px;
-    background-repeat: no-repeat;
-    box-sizing: border-box;
-    width: 154px;
-    height: 49px;
-    color: #fff;
-    border: none;
-    font-size: 20px;
-    transition: all .3s ease-in-out;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.callToAction::before {
-    content: "";
-    background-color: rgb(50, 113, 248);
-    width: 0;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    display: inline-block;
-}
-
-.callToAction:hover::before {
-    width: 100%;
-}
-
 .socialActionButton {
     border: none;
     font-weight: bold;
     background: none;
     letter-spacing: 0.1em;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    text-transform: uppercase;
+    color: rgba(0, 118, 255, 0.9);
+}
+
+.callToAction {
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 56px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 7px;
+    background-color: #0070f3;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+    transition: background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.callToAction:hover {
+    background: rgba(0, 118, 255, 0.9);
+    box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+}
+
+/* home animamtion */
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 50%;
+    }
+}
+
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    animation: typing 2s steps(40, end) forwards;
+    white-space: nowrap;
+    border-right: 2px solid #000;
+    padding-right: 8px;
 }

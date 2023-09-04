@@ -39,11 +39,18 @@ const ChallengePage = () => {
 	}
 
 	return (
-		<Container className='ChallengesPage'>
-			<Row>
-				<Col md={{ span: 8, offset: 2 }}>
-					<h1 className='PageHeading'>Daily Challenge</h1>
+		<Container className='PageContainer'>
+			<section style={{ marginBottom: '5em' }}>
+				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
+					{' '}
+					Challenges{' '}
+				</h1>
 
+				<h3 className='PageSubHeading'> A new technology question everyday </h3>
+			</section>
+
+			<Row>
+				<Col>
 					<ContentCard challenge={challenge}>
 						{myResponse ? (
 							<>

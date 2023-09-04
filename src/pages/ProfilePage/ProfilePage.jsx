@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import userService from '../../services/user.services'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card, Modal } from 'react-bootstrap'
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
 import ResponseCard from '../../components/ResponseCard/ResponseCard'
@@ -60,25 +60,64 @@ const ProfilePage = () => {
 	}
 
 	return (
-		<Container className='ProfilePage'>
+		<Container className='PageContainer'>
+			<section style={{ marginBottom: '5em' }}>
+				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
+					{' '}
+					Welcome, {firstName}!{' '}
+				</h1>
+
+				<h3 className='PageSubHeading'> Nice to have you here </h3>
+			</section>
+
 			<section className=' ProfileInformation mb-5'>
-				<Row>
-					<Col md={{ span: 8, offset: 2 }}>
-						<h3>Welcome, {firstName}</h3>
-						<div className='d-flex avatar-container'>
-							<img src={avatar} alt='User avatar' className='avatar-img' />
-						</div>
-						<p>
-							{firstName} {lastName}
-						</p>
-						<p> {email} </p>
-						<p> {jobPosition} </p>
-						<p> {description}</p>
-						<Button className='callToAction' onClick={() => setProfileEditModal(true)}>
-							Edit profile
-						</Button>
-					</Col>
-				</Row>
+				<Card className='CommunityCard'>
+					<Card.Header className='CardHeader'>
+						<Row>
+							<Col>
+								<img src={avatar} alt='ProfileAvatar' className='mb-1' />
+							</Col>
+						</Row>
+					</Card.Header>
+
+					<Card.Body className='CardBody'>
+						<Col>
+							<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
+								{firstName} {lastName}
+							</Card.Title>
+
+							<Card.Text
+								className='CardText'
+								style={{ marginBottom: '0rem', color: 'grey' }}>
+								<strong>{jobPosition} </strong>
+							</Card.Text>
+
+							<Card.Text className='CardText'>
+								{' '}
+								<strong>{description}</strong>
+							</Card.Text>
+
+							<Card.Text className='CardText'>{email}</Card.Text>
+						</Col>
+					</Card.Body>
+
+					<Card.Footer className='CardFooter'>
+						<Row>
+							<Col>
+								<Button
+									className='callToAction'
+									onClick={() => setProfileEditModal(true)}>
+									{' '}
+									Edit profile{' '}
+								</Button>
+							</Col>
+							{/* <Col>
+								<button className='socialActionButton'>Follow</button>
+							</Col> */}
+						</Row>
+					</Card.Footer>
+				</Card>
+
 				<Modal show={showProfileEditModal} onHide={() => setProfileEditModal(false)}>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit personal information</Modal.Title>
@@ -88,6 +127,7 @@ const ProfilePage = () => {
 					</Modal.Body>
 				</Modal>
 			</section>
+
 			<section className=' ProfileCards mt-5'>
 				<Row>
 					<Col md={{ span: 8, offset: 2 }}>
@@ -111,9 +151,15 @@ const ProfilePage = () => {
 			<section>
 				<Row>
 					<Col md={{ span: 8, offset: 2 }}>
-						<h5> Danger zone </h5>
+						<h3 className='mb-4'> Danger zone </h3>
+
+						<p className='mb-4'>
+							We don't want you to go, but we respect your decisions.{' '}
+						</p>
+
 						<Button className='callToAction' variant='danger' onClick={deleteProfile}>
-							Delete profile
+							{' '}
+							Delete profile{' '}
 						</Button>
 					</Col>
 				</Row>

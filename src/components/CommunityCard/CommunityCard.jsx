@@ -7,8 +7,8 @@ const CommunityCard = ({ user }) => {
 
     const checkUserProfile = () => {
         // alert("Button clicked")
-        console.log(user.id)
-        navigate(`/profile/${user.id}`)
+        console.log(user._id)
+        navigate(`/profile/${user._id}`)
     }
 
     return (

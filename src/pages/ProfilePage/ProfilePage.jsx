@@ -5,7 +5,7 @@ import { Container, Row, Col, Button, Card, Modal, Carousel } from 'react-bootst
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
-import CarouselChallenge from '../../components/CarouselChallenge/CarouselChallenge'
+import CarouselResponses from '../../components/CarouselResponses/CarouselResponses'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -15,11 +15,12 @@ const ProfilePage = () => {
 	const [user, setUser] = useState(null)
 	const [showProfileEditModal, setProfileEditModal] = useState(false)
 	const [userResponses, setUserResponses] = useState([])
+	const [errors, setErrors] = useState([])
 
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		user ? loadUserResponses() : loadUserDetails()
+		user ? getResponses() : loadUserDetails()
 	}, [user])
 
 	const fireFinalActions = () => {
@@ -30,15 +31,18 @@ const ProfilePage = () => {
 	const loadUserDetails = () => {
 		userService
 			.getOneUser(user_id)
-			.then(({ data }) => setUser(data))
-			.catch(err => console.log(err))
+			.then(({ data }) => {
+				setUser(data)
+				getResponses()
+			})
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
-	const loadUserResponses = () => {
+	const getResponses = () => {
 		responseService
 			.getUserResponses(user_id)
 			.then(({ data }) => setUserResponses(data))
-			.catch(err => console.log(err))
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	const deleteProfile = () => {
@@ -53,7 +57,7 @@ const ProfilePage = () => {
 					logout()
 					navigate('/')
 				})
-				.catch(err => console.log(err))
+				.catch(err => setErrors(err.response.data.errorMessages))
 		}
 	}
 
@@ -151,10 +155,11 @@ const ProfilePage = () => {
 							</h3>
 							{userResponses ? (
 								userResponses.length > 0 ? (
-									<CarouselChallenge
+									<CarouselResponses
 										responses={userResponses}
+										getResponses={getResponses}
 										type={'profile'}
-										data-bs-theme='dark'></CarouselChallenge>
+										data-bs-theme='dark'></CarouselResponses>
 								) : (
 									<h3 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
 										{loggedUser && user._id === loggedUser._id

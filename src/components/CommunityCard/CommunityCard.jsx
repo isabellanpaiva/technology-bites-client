@@ -1,59 +1,82 @@
-import { Card, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Card, Row, Col } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../contexts/auth.context'
+import userService from '../../services/user.services'
 
 const CommunityCard = ({ user }) => {
+	const { loggedUser } = useContext(AuthContext)
 
-    const navigate = useNavigate()
+	const [following, setFollowing] = useState(false)
+	const [followersCount, setFollowersCount] = useState(0)
+	const [errors, setErrors] = useState([])
+	const navigate = useNavigate()
 
-    const checkUserProfile = () => {
-        navigate(`/profile/${user._id}`)
-    }
+	const { _id: user_id, firstName, lastName, avatar, description, jobPosition } = user
 
-    return (
+	useEffect(() => {
+		setFollowing(user.followers.includes(loggedUser._id))
+		setFollowersCount(user.followers.length)
+	}, [])
 
-        <Card className='CommunityCard'>
+	const handleFollow = (friend_id, { action }) => {
+		userService
+			.updateFollowers(friend_id, action)
+			.then(() => setFollowing(!following))
+			.catch(err => setErrors(err.response.data.errorMessages))
 
-            <Card.Header className='CardHeader'>
+		setFollowersCount(followersCount + (action === 'add' ? +1 : -1))
+		setFollowing(!following)
+	}
 
-                <Row>
+	const checkUserProfile = () => {
+		navigate(`/profile/${user._id}`)
+	}
 
-                    <Col>
+	return (
+		<Card className='CommunityCard'>
+			<Card.Header className='CardHeader'>
+				<Row>
+					<Col>
+						<img src={avatar} alt='ProfileAvatar' className='mb-1' />
 
-                        <img src={user.avatar} alt='ProfileAvatar' className='mb-1' />
+						<Card.Title className='CardTitle'>
+							{firstName} {lastName}
+						</Card.Title>
+					</Col>
+				</Row>
+			</Card.Header>
 
-                        <Card.Title
-                            className='CardTitle'>
-                            {user.firstName} {user.lastName}
-                        </Card.Title>
-                    </Col>
+			<Card.Body className='CardBody'>
+				<Card.Text className='CardText'> {jobPosition} </Card.Text>
 
+				<Card.Text className='plainText' style={{ fontSize: '1.3em' }}>
+					{description}
+				</Card.Text>
+			</Card.Body>
 
-                </Row>
+			<Card.Footer className='CardFooter'>
+				<Row>
+					<Col>
+						<button className='socialActionButton' onClick={checkUserProfile}>
+							Check
+						</button>
+					</Col>
+					<Col>
+						<button
+							className='socialActionButton'
+							onClick={
+								!following
+									? () => handleFollow(user_id, { action: 'add' })
+									: () => handleFollow(user_id, { action: 'remove' })
+							}>
+							{following ? 'Unfollow' : 'Follow'} {followersCount}
+						</button>
+					</Col>
+				</Row>
+			</Card.Footer>
+		</Card>
+	)
+}
 
-            </Card.Header>
-
-            <Card.Body className='CardBody'>
-
-                <Card.Text className='CardText' > {user.jobPosition} </Card.Text>
-
-                <Card.Text className='plainText' style={{ fontSize: '1.3em' }}>{user.description}</Card.Text>
-
-            </Card.Body>
-
-            <Card.Footer className='CardFooter'>
-                <Row>
-                    <Col>
-                        <button className='socialActionButton' onClick={checkUserProfile}>Check</button>
-                    </Col>
-                    <Col>
-                        <button className='socialActionButton'>Follow</button>
-                    </Col>
-                </Row>
-            </Card.Footer>
-
-        </Card >
-    );
-};
-
-export default CommunityCard;
-
+export default CommunityCard

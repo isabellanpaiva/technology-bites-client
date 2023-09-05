@@ -8,6 +8,7 @@ const HomePage = () => {
 	const appName = import.meta.env.VITE_APP_NAME
 
 	const [bites, setBites] = useState({})
+	const [errors, setErrors] = useState([])
 
 	useEffect(() => {
 		loadBites()
@@ -17,11 +18,10 @@ const HomePage = () => {
 		biteServices
 			.getOneRandomBite()
 			.then(({ data }) => setBites(data[0]))
-			.catch(err => console.log(err))
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	return (
-
 		<Container className='PageContainer'>
 			<section>
 				<Row>
@@ -33,15 +33,11 @@ const HomePage = () => {
 						<h3 className='PageSubHeading'>Learn. Validate. Connect. </h3>
 
 						<ContentCard bites={bites}>
+							<p className='plainText mb-3'>{bites.definition}</p>
 
-							<p className='plainText mb-3'>
-								{bites.definition}
-							</p>
-
-							<Button className="callToAction mt-4" type='submit' onClick={loadBites}>
+							<Button className='callToAction mt-4' type='submit' onClick={loadBites}>
 								Get Another Bite
 							</Button>
-
 						</ContentCard>
 					</Col>
 				</Row>

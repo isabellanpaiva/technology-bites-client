@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 class CommentServices {
-
 	constructor() {
 		this.api = axios.create({
 			baseURL: `${import.meta.env.VITE_API_URL}/comment`,
@@ -16,22 +15,21 @@ class CommentServices {
 		})
 	}
 
-	createComment(commentData) {
-		return this.api.post('/createComment', commentData)
+	createComment(commentInfo) {
+		return this.api.post('/createComment', { commentInfo })
 	}
 
-	getAllComments(challenge_id) {
-		return this.api.get('/getAllComments', challenge_id)
+	getAllComments(response_id) {
+		return this.api.get(`/getAllComments/${response_id}`)
 	}
 
-	editComment(commentData, comment_id) {
-		return this.api.put(`/editComment/${comment_id}`, commentData)
+	editComment(comment_id, commentContent) {
+		return this.api.post(`/editComment/${comment_id}`, { commentContent })
 	}
 
 	deleteComment(comment_id) {
 		return this.api.delete(`/deleteComment/${comment_id}`)
 	}
-
 }
 
 const commentServices = new CommentServices()

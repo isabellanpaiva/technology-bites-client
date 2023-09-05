@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import ResponseCard from '../ResponseCard/ResponseCard'
 
-const CarouselChallenge = ({ responses, type }) => {
+const CarouselResponses = ({ responses, type, getResponses }) => {
 	const [index, setIndex] = useState(0)
 
 	const handleSelect = selectedIndex => {
@@ -17,6 +17,7 @@ const CarouselChallenge = ({ responses, type }) => {
 					<Carousel.Item key={eachResponse._id}>
 						<ResponseCard
 							response={eachResponse}
+							getResponses={getResponses}
 							challenge={eachResponse.relatedChallenge}
 							type={type}
 						/>
@@ -27,4 +28,4 @@ const CarouselChallenge = ({ responses, type }) => {
 	)
 }
 
-export default CarouselChallenge
+export default CarouselResponses

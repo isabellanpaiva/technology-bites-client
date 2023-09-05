@@ -3,17 +3,17 @@ import ContentCard from './../../components/ContentCard/ContentCard'
 import { useContext, useEffect, useState } from 'react'
 import challengeServices from '../../services/challenge.services'
 import ChallengeForm from '../../components/ChallengeForm/ChallengeForm'
-import ResponseCard from '../../components/ResponseCard/ResponseCard'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
-import CarouselChallenge from '../../components/CarouselChallenge/CarouselChallenge'
+import CarouselResponses from '../../components/CarouselResponses/CarouselResponses'
 
 const ChallengePage = () => {
+	const { loggedUser } = useContext(AuthContext)
+
 	const [challenge, setChallenge] = useState(null)
 	const [myResponse, setMyResponse] = useState(null)
 	const [responses, setResponses] = useState([])
-
-	const { loggedUser } = useContext(AuthContext)
+	const [errors, setErrors] = useState([])
 
 	useEffect(() => {
 		challenge ? getResponses() : loadChallenge()
@@ -21,21 +21,25 @@ const ChallengePage = () => {
 
 	const loadChallenge = () => {
 		challengeServices
-			.getOneChallenge('64f5905da4a69300fd90e80a')
-			.then(({ data }) => setChallenge(data))
-			.catch(err => console.log(err))
+			.getOneChallenge('64f5905da4a69300fd90e816')
+			.then(({ data }) => {
+				setChallenge(data)
+				getResponses()
+			})
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	const getResponses = () => {
-		responseService
-			.getResponsesToChallenge(challenge._id)
-			.then(({ data }) => {
-				let myResp = data.filter(eachResponse => eachResponse.user === loggedUser._id)
-				let restResp = data.filter(eachResponse => eachResponse.user !== loggedUser._id)
-				setResponses(restResp)
-				setMyResponse(myResp[0])
-			})
-			.catch(err => console.log(err))
+		challenge &&
+			responseService
+				.getResponsesToChallenge(challenge._id)
+				.then(({ data }) => {
+					let myResp = data.filter(eachResponse => eachResponse.user === loggedUser._id)
+					let restResp = data.filter(eachResponse => eachResponse.user !== loggedUser._id)
+					setResponses(restResp)
+					myResponse ?? setMyResponse(myResp[0])
+				})
+				.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	return (
@@ -59,7 +63,11 @@ const ChallengePage = () => {
 								<p className='CardResponse'> "{myResponse.response}"</p>
 							</>
 						) : (
-							<ChallengeForm challenge={challenge} setMyResponse={setMyResponse} />
+							<ChallengeForm
+								challenge={challenge}
+								setMyResponse={setMyResponse}
+								getResponses={getResponses}
+							/>
 						)}
 					</ContentCard>
 				</Col>
@@ -67,7 +75,10 @@ const ChallengePage = () => {
 
 			<Row>
 				{myResponse && responses.length !== 0 && (
-					<CarouselChallenge responses={responses} type={'challenge'}></CarouselChallenge>
+					<CarouselResponses
+						responses={responses}
+						getResponses={getResponses}
+						type={'challenge'}></CarouselResponses>
 				)}
 			</Row>
 		</Container>

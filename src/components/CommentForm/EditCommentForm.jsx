@@ -1,11 +1,9 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Alert, Card, FloatingLabel, Form } from 'react-bootstrap'
 import commentServices from '../../services/comment.services'
-import { AuthContext } from '../../contexts/auth.context'
 
-const CommentForm = ({ response, getComments }) => {
-	const [comment, setComment] = useState('')
-	const { loggedUser } = useContext(AuthContext)
+const EditCommentForm = ({ comment, setEditing, getComments }) => {
+	const [newComment, setComment] = useState(comment.content)
 	const [errors, setErrors] = useState([])
 
 	const handleInputChange = e => {
@@ -15,19 +13,10 @@ const CommentForm = ({ response, getComments }) => {
 	const handleSubmitForm = e => {
 		e.preventDefault()
 
-		const { _id: user_id } = loggedUser
-		const { _id: response_id } = response
-
-		const commentInfo = {
-			owner: user_id,
-			content: comment,
-			relatedResponse: response_id,
-		}
-
 		commentServices
-			.createComment(commentInfo)
+			.editComment(comment._id, newComment)
 			.then(() => {
-				setComment('')
+				setEditing(false)
 				getComments()
 				setErrors([])
 			})
@@ -44,20 +33,19 @@ const CommentForm = ({ response, getComments }) => {
 							label='Have something to say about this response?'>
 							<Form.Control
 								as='textarea'
-								placeholder='userComment'
 								style={{ height: '7.5em', paddingTop: '2.5em' }}
-								value={comment}
+								value={newComment}
 								onChange={handleInputChange}
 								maxLength={140}
 							/>
 						</FloatingLabel>
-						<p>{comment.length}/140</p>
+						<p>{newComment.length}/140</p>
 						{errors.length > 0 && <Alert variant='danger'>{errors[0]}</Alert>}
 						<button
 							className='socialActionButton'
 							type='submit'
 							style={{ fontSize: '1em' }}>
-							Publish
+							Save
 						</button>
 					</Form.Group>
 				</Form>
@@ -66,4 +54,4 @@ const CommentForm = ({ response, getComments }) => {
 	)
 }
 
-export default CommentForm
+export default EditCommentForm

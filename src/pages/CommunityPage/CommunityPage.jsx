@@ -8,6 +8,7 @@ const CommunityPage = () => {
 	const { loggedUser } = useContext(AuthContext)
 
 	const [users, setUsers] = useState([])
+	const [errors, setErrors] = useState([])
 
 	useEffect(() => {
 		loadCommunityDetails()
@@ -20,7 +21,7 @@ const CommunityPage = () => {
 				const communityUsers = data.filter(user => user._id !== loggedUser._id)
 				setUsers(communityUsers)
 			})
-			.catch(err => console.log(err))
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	//call service updateFavorites

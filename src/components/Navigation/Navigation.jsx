@@ -7,7 +7,7 @@ import LoginForm from '../LoginForm/LoginForm'
 import SignupForm from '../SignupForm/SignupForm'
 import { AuthContext } from '../../contexts/auth.context'
 import { MessageContext } from '../../contexts/message.context'
-import logo from './../../../public/test-logo.png'
+import logo from './../../../public/logo.png'
 
 const Navigation = () => {
 	const { emitMessage } = useContext(MessageContext)
@@ -34,7 +34,7 @@ const Navigation = () => {
 				<Navbar.Collapse>
 					<Nav>
 						<Link to={'/'} className='nav-link'>
-							<img src={logo} alt='logo' style={{ width: '5em', height: 'auto' }} />
+							<img src={logo} alt='logo' style={{ width: '5em', height: 'auto', filter: 'invert(100%)' }} />
 						</Link>
 					</Nav>
 

@@ -30,7 +30,7 @@ const CommentsCard = () => {
                     <Col md={{ span: 2 }} >
 
                         <div>
-                            <img src={testImage} alt="ProfileAvatar" style={{ width: '140%', height: '10em' }} />
+                            <img className="userAvatar" src={testImage} alt="ProfileAvatar" style={{ width: '140%', height: '10em' }} />
                         </div>
 
                         <div className="mt-2 ms-4">
@@ -64,7 +64,7 @@ const CommentsCard = () => {
                     <Col md={{ span: 2 }} >
 
                         <div>
-                            <img src={testImage} alt="ProfileAvatar" style={{ width: '140%', height: '10em' }} />
+                            <img className="userAvatar" src={testImage} alt="ProfileAvatar" style={{ width: '140%', height: '10em' }} />
                         </div>
 
                         <div className="mt-2 ms-4">

@@ -1,7 +1,7 @@
 .Footer {
     width: 100%;
     padding: 2.5em;
-    margin-top: 3.5em;
+    margin-top: 7.5em;
     margin-right: 3em;
     background-color: #191919;
     color: white;
@@ -19,4 +19,9 @@
 
 .FooterEmail {
     color: rgb(155, 154, 154)
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
 }

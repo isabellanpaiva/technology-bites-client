@@ -19,7 +19,7 @@ const CommunityCard = ({ user }) => {
 
                     <Col>
 
-                        <img src={user.avatar} alt='ProfileAvatar' className='mb-1' />
+                        <img className="userAvatar mb-1" src={user.avatar} alt='ProfileAvatar' />
 
                         <Card.Title
                             className='CardTitle'>

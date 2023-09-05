@@ -11,7 +11,7 @@ const CarouselChallenge = ({ responses, type }) => {
 	}
 
 	return (
-		<Carousel activeIndex={index} onSelect={handleSelect} data-bs-theme='dark'>
+		<Carousel className="Carousel" activeIndex={index} onSelect={handleSelect} data-bs-theme='dark'>
 			{responses.map(eachResponse => {
 				return (
 					<Carousel.Item key={eachResponse._id}>

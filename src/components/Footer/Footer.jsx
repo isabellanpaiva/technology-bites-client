@@ -1,5 +1,5 @@
 import './Footer.css'
-import logo from './../../../public/test-logo.png'
+import logo from './../../../public/logo.png'
 import { Row, Col } from 'react-bootstrap'
 
 const Footer = () => {
@@ -25,7 +25,7 @@ const Footer = () => {
 
                 <Col md={{ span: 2 }}>
 
-                    <img src={logo} alt="logo" />
+                    <img className="logo" src={logo} alt="logo" />
 
                 </Col>
 

@@ -15,7 +15,7 @@ const CommentsCard = () => {
 				<Row className='mt-3 mb-5'>
 					<Col md={{ span: 2 }}>
 						<div>
-							<img
+							<img className="userAvatar"
 								src={testImage}
 								alt='ProfileAvatar'
 								style={{ width: '145%', height: '8em' }}

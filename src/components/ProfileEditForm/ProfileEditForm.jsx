@@ -67,7 +67,7 @@ const ProfileEditForm = ({ fireFinalActions }) => {
 		<Form onSubmit={handleFormSubmit}>
 			<Row>
 				<div className='d-flex avatar-container'>
-					<img src={avatar} alt='User avatar' className='avatar-img' />
+					<img className="userAvatar" src={avatar} alt='User avatar' />
 				</div>
 
 				<Col>

@@ -87,9 +87,9 @@ const ProfilePage = () => {
 								<Row>
 									<Col>
 										<img
+											className="userAvatar mb-1"
 											src={user.avatar}
 											alt='ProfileAvatar'
-											className='mb-1'
 										/>
 									</Col>
 								</Row>

@@ -38,7 +38,7 @@ const CommunityCard = ({ user }) => {
 			<Card.Header className='CardHeader'>
 				<Row>
 					<Col>
-						<img src={avatar} alt='ProfileAvatar' className='mb-1' />
+						<img src={avatar} className='userAvatar mb-1' alt='ProfileAvatar' />
 
 						<Card.Title className='CardTitle'>
 							{firstName} {lastName}

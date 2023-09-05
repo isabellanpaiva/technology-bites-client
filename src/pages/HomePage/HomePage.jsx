@@ -1,8 +1,11 @@
 import './HomePage.css'
 import { useState, useEffect } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Figure } from 'react-bootstrap'
 import ContentCard from './../../components/ContentCard/ContentCard'
 import biteServices from '../../services/bite.services'
+import DogMockup2 from '../../assets/DogMockup2.png'
+import IDontKnowWhatImDoing4 from '../../assets/IDontKnowWhatImDoing4.png'
+import memeMockup from '../../assets/memeMockup.png'
 
 const HomePage = () => {
 	const appName = import.meta.env.VITE_APP_NAME
@@ -22,16 +25,16 @@ const HomePage = () => {
 	}
 
 	return (
-		<Container className='PageContainer'>
-			<section>
+		<Container fluid className='PageContainer'>
+			<section className='Bites mt-5'>
 				<Row>
-					<Col>
-						<h1 className='PageHeading'>
-							<span className='typing-animation'>{appName}.</span>
-						</h1>
+					<h1 className='PageHeading'>
+						<span className='typing-animation'>{appName}. </span>
+					</h1>
 
-						<h3 className='PageSubHeading'>Learn. Validate. Connect. </h3>
+					<h1 className='PageSubHeading mt-3'> Nerd stuff made easy  💻</h1>
 
+					<Col style={{ marginTop: '3em' }}>
 						<ContentCard bites={bites}>
 							<p className='plainText mb-3'>{bites.definition}</p>
 
@@ -43,41 +46,93 @@ const HomePage = () => {
 				</Row>
 			</section>
 
-			{/* <section>
+			<h1 className='PageSubHeading' style={{ marginBottom: '5em' }}>
+				{' '}
+				Learn. Validate. Connect.
+			</h1>
 
-				<Row>
+			<section className='Features' style={{ marginBottom: '10em' }}>
+				<article>
+					<Row className='justify-content-center'>
+						<Col>
+							<Row className='d-flex align-items-center'>
+								<Col className='columnRight'>
+									<Figure.Image
+										className='mockupImage'
+										alt='Mockup'
+										src={IDontKnowWhatImDoing4}
+										style={{ width: '350px' }}
+									/>
+								</Col>
 
-					<Col md={6}>
-						<h2 className='Features'> Bites</h2>
+								<Col className='columnLeft' md={{ span: 6 }}>
+									<h2 className='FeaturesHeading'> Bites 🍿 </h2>
+									<h2 className='FeaturesSubHeading'>
+										{' '}
+										Technology concepts with one click.
+									</h2>
+									<h2 className='FeaturesSubHeading2'> Grab your bite! </h2>
+								</Col>
+							</Row>
+						</Col>
+					</Row>
+				</article>
 
-						<h4 className='FeaturesText'> Learn a new technology concept with one click. </h4>
+				<article style={{ paddingTop: '15em' }}>
+					<Row className='justify-content-center'>
+						<Col>
+							<Row className='d-flex align-items-center'>
+								<Col className='columnRight' md={{ span: 6 }}>
+									<h2 className='FeaturesHeading'> Challenges 🥇</h2>
+									<h2 className='FeaturesSubHeading'>
+										{' '}
+										A fresh question everyday.
+									</h2>
+									<h2 className='FeaturesSubHeading2'>
+										{' '}
+										Connect, discuss and get inspired!{' '}
+									</h2>
+								</Col>
 
-					</Col >
+								<Col className='columnLeft'>
+									<Figure.Image
+										className='mockupImage'
+										alt='Mockup'
+										src={DogMockup2}
+										style={{ filter: 'grayscale(100%' }}
+									/>
+								</Col>
+							</Row>
+						</Col>
+					</Row>
+				</article>
 
-					<Col md={6}>
+				<article style={{ paddingTop: '15em' }}>
+					<Row className='justify-content-center'>
+						<Col>
+							<Row className='d-flex align-items-center'>
+								<Col className='columnRight'>
+									<Figure.Image
+										className='memeMockup'
+										alt='Mockup'
+										src={memeMockup}
+										style={{ width: '350px', filter: 'grayscale(100%' }}
+									/>
+								</Col>
 
-						<h1>test</h1>
-
-						<Figure.Image
-							width={171}
-							height={180}
-							alt="171x180"
-							src="iphoneMockup"
-						/>
-
-					</Col>
-
-				</Row>
-
-				<Row>
-
-					<h2 className='Features'> Challenges</h2>
-
-					<h3 className='FeaturesText'> Learn a new technology concept with one click. Grab your bite! </h3>
-
-				</Row>
-
-			</section> */}
+								<Col className='columnLeft ms-5' md={{ span: 6 }}>
+									<h2 className='FeaturesHeading'> Dojo 🏁 </h2>
+									<h2 className='FeaturesSubHeading'>
+										{' '}
+										10 rounds, true or false.{' '}
+									</h2>
+									<h2 className='FeaturesSubHeading2'> How many can you get? </h2>
+								</Col>
+							</Row>
+						</Col>
+					</Row>
+				</article>
+			</section>
 		</Container>
 	)
 }

@@ -1,25 +1,25 @@
 /* global settings */
 
 body {
-    /* padding-top: 15em; */
     letter-spacing: 0.1em;
 }
 
-img {
-
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover
-}
+img {}
 
 .PageContainer {
-    padding-top: 15em;
+    padding-top: 20em;
     margin-left: 15em;
     /* background-color: red; */
 }
 
+.PageHeading {
+    font-size: 5em;
+    text-align: center;
+}
+
 .PageSubHeading {
+    text-align: center;
+    margin-top: 1em;
     color: #0070f3;
 }
 
@@ -33,6 +33,62 @@ img {
     justify-content: center;
     height: 100vh;
     margin: 15px;
+}
+
+/* home page setting  */
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 50%;
+    }
+}
+
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    animation: typing 2s steps(40, end) forwards;
+    white-space: nowrap;
+    border-right: 2px solid #000;
+    padding-right: 8px;
+}
+
+.columnRight {
+    text-align: right !important;
+    margin-left: 10em;
+    margin-right: 5em;
+    /* background-color: blue; */
+}
+
+.columnLeft {
+    text-align: left !important;
+    margin-right: 10em;
+    /* background-color: red; */
+}
+
+.mockupImage {
+    width: 15em;
+    height: 15em;
+}
+
+.FeaturesHeading {
+    font-size: 4em;
+    line-height: 2;
+}
+
+.FeaturesSubHeading {
+    font-size: 2.5em;
+    line-height: 2;
+    color: black;
+}
+
+.FeaturesSubHeading2 {
+    font-size: 2.5em;
+    line-height: 2;
+    color: #0070f3;
 }
 
 
@@ -94,6 +150,13 @@ img {
     line-height: 2.5em;
 }
 
+.userAvatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 /* buttons settings */
 
 .socialActionButton {
@@ -130,33 +193,9 @@ img {
     box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }
 
-/* carousel */
+/* carousel settings*/
 
-.CarouselPrevIcon {
-    background-image: url('/CarouselPrevIcon.webp');
-}
-
-.CarouselNextIcon {
-    background-image: url('/CarouselNextIcon.webp');
-}
-
-/* home animation */
-
-@keyframes typing {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 50%;
-    }
-}
-
-.typing-animation {
-    display: inline-block;
-    overflow: hidden;
-    animation: typing 2s steps(40, end) forwards;
-    white-space: nowrap;
-    border-right: 2px solid #000;
-    padding-right: 8px;
+.card {
+    background-color: white !important;
+    color: #000 !important;
 }

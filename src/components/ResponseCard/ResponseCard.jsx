@@ -36,7 +36,11 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 		<Card className='ContentCard'>
 			{type === 'challenge' && (
 				<Card.Header className='CardHeader'>
-					<img src={responseOwner?.avatar} alt='ProfileAvatar' className='mb-2' />
+					<img
+						className='userAvatar mb-2'
+						src={responseOwner?.avatar}
+						alt='ProfileAvatar'
+					/>
 
 					<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
 						{responseOwner?.firstName}
@@ -45,9 +49,14 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 			)}
 
 			<Card.Body className='CardBody'>
-				<Card.Title className='CardTitle'>{challenge.question}</Card.Title>
+				<Card.Title>
+					<h4 className='PageSubHeading mb-5' style={{ lineHeight: '2', color: 'black' }}>
+						{' '}
+						{challenge.question}{' '}
+					</h4>
+				</Card.Title>
 
-				<Card.Text className='CardText'>{response.response}</Card.Text>
+				<Card.Text className='CardText mb-5'>{response.response}</Card.Text>
 			</Card.Body>
 
 			<Card.Footer className='CardFooter'>

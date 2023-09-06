@@ -21,7 +21,8 @@ const ChallengePage = () => {
 
 	const loadChallenge = () => {
 		challengeServices
-			.getOneChallenge('64f5905da4a69300fd90e816')
+			.getDailyChallenge()
+			// .getOneChallenge('64f5905da4a69300fd90e816')
 			.then(({ data }) => {
 				setChallenge(data)
 				getResponses()
@@ -74,12 +75,19 @@ const ChallengePage = () => {
 			</Row>
 
 			<Row>
-				{myResponse && responses.length !== 0 && (
-					<CarouselResponses
-						responses={responses}
-						getResponses={getResponses}
-						type={'challenge'}></CarouselResponses>
-				)}
+				{myResponse &&
+					(responses.length !== 0 ? (
+						<CarouselResponses
+							responses={responses}
+							getResponses={getResponses}
+							type={'challenge'}></CarouselResponses>
+					) : (
+						<Row>
+							<Col>
+								<p>SO SAD NADIE HA RESPONDIDO UY UY UY </p>
+							</Col>
+						</Row>
+					))}
 			</Row>
 		</Container>
 	)

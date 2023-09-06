@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import userService from '../../services/user.services'
 import CommunityCard from '../../components/CommunityCard/CommunityCard'
 import { AuthContext } from './../../contexts/auth.context'
@@ -9,14 +9,20 @@ const CommunityPage = () => {
 
 	const [users, setUsers] = useState([])
 	const [errors, setErrors] = useState([])
+	const [filter, setFilter] = useState(false)
 
 	useEffect(() => {
+		!users.length && loadCommunityDetails()
+	}, [users])
+
+	const handleCheck = e => {
+		setFilter(!e.target.checked)
 		loadCommunityDetails()
-	}, [])
+	}
 
 	const loadCommunityDetails = () => {
 		userService
-			.getAllUsers()
+			.getAllUsers(filter)
 			.then(({ data }) => {
 				const communityUsers = data.filter(user => user._id !== loggedUser._id)
 				setUsers(communityUsers)
@@ -24,25 +30,31 @@ const CommunityPage = () => {
 			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
-	//call service updateFavorites
-
 	return (
 		<>
 			<Container fluid className='PageContainer'>
 				<section style={{ marginBottom: '5em' }}>
 					<h1 className='PageHeading' style={{ fontSize: '3em' }}>
-						{' '}
-						Community{' '}
+						Community
 					</h1>
 
 					<h3 className='PageSubHeading'>Meet your neighbors </h3>
 				</section>
-
+				<Form>
+					<Form.Check
+						type='switch'
+						id='custom-switch'
+						label='Only Followers'
+						onChange={handleCheck}
+					/>
+				</Form>
 				<Row>
 					{users.map(user => (
 						<Col key={user._id} md={{ span: 4 }}>
-							{/* <Col key={user.id} md={4}> */}
-							<CommunityCard user={user} />
+							<CommunityCard
+								user={user}
+								loadCommunityDetails={loadCommunityDetails}
+							/>
 						</Col>
 					))}
 				</Row>

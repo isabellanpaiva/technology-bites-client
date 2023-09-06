@@ -17,8 +17,8 @@ class UserService {
 		return this.api.get(`/getOneUser/${user_id}`)
 	}
 
-	getAllUsers() {
-		return this.api.get('/getAllUsers')
+	getAllUsers(filter) {
+		return this.api.get(`/getAllUsers/${filter}`)
 	}
 
 	deleteUser(user_id) {

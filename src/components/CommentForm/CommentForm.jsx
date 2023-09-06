@@ -52,7 +52,9 @@ const CommentForm = ({ response, getComments }) => {
 							/>
 						</FloatingLabel>
 						<p>{comment.length}/140</p>
-						{errors.length > 0 && <Alert variant='danger'>{errors[0]}</Alert>}
+						{errors.length > 0 && comment.length <= 5 && (
+							<Alert variant='danger'>{errors[0]}</Alert>
+						)}
 						<button
 							className='socialActionButton'
 							type='submit'

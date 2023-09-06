@@ -4,7 +4,7 @@ import userService from '../../services/user.services'
 import { useParams } from 'react-router-dom'
 import uploadServices from '../../services/upload.services'
 
-const ProfileEditForm = ({ fireFinalActions }) => {
+const ProfileEditForm = ({ saveUserEdition }) => {
 	const { user_id } = useParams()
 
 	const [userData, setUserData] = useState({
@@ -58,7 +58,7 @@ const ProfileEditForm = ({ fireFinalActions }) => {
 		userService
 			.editUser(user_id, userData)
 			.then(() => {
-				fireFinalActions()
+				saveUserEdition()
 			})
 			.catch(err => console.log(err))
 	}
@@ -67,7 +67,7 @@ const ProfileEditForm = ({ fireFinalActions }) => {
 		<Form onSubmit={handleFormSubmit}>
 			<Row>
 				<div className='d-flex avatar-container'>
-					<img className="userAvatar" src={avatar} alt='User avatar' />
+					<img className='userAvatar' src={avatar} alt='User avatar' />
 				</div>
 
 				<Col>
@@ -131,7 +131,11 @@ const ProfileEditForm = ({ fireFinalActions }) => {
 			</Form.Group>
 
 			<div className='d-grid mb-3'>
-				<Button className="callToAction" variant='primary' type='submit' disabled={loadingImage}>
+				<Button
+					className='callToAction'
+					variant='primary'
+					type='submit'
+					disabled={loadingImage}>
 					{loadingImage ? 'Loading image...' : 'Save updates'}
 				</Button>
 			</div>

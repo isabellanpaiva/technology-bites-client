@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import userService from '../../services/user.services'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Container, Row, Col, Button, Card, Modal, Carousel } from 'react-bootstrap'
-import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
 import CarouselResponses from '../../components/CarouselResponses/CarouselResponses'
+import CommunityCard from '../../components/CommunityCard/CommunityCard'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -13,7 +13,6 @@ const ProfilePage = () => {
 	const { loggedUser, logout } = useContext(AuthContext)
 
 	const [user, setUser] = useState(null)
-	const [showProfileEditModal, setProfileEditModal] = useState(false)
 	const [userResponses, setUserResponses] = useState([])
 	const [errors, setErrors] = useState([])
 
@@ -22,11 +21,6 @@ const ProfilePage = () => {
 	useEffect(() => {
 		user ? getResponses() : loadUserDetails()
 	}, [user])
-
-	const fireFinalActions = () => {
-		loadUserDetails()
-		setProfileEditModal(false)
-	}
 
 	const loadUserDetails = () => {
 		userService
@@ -73,68 +67,17 @@ const ProfilePage = () => {
 								? `Welcome, ${user.firstName}!`
 								: `${user.firstName} ${user.lastName} profile`}
 						</h1>
-
 						<h3 className='PageSubHeading'>
 							{user && user._id === loggedUser._id
 								? 'Nice to have you here'
 								: 'Inspire and be inspired'}
 						</h3>
 					</section>
-
-					<section className=' ProfileInformation mb-5'>
-						<Card className='CommunityCard'>
-							<Card.Header className='CardHeader'>
-								<Row>
-									<Col>
-										<img
-											className="userAvatar mb-1"
-											src={user.avatar}
-											alt='ProfileAvatar'
-										/>
-									</Col>
-								</Row>
-							</Card.Header>
-
-							<Card.Body className='CardBody'>
-								<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
-									{user.firstName} {user.lastName}
-								</Card.Title>
-
-								<Card.Text className='CardText'> {user.jobPosition} </Card.Text>
-								<Card.Text className='CardText' style={{ color: 'black' }}>
-									{user.email}
-								</Card.Text>
-								<Card.Text className='CardText'> {user.description} </Card.Text>
-							</Card.Body>
-
-							<Card.Footer className='CardFooter'>
-								<Row>
-									<Col>
-										{loggedUser && user._id === loggedUser._id ? (
-											<Button
-												className='callToAction'
-												onClick={() => setProfileEditModal(true)}>
-												Edit profile
-											</Button>
-										) : (
-											<button className='socialActionButton'>Follow</button>
-										)}
-									</Col>
-								</Row>
-							</Card.Footer>
-						</Card>
-
-						<Modal
-							show={showProfileEditModal}
-							onHide={() => setProfileEditModal(false)}>
-							<Modal.Header closeButton>
-								<Modal.Title>Edit personal information</Modal.Title>
-							</Modal.Header>
-							<Modal.Body>
-								<ProfileEditForm fireFinalActions={fireFinalActions} />
-							</Modal.Body>
-						</Modal>
-					</section>
+					<CommunityCard
+						user={user}
+						profilePage={true}
+						loadUserDetails={loadUserDetails}
+					/>
 
 					<section className=' ProfileCards mt-5'>
 						<Row>

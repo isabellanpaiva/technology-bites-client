@@ -7,8 +7,8 @@ import responseService from '../../services/response.services'
 
 const ResponseCard = ({ challenge, response, type, getResponses }) => {
 	const { loggedUser } = useContext(AuthContext)
-	const [errors, setErrors] = useState([])
 
+	const [errors, setErrors] = useState([])
 	const [responseOwner, setResponseOwner] = useState(null)
 	const [showComments, setShowComments] = useState(false)
 	const [isFav, setFav] = useState(response.likes.includes(loggedUser._id))
@@ -51,8 +51,7 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 			<Card.Body className='CardBody'>
 				<Card.Title>
 					<h4 className='PageSubHeading mb-5' style={{ lineHeight: '2', color: 'black' }}>
-						{' '}
-						{challenge.question}{' '}
+						{challenge.question}
 					</h4>
 				</Card.Title>
 
@@ -71,7 +70,7 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 										? () => handleFav(response._id, { action: 'add' })
 										: () => handleFav(response._id, { action: 'remove' })
 								}>
-								Like
+								{responseOwner?._id !== loggedUser?._id && 'Like'}
 								<span style={{ color: isFav ? 'red' : 'black' }}> ♥️ </span>
 							</button>
 						)}

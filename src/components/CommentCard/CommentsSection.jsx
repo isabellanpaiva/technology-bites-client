@@ -11,9 +11,9 @@ const CommentsSection = ({ response }) => {
 		getComments()
 	}, [])
 
-	const getComments = response_id => {
+	const getComments = () => {
 		commentServices
-			.getAllComments(response_id)
+			.getAllComments(response._id)
 			.then(({ data }) => setComments(data))
 			.catch(err => setErrors(err.response.data.errorMessages))
 	}

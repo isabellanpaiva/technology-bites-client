@@ -31,6 +31,10 @@ class ChallengeServices {
 		return this.api.get('/getOneRandomChallenge')
 	}
 
+	getDailyChallenge() {
+		return this.api.get('/getDailyChallenge')
+	}
+
 	getChallengeResponses(challenge_id) {
 		console.log('oooooooo', challenge_id)
 		return this.api.get(`/getChallengeResponses/${challenge_id}`)

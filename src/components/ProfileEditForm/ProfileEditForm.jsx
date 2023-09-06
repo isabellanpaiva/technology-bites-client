@@ -17,7 +17,7 @@ const ProfileEditForm = ({ saveUserEdition }) => {
 		avatar: '',
 	})
 
-	const { firstName, lastName, email, password, jobPosition, description, avatar } = userData
+	const { firstName, lastName, email, jobPosition, description, avatar } = userData
 
 	const [loadingImage, setLoadingImage] = useState(false)
 

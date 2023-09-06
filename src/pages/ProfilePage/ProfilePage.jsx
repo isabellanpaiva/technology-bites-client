@@ -6,6 +6,7 @@ import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
 import CarouselResponses from '../../components/CarouselResponses/CarouselResponses'
 import CommunityCard from '../../components/CommunityCard/CommunityCard'
+import * as MESSAGES from './../../consts/messages.consts'
 
 const ProfilePage = () => {
 	const { user_id } = useParams()
@@ -40,14 +41,12 @@ const ProfilePage = () => {
 	}
 
 	const deleteProfile = () => {
-		const shouldDelete = confirm(
-			'Are you sure you want to delete your profile? This action cannot be undone.'
-		)
+		const shouldDelete = confirm(MESSAGES.PROMPT_DELETE_PROFILE)
 		if (shouldDelete) {
 			userService
 				.deleteUser(user_id)
 				.then(() => {
-					alert('Profile deleted')
+					alert(MESSAGES.CONFIRM_PROFILE_DELETE)
 					logout()
 					navigate('/')
 				})
@@ -92,7 +91,7 @@ const ProfilePage = () => {
 							</h1>
 
 							<h3 className='PageSubHeading'>
-								{loggedUser && user._id === loggedUser._id
+								{user._id === loggedUser._id
 									? 'Your previous responses'
 									: `Previous responses from ${user.firstName}`}
 							</h3>
@@ -105,7 +104,7 @@ const ProfilePage = () => {
 										data-bs-theme='dark'></CarouselResponses>
 								) : (
 									<h3 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
-										{loggedUser && user._id === loggedUser._id
+										{user._id === loggedUser._id
 											? 'No challenges resolved yet. What about start now?'
 											: `Ops... ${user.firstName} don't have any responsers yet 🔎`}
 									</h3>
@@ -117,7 +116,7 @@ const ProfilePage = () => {
 					</section>
 
 					<section>
-						{loggedUser && user._id === loggedUser._id ? (
+						{user._id === loggedUser._id ? (
 							<Row>
 								<Col md={{ span: 8, offset: 2 }} className='text-center'>
 									<h1

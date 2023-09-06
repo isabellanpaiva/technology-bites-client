@@ -1,4 +1,4 @@
-import { Card, Row, Col, Accordion } from 'react-bootstrap'
+import { Card, Row, Col } from 'react-bootstrap'
 import CommentsSection from '../CommentCard/CommentsSection'
 import { useContext, useEffect, useState } from 'react'
 import userService from '../../services/user.services'
@@ -61,19 +61,17 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 			<Card.Footer className='CardFooter'>
 				<Row>
 					<Col>
-						{loggedUser && (
-							<button
-								disabled={responseOwner?._id === loggedUser?._id}
-								className='socialActionButton'
-								onClick={
-									!isFav
-										? () => handleFav(response._id, { action: 'add' })
-										: () => handleFav(response._id, { action: 'remove' })
-								}>
-								{responseOwner?._id !== loggedUser?._id && 'Like'}
-								<span style={{ color: isFav ? 'red' : 'black' }}> ♥️ </span>
-							</button>
-						)}
+						<button
+							disabled={responseOwner?._id === loggedUser._id}
+							className='socialActionButton'
+							onClick={
+								!isFav
+									? () => handleFav(response._id, { action: 'add' })
+									: () => handleFav(response._id, { action: 'remove' })
+							}>
+							{responseOwner?._id !== loggedUser._id && 'Like'}
+							<span style={{ color: isFav ? 'red' : 'black' }}> ♥️ </span>
+						</button>
 						{response.likes.length}
 					</Col>
 					<Col>

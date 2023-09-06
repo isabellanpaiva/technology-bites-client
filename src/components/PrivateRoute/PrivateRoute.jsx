@@ -14,6 +14,7 @@ const PrivateRoute = () => {
 
 	if (!loggedUser) {
 		emitMessage('Ops! Please log in to continue')
+		console.clear()
 		return (
 			<>
 				<Navigate to='/' />

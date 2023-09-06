@@ -12,12 +12,11 @@ const CommunityPage = () => {
 	const [filter, setFilter] = useState(false)
 
 	useEffect(() => {
-		!users.length && loadCommunityDetails()
-	}, [users])
+		loadCommunityDetails()
+	}, [filter])
 
 	const handleCheck = e => {
-		setFilter(!e.target.checked)
-		loadCommunityDetails()
+		setFilter(e.target.checked)
 	}
 
 	const loadCommunityDetails = () => {
@@ -42,9 +41,9 @@ const CommunityPage = () => {
 				</section>
 				<Form>
 					<Form.Check
-						type='switch'
+						type='checkbox'
 						id='custom-switch'
-						label='Only Followers'
+						label='Only Following'
 						onChange={handleCheck}
 					/>
 				</Form>

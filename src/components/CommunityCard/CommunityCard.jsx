@@ -99,7 +99,7 @@ const CommunityCard = ({ user, profilePage, loadUserDetails, loadCommunityDetail
 					</Row>
 					<Row>
 						<Col>
-							{loggedUser && user._id === loggedUser._id && (
+							{user._id === loggedUser._id && (
 								<Button
 									className='callToAction'
 									onClick={() => setProfileEditModal(true)}>

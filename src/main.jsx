@@ -8,10 +8,10 @@ import { MessageProviderWrapper } from './contexts/message.context'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<Router>
-		<AuthProviderWrapper>
-			<MessageProviderWrapper>
+		<MessageProviderWrapper>
+			<AuthProviderWrapper>
 				<App />
-			</MessageProviderWrapper>
-		</AuthProviderWrapper>
+			</AuthProviderWrapper>
+		</MessageProviderWrapper>
 	</Router>
 )

@@ -31,16 +31,17 @@ const ChallengePage = () => {
 	}
 
 	const getResponses = () => {
-		challenge &&
-			responseService
-				.getResponsesToChallenge(challenge._id)
-				.then(({ data }) => {
-					let myResp = data.filter(eachResponse => eachResponse.user === loggedUser._id)
-					let restResp = data.filter(eachResponse => eachResponse.user !== loggedUser._id)
-					setResponses(restResp)
-					myResponse ?? setMyResponse(myResp[0])
-				})
-				.catch(err => setErrors(err.response.data.errorMessages))
+		// challenge &&
+		responseService
+			.getResponsesToChallenge(challenge._id)
+			.then(({ data }) => {
+				// CHANGED
+				let myResp = data.find(eachResponse => eachResponse.user === loggedUser._id)
+				let restResp = data.filter(eachResponse => eachResponse.user !== loggedUser._id)
+				setResponses(restResp)
+				myResponse ?? setMyResponse(myResp)
+			})
+			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	return (
@@ -84,7 +85,7 @@ const ChallengePage = () => {
 					) : (
 						<Row>
 							<Col>
-								<p>SO SAD NADIE HA RESPONDIDO UY UY UY </p>
+								<p>Nice, you are the first the respond this challenge! </p>
 							</Col>
 						</Row>
 					))}

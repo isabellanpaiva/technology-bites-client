@@ -15,8 +15,12 @@ class DojoServices {
 		})
 	}
 
-	getDojoInformation() {
-		return this.api.get('/getDojoInformation')
+	getDojoCategories() {
+		return this.api.get('/getDojoCategories')
+	}
+
+	getDojoQuestions(category) {
+		return this.api.get(`/getDojoQuestions/${category}`)
 	}
 }
 

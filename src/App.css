@@ -197,3 +197,19 @@ body {
     background-color: white !important;
     color: #000 !important;
 }
+
+/* tag settings */
+
+.categoryTag {
+    padding: 1.5em !important;
+    background-color: #f1f3f7 !important;
+    color: black !important;
+    border: none;
+    border-radius: 0.8em;
+    font-weight: bold;
+}
+
+.dojoList {
+    height: 10em;
+    text-align: center;
+}

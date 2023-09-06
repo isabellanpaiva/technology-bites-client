@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './../pages/HomePage/HomePage'
 import ChallengePage from '../pages/ChallengePage/ChallengePage'
-import DojoPage from '../pages/DojoPage/DogoPage'
+import DojoPage from '../pages/DojoPage/DojoPage'
 import CommunityPage from '../pages/CommunityPage/CommunityPage'
 import ProfilePage from '../pages/ProfilePage/ProfilePage'
 import NotFoundPage from './../pages/NotFoundPage/NotFoundPage'

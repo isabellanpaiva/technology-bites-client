@@ -1,23 +1,12 @@
 import './../../App.css'
-import { Container, Row, Col, Badge } from 'react-bootstrap'
 
-const CategoryTags = () => {
+const CategoryTags = ({ tag, getQuestions }) => {
 
     return (
 
-        <>
-
-            {/* connect tag content and delete examples 2 and 3 */}
-
-            <Badge className="categoryTag" bg="dark"> category tag 1</Badge>
-
-            <Badge className="categoryTag" bg="dark"> category tag 2</Badge>
-
-            <Badge className="categoryTag" bg="dark"> category tag 3</Badge>
-
-            {/* connect tag content and delete examples 2 and 3 */}
-
-        </>
+        <p>
+            <button className="d-grid categoryTag" onClick={() => getQuestions(tag)}> {tag}</button>
+        </p>
     )
 }
 

@@ -45,9 +45,9 @@ const Navigation = () => {
 						<Link to={'/challenges'} className='nav-link'>
 							Challenges
 						</Link>
-						{/* <Link to={'/dojo'} className='nav-link'>
+						<Link to={'/dojo'} className='nav-link'>
 							Dojo
-						</Link>*/}
+						</Link>
 						<Link to={'/community'} className='nav-link'>
 							Community
 						</Link>

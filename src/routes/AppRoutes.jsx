@@ -21,7 +21,6 @@ const AppRoutes = () => {
 
 			<Route path={'*'} element={<NotFoundPage />} />
 
-			{/* add PrivateRoutes >>> */}
 		</Routes>
 	)
 }

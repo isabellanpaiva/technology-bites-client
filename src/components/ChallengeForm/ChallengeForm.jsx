@@ -1,9 +1,11 @@
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
+import openaiAPIServices from '../../services/openaiAPI.services'
+import FormError from '../FormError/FormError'
 
-const ChallengeForm = ({ challenge, setMyResponse, getResponses }) => {
+const ChallengeForm = ({ challenge, setMyResponse, getResponses, getApiResponse }) => {
 	const [userResponse, setUserResponse] = useState('')
 	const { loggedUser } = useContext(AuthContext)
 	const [errors, setErrors] = useState([])
@@ -24,31 +26,46 @@ const ChallengeForm = ({ challenge, setMyResponse, getResponses }) => {
 			challenge_id,
 		}
 
-		responseService
-			.createOneResponse(responseInfo)
-			.then(() => {
-				setMyResponse(userResponse)
-				getResponses()
-			})
-			.catch(err => setErrors(err.response.data.errorMessages))
+		if (userResponse !== '') {
+			responseService
+				.createOneResponse(responseInfo)
+				.then(() => {
+					setMyResponse(userResponse)
+					getApiResponse(userResponse)
+					getResponses()
+				})
+				.catch(err => setErrors(err.response.data.errorMessages))
+		} else {
+			setErrors(['Ops, your answer must be at leas five characters long'])
+		}
 	}
 
 	return (
-		<Form onSubmit={handleSubmitForm}>
-			<Form.Group className='mt-5 mb-3' controlId='userResponse'>
-				<Form.Control
-					type='text'
-					name='userResponse'
-					value={userResponse}
-					placeholder='Type your answer here!'
-					onChange={handleInputChange}
-				/>
-
-				<Button variant='primary' type='submit' className='callToAction mt-5'>
-					Submit answer
-				</Button>
-			</Form.Group>
-		</Form>
+		<>
+			<Form onSubmit={handleSubmitForm}>
+				<Form.Group className='mt-5 mb-3' controlId='userResponse'>
+					<Form.Control
+						type='text'
+						name='userResponse'
+						value={userResponse}
+						placeholder='Type your answer here!'
+						onChange={handleInputChange}
+					/>
+					{errors.length > 0 && (
+						<FormError>
+							{errors.map(elm => (
+								<p key={elm} style={{ margin: 0, fontSize: '.8em' }}>
+									{elm}
+								</p>
+							))}
+						</FormError>
+					)}
+					<Button variant='primary' type='submit' className='callToAction mt-5'>
+						Submit answer
+					</Button>
+				</Form.Group>
+			</Form>
+		</>
 	)
 }
 

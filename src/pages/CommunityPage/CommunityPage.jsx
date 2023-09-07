@@ -41,7 +41,7 @@ const CommunityPage = () => {
 
 	for (let i = 0; i < totalUsers / 6; i++) {
 		buttons.push(
-			<Col md={{ span: 1 }}>
+			<Col md={{ span: 1 }} key={i}>
 				<button
 					className='categoryTag'
 					style={{ marginRight: '1em' }}

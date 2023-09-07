@@ -33,26 +33,53 @@ body {
     margin: 15px;
 }
 
-/* home page setting  */
+/* home page animation  */
 
 @keyframes typing {
     from {
         width: 0;
+        border-right-width: 0;
+        /* Start with no border */
     }
 
     to {
-        width: 50%;
+        width: 35%;
+        border-right-width: 1.75px;
+        /* Reach 35% width and add the border */
+    }
+}
+
+@keyframes border-blink {
+
+    0%,
+    100% {
+        border-color: transparent;
+        /* Hide the border */
+    }
+
+    50% {
+        border-color: #00000080;
+        /* Show the border */
     }
 }
 
 .typing-animation {
     display: inline-block;
     overflow: hidden;
-    animation: typing 2s steps(40, end) forwards;
+    animation: typing 2.5s steps(40, end) forwards, border-blink 0.75s infinite alternate;
     white-space: nowrap;
-    border-right: 2px solid #000;
-    padding-right: 8px;
+    border-right: 2px solid #00000080;
+    padding-right: 3px;
 }
+
+@keyframes typing-delay {
+    to {
+        width: 0;
+    }
+}
+
+/* home page settings  */
+
 
 .columnRight {
     text-align: right !important;
@@ -126,11 +153,12 @@ body {
 }
 
 .CardText {
-    padding-right: 4em;
-    padding-left: 4em;
+    padding-right: 2em;
+    padding-left: 2em;
     font-size: 1.25em !important;
     color: gray;
-    font-weight: bold;
+    font-weight: 500;
+    /* font-weight: bold; */
 }
 
 .CardFooter {
@@ -167,28 +195,33 @@ body {
     color: rgba(0, 118, 255, 0.9);
 }
 
+/* CSS */
 .callToAction {
-    display: inline-block;
-    outline: 0;
+    background-color: #111827;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
     cursor: pointer;
-    border: none;
-    padding: 0 56px;
-    height: 45px;
-    line-height: 45px;
-    border-radius: 7px;
-    background-color: #0070f3;
-    color: white;
-    font-weight: 400;
-    font-size: 16px;
-    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
-    transition: background 0.2s ease,
-        color 0.2s ease,
-        box-shadow 0.2s ease;
+    flex: 0 0 auto;
+    font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
 }
 
 .callToAction:hover {
-    background: rgba(0, 118, 255, 0.9);
-    box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+    background-color: #374151;
 }
 
 /* carousel settings*/
@@ -233,6 +266,22 @@ body {
     text-align: center;
 }
 
+/* form settings */
+
+.CommentForm {
+    background-color: rgb(255, 255, 255) !important;
+    color: black !important;
+    height: 7.5em !important;
+    padding-top: 2.5em !important;
+}
+
+.form-floating>.form-control-plaintext~label,
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+    color: black !important;
+    --bs-body-bg: none
+}
 .dojoQuestion {
 	padding: 1.5em !important;
 	margin-bottom: 1.5em;

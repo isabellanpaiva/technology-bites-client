@@ -62,14 +62,18 @@ const CommunityPage = () => {
 
 					<h3 className='PageSubHeading'>Meet your neighbors </h3>
 				</section>
-				<Form>
+
+				<Form
+					className='CardTitle'
+					style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 					<Form.Check
 						type='checkbox'
 						id='custom-switch'
-						label='Only Following'
+						label='People I follow'
 						onChange={handleCheck}
 					/>
 				</Form>
+
 				<Row>
 					{users.length > 0 &&
 						users.map(user => (

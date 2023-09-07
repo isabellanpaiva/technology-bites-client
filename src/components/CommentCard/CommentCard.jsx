@@ -18,8 +18,10 @@ const CommentCard = ({ comment, getComments }) => {
 			.catch(err => console.log(err))
 	}
 	return (
-		<Card className='ContentCard' style={{ fontSize: '0.85em' }}>
+		<Card className='ContentCard' style={{ fontSize: '0.8em' }}>
+
 			<Card.Body>
+
 				<Row>
 					<Col md={{ span: 2 }}>
 						<div>
@@ -47,19 +49,21 @@ const CommentCard = ({ comment, getComments }) => {
 									<button
 										className='socialActionButton'
 										onClick={() => setEditing(true)}>
-										Edit 🥑
+										Edit ✏️
 									</button>
 									<button
 										className='socialActionButton'
 										onClick={() => handleDeleteComment()}>
-										Delete 🍄
+										Delete 🗑
 									</button>
 								</>
 							)}
 						</div>
 					</Col>
 				</Row>
+
 			</Card.Body>
+
 		</Card>
 	)
 }

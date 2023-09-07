@@ -103,11 +103,11 @@ const ProfilePage = () => {
 										type={'profile'}
 										data-bs-theme='dark'></CarouselResponses>
 								) : (
-									<h3 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
+									<h4 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
 										{user._id === loggedUser._id
 											? 'No challenges resolved yet. What about start now?'
 											: `Ops... ${user.firstName} don't have any responsers yet 🔎`}
-									</h3>
+									</h4>
 								)
 							) : (
 								<p>Loading...</p>
@@ -125,7 +125,7 @@ const ProfilePage = () => {
 										Danger zone
 									</h1>
 
-									<h3 className='PageSubHeading' style={{ color: 'red' }}>
+									<h3 className='PageSubHeading'>
 										We don't want you to go, but we respect your decisions.
 									</h3>
 

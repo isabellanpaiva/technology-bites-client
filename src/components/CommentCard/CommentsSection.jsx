@@ -1,4 +1,4 @@
-import { Card, Row, Col, FloatingLabel, Form } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import CommentForm from '../CommentForm/CommentForm'
 import CommentCard from './CommentCard'
 import { useEffect, useState } from 'react'
@@ -37,7 +37,7 @@ const CommentsSection = ({ response }) => {
 					))}
 				</Card.Body>
 			) : (
-				<h3>Be the first to leave a comment! 🌚</h3>
+				<h3>Be the first to leave a comment 🌚</h3>
 			)}
 		</Card>
 	)

@@ -44,42 +44,46 @@ const CommunityCard = ({ user, profilePage, loadUserDetails, loadCommunityDetail
 				<Card.Header className='CardHeader'>
 					<Row>
 						<Col>
-							<img src={avatar} className='userAvatar mb-1' alt='ProfileAvatar' />
+							<img src={avatar} className='userAvatar mb-' alt='ProfileAvatar' />
 
 							<Card.Title className='CardTitle'>
-								{firstName} {lastName}
+								<div>{firstName} {lastName}</div>
+								<div style={{ fontSize: '0.75em', marginTop: '1em' }}>{jobPosition}</div>
+								<div style={{ fontSize: '0.5em', marginTop: '1.5em', color: 'lightgray' }}>
+									{user.followers.length}{' '}
+									{user.followers.length === 1 ? 'follower' : 'followers'}
+
+								</div>
 							</Card.Title>
+
 						</Col>
 					</Row>
+
 				</Card.Header>
 
-				<Card.Body className='CardBody'>
-					<Card.Text className='CardText'> {jobPosition} </Card.Text>
+				<Card.Body className='CardBody mb-3'>
 
-					{profilePage && (
-						<Card.Text className='CardText' style={{ color: 'black' }}>
-							{user.email}
-						</Card.Text>
-					)}
-
-					<Card.Text className='CardText' style={{ fontSize: '1.3em' }}>
+					<Card.Text className='CardText'>
 						{description}
 					</Card.Text>
+
 				</Card.Body>
 
 				<Card.Footer className='CardFooter'>
-					<Row>
-						<Col>
-							{user.followers.length}{' '}
-							{user.followers.length === 1 ? 'follower' : 'followers'}
-						</Col>
-					</Row>
+
+					{/* <Row>
+						<div style={{ fontSize: '1.25em', marginBottom: '1.5em' }}>
+							<strong>{user.followers.length}{' '}
+								{user.followers.length === 1 ? 'follower' : 'followers'}
+							</strong>
+						</div>
+					</Row> */}
 
 					<Row>
 						{!profilePage && (
 							<Col>
 								<button className='socialActionButton' onClick={checkUserProfile}>
-									Check
+									Check 👀
 								</button>
 							</Col>
 						)}
@@ -92,7 +96,7 @@ const CommunityCard = ({ user, profilePage, loadUserDetails, loadCommunityDetail
 											? () => handleFollow(user_id, { action: 'add' })
 											: () => handleFollow(user_id, { action: 'remove' })
 									}>
-									{following ? 'Unfollow' : 'Follow'}
+									{following ? 'Unfollow 👎🏽' : 'Follow 👍🏽'}
 								</button>
 							</Col>
 						)}

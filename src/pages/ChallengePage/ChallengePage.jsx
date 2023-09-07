@@ -85,7 +85,8 @@ const ChallengePage = () => {
 					) : (
 						<Row>
 							<Col>
-								<p>Nice, you are the first the respond this challenge! </p>
+								<h4 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
+									Cool! You are the first the respond this challenge 🥇 </h4>
 							</Col>
 						</Row>
 					))}

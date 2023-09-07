@@ -70,7 +70,7 @@ const CommentForm = ({ response, getComments }) => {
 							className='socialActionButton mt-3'
 							type='submit'
 							style={{ fontSize: '1em' }}>
-							Publish 📩
+							Publish
 						</button>
 
 					</Form.Group>

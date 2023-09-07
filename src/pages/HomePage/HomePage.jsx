@@ -25,16 +25,24 @@ const HomePage = () => {
 	}
 
 	return (
-		<Container fluid className='PageContainer'>
-			<section className='Bites mt-5'>
-				<Row>
-					<h1 className='PageHeading'>
-						<span className='typing-animation'>{appName}. </span>
-					</h1>
 
-					<h1 className='PageSubHeading mt-3'> Nerd stuff made easy  💻</h1>
+		<Container fluid>
 
-					<Col style={{ marginTop: '3em' }}>
+			<section >
+
+				<Row className='justify-content-center'>
+
+					<Col>
+
+						<h1 className='PageHeading'>
+							<span className='typing-animation'>{appName}. </span>
+						</h1>
+
+						<h1 className='PageSubHeading mt-3'> Nerd stuff made easy  💻</h1>
+
+					</Col>
+
+					<Col xs={12} style={{ marginTop: '3em' }}>
 						<ContentCard bites={bites}>
 							<p className='plainText mb-3'>{bites.definition}</p>
 
@@ -43,7 +51,9 @@ const HomePage = () => {
 							</Button>
 						</ContentCard>
 					</Col>
+
 				</Row>
+
 			</section>
 
 			<h1 className='PageSubHeading' style={{ marginBottom: '5em' }}>
@@ -51,7 +61,8 @@ const HomePage = () => {
 				Learn. Validate. Connect.
 			</h1>
 
-			<section className='Features' style={{ marginBottom: '10em' }}>
+			<section>
+
 				<article>
 					<Row className='justify-content-center'>
 						<Col>
@@ -76,6 +87,7 @@ const HomePage = () => {
 							</Row>
 						</Col>
 					</Row>
+
 				</article>
 
 				<article style={{ paddingTop: '15em' }}>
@@ -134,6 +146,8 @@ const HomePage = () => {
 				</article>
 			</section>
 		</Container>
+
+
 	)
 }
 

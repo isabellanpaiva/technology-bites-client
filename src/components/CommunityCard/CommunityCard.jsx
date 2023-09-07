@@ -83,7 +83,7 @@ const CommunityCard = ({ user, profilePage, loadUserDetails, loadCommunityDetail
 						{!profilePage && (
 							<Col>
 								<button className='socialActionButton' onClick={checkUserProfile}>
-									Check 👀
+									See profile
 								</button>
 							</Col>
 						)}
@@ -96,7 +96,7 @@ const CommunityCard = ({ user, profilePage, loadUserDetails, loadCommunityDetail
 											? () => handleFollow(user_id, { action: 'add' })
 											: () => handleFollow(user_id, { action: 'remove' })
 									}>
-									{following ? 'Unfollow 👎🏽' : 'Follow 👍🏽'}
+									{following ? 'Unfollow' : 'Follow'}
 								</button>
 							</Col>
 						)}

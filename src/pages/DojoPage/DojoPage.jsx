@@ -35,7 +35,7 @@ const DojoPage = () => {
 	const correctAnswers = answers.filter(answer => answer === 'right')
 
 	return (
-		<Container className='PageContainer'>
+		<Container>
 			<section style={{ marginBottom: '5em' }}>
 				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
 					Dojo
@@ -45,7 +45,7 @@ const DojoPage = () => {
 			</section>
 
 			<Row>
-				<section className='mb-5'>
+				<section className='mt-5 mb-5'>
 					<Row>
 						{tags &&
 							tags.map(tag => (
@@ -59,31 +59,47 @@ const DojoPage = () => {
 										setSelectedTag={setSelectedTag}
 										selectedTag={selectedTag}
 										setAnswers={setAnswers}
-									/>
+									>
+									</CategoryTags>
+
 								</Col>
 							))}
 					</Row>
 				</section>
 
-				<section>
+				<section className="mt-5">
+
 					{questions && (
+
 						<>
+
+							<h3 className='PageSubHeading' style={{ marginBottom: '3em' }}>
+								Ready... Set... Go!
+							</h3>
+
 							{questions.map(question => (
 								<DojoQuestion
 									key={question._id}
-									className='dojoList'
 									question={question}
-									updateAnswers={updateAnswers}></DojoQuestion>
+									updateAnswers={updateAnswers}
+								>
+
+								</DojoQuestion>
+
 							))}
-							<Row className='justify-content-center'>
-								<Col md={{ span: 2 }}>
-									<p>
+
+							<Row>
+								<Col md={{ span: 12 }}>
+									<p className='CardText mt-3' style={{ textAlign: 'center' }}>
 										Correct answers: {correctAnswers.length}/{questions.length}
 									</p>
 								</Col>
 							</Row>
+
 						</>
+
 					)}
+
 				</section>
 			</Row>
 		</Container>

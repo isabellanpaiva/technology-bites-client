@@ -55,7 +55,7 @@ const ProfilePage = () => {
 	}
 
 	return (
-		<Container className='PageContainer'>
+		<Container fluid>
 			{!user ? (
 				<p> cargando.......</p>
 			) : (

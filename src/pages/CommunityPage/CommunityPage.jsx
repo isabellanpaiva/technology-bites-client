@@ -54,7 +54,7 @@ const CommunityPage = () => {
 
 	return (
 		<>
-			<Container fluid className='PageContainer'>
+			<Container fluid>
 				<section style={{ marginBottom: '5em' }}>
 					<h1 className='PageHeading' style={{ fontSize: '3em' }}>
 						Community
@@ -86,7 +86,7 @@ const CommunityPage = () => {
 						))}
 				</Row>
 				<Container>
-					<Row className='justify-content-center' style={{ marginTop: '2.5em' }}>
+					<Row className='justify-content-center' style={{ marginTop: '3.5em' }}>
 						{buttons}
 					</Row>
 				</Container>

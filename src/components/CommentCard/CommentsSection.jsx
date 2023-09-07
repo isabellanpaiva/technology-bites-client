@@ -37,7 +37,10 @@ const CommentsSection = ({ response }) => {
 					))}
 				</Card.Body>
 			) : (
-				<h3>Be the first to leave a comment 🌚</h3>
+
+				<p className='plainText mt-5 mb-5'>
+					Be the first to leave a comment!
+				</p>
 			)}
 		</Card>
 	)

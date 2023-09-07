@@ -45,7 +45,7 @@ const ChallengePage = () => {
 	}
 
 	return (
-		<Container className='PageContainer'>
+		<Container fluid>
 			<section style={{ marginBottom: '5em' }}>
 				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
 					Challenges

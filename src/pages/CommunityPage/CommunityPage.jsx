@@ -32,6 +32,7 @@ const CommunityPage = () => {
 	return (
 		<>
 			<Container fluid className='PageContainer'>
+
 				<section style={{ marginBottom: '5em' }}>
 					<h1 className='PageHeading' style={{ fontSize: '3em' }}>
 						Community
@@ -39,14 +40,16 @@ const CommunityPage = () => {
 
 					<h3 className='PageSubHeading'>Meet your neighbors </h3>
 				</section>
-				<Form>
+
+				<Form className="CardTitle" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 					<Form.Check
 						type='checkbox'
 						id='custom-switch'
-						label='Only Following'
+						label='People I follow'
 						onChange={handleCheck}
 					/>
 				</Form>
+
 				<Row>
 					{users.map(user => (
 						<Col key={user._id} md={{ span: 4 }}>
@@ -57,6 +60,7 @@ const CommunityPage = () => {
 						</Col>
 					))}
 				</Row>
+
 			</Container>
 		</>
 	)

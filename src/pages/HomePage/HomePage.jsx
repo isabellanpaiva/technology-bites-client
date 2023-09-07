@@ -110,23 +110,23 @@ const HomePage = () => {
 				<article style={{ paddingTop: '15em' }}>
 					<Row className='justify-content-center'>
 						<Col>
-							<Row className='d-flex align-items-center'>
+							<Row className='d-flex align-items-center ms-5'>
 								<Col className='columnRight'>
 									<Figure.Image
 										className='memeMockup'
 										alt='Mockup'
 										src={memeMockup}
-										style={{ width: '350px', filter: 'grayscale(100%' }}
+										style={{ width: '400px', filter: 'grayscale(100%' }}
 									/>
 								</Col>
 
 								<Col className='columnLeft ms-5' md={{ span: 6 }}>
-									<h2 className='FeaturesHeading'> Dojo 🏁 </h2>
-									<h2 className='FeaturesSubHeading'>
+									<h2 className='FeaturesHeading ms-5'> Dojo 🥋 </h2>
+									<h2 className='FeaturesSubHeading ms-5'>
 										{' '}
-										10 rounds, true or false.{' '}
+										10 questions, true or false.{' '}
 									</h2>
-									<h2 className='FeaturesSubHeading2'> How many can you get? </h2>
+									<h2 className='FeaturesSubHeading2 ms-5'> How many can you get? </h2>
 								</Col>
 							</Row>
 						</Col>

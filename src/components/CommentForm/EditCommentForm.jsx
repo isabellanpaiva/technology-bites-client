@@ -24,32 +24,45 @@ const EditCommentForm = ({ comment, setEditing, getComments }) => {
 	}
 
 	return (
-		<Card style={{ border: 'none' }}>
+
+		<Card>
+
 			<Card.Header className='CardHeader'>
+
 				<Form onSubmit={handleSubmitForm}>
+
 					<Form.Group className='mt-4' controlId='userResponse'>
+
 						<FloatingLabel
 							controlId='floatingTextarea2'
 							label='Have something to say about this response?'>
+
 							<Form.Control
+								className="CommentForm"
 								as='textarea'
-								style={{ height: '7.5em', paddingTop: '2.5em' }}
 								value={newComment}
 								onChange={handleInputChange}
 								maxLength={140}
 							/>
 						</FloatingLabel>
+
 						<p>{newComment.length}/140</p>
+
 						{errors.length > 0 && <Alert variant='danger'>{errors[0]}</Alert>}
+
 						<button
 							className='socialActionButton'
 							type='submit'
 							style={{ fontSize: '1em' }}>
 							Save
+
 						</button>
 					</Form.Group>
+
 				</Form>
+
 			</Card.Header>
+
 		</Card>
 	)
 }

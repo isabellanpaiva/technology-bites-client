@@ -34,7 +34,11 @@ const Navigation = () => {
 				<Navbar.Collapse>
 					<Nav>
 						<Link to={'/'} className='nav-link'>
-							<img src={logo} alt='logo' style={{ width: '5em', height: 'auto', filter: 'invert(100%)' }} />
+							<img
+								src={logo}
+								alt='logo'
+								style={{ width: '5em', height: 'auto', filter: 'invert(100%)' }}
+							/>
 						</Link>
 					</Nav>
 
@@ -68,7 +72,10 @@ const Navigation = () => {
 									My profile
 								</Link>
 
-								<span className='nav-link' onClick={logoutUser}>
+								<span
+									className='nav-link'
+									onClick={logoutUser}
+									style={{ cursor: 'pointer' }}>
 									Logout
 								</span>
 							</>

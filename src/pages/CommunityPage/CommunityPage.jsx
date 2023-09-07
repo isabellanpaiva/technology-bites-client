@@ -8,6 +8,7 @@ const CommunityPage = () => {
 	const { loggedUser } = useContext(AuthContext)
 
 	const [users, setUsers] = useState([])
+	const [totalUsers, setTotalUsers] = useState(0)
 	const [errors, setErrors] = useState([])
 	const [filter, setFilter] = useState(false)
 
@@ -19,14 +20,36 @@ const CommunityPage = () => {
 		setFilter(e.target.checked)
 	}
 
-	const loadCommunityDetails = () => {
+	const loadCommunityDetails = page => {
+		page ??= 0
 		userService
-			.getAllUsers(filter)
+			.getTotalUsers(filter)
 			.then(({ data }) => {
-				const communityUsers = data.filter(user => user._id !== loggedUser._id)
-				setUsers(communityUsers)
+				setTotalUsers(data)
 			})
 			.catch(err => setErrors(err.response.data.errorMessages))
+
+		userService
+			.getAllUsers(filter, page)
+			.then(({ data }) => {
+				setUsers(data)
+			})
+			.catch(err => setErrors(err.response.data.errorMessages))
+	}
+
+	let buttons = []
+
+	for (let i = 0; i < totalUsers / 6; i++) {
+		buttons.push(
+			<Col md={{ span: 1 }}>
+				<button
+					className='categoryTag'
+					style={{ marginRight: '1em' }}
+					onClick={() => loadCommunityDetails(i)}>
+					{i + 1}
+				</button>
+			</Col>
+		)
 	}
 
 	return (
@@ -48,15 +71,21 @@ const CommunityPage = () => {
 					/>
 				</Form>
 				<Row>
-					{users.map(user => (
-						<Col key={user._id} md={{ span: 4 }}>
-							<CommunityCard
-								user={user}
-								loadCommunityDetails={loadCommunityDetails}
-							/>
-						</Col>
-					))}
+					{users.length > 0 &&
+						users.map(user => (
+							<Col key={user._id} md={{ span: 4 }}>
+								<CommunityCard
+									user={user}
+									loadCommunityDetails={loadCommunityDetails}
+								/>
+							</Col>
+						))}
 				</Row>
+				<Container>
+					<Row className='justify-content-center' style={{ marginTop: '2.5em' }}>
+						{buttons}
+					</Row>
+				</Container>
 			</Container>
 		</>
 	)

@@ -1,13 +1,17 @@
 import './../../App.css'
 
-const CategoryTags = ({ tag, getQuestions }) => {
-
-    return (
-
-        <p>
-            <button className="d-grid categoryTag" onClick={() => getQuestions(tag)}> {tag}</button>
-        </p>
-    )
+const CategoryTags = ({ tag, getQuestions, setSelectedTag, selectedTag, setAnswers }) => {
+	return (
+		<p
+			className={`d-grid ${selectedTag === tag ? 'categoryTagSelected' : 'categoryTag'}`}
+			onClick={() => {
+				getQuestions(tag)
+				setSelectedTag(tag)
+				setAnswers([])
+			}}>
+			{tag}
+		</p>
+	)
 }
 
 export default CategoryTags

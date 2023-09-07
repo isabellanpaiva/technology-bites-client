@@ -1,111 +1,93 @@
 import { useEffect, useState } from 'react'
 import { Container, Row, Col, ListGroup } from 'react-bootstrap'
-import DojoCard from '../../components/DojoCard/DojoCard'
+import DojoQuestion from '../../components/DojoQuestion/DojoQuestion'
 import CategoryTags from '../../components/CategoryTags/CategoryTags'
 import dojoServices from '../../services/dojo.services'
 
 const DojoPage = () => {
+	const [tags, setTags] = useState([])
+	const [questions, setQuestions] = useState(null)
+	const [selectedTag, setSelectedTag] = useState(null)
+	const [answers, setAnswers] = useState([])
 
-    const [tags, setTags] = useState([])
-    const [questions, setQuestions] = useState([])
+	useEffect(() => {
+		loadTags()
+	}, [])
 
-    useEffect(() => {
-        loadTags()
-    }, [])
+	const loadTags = () => {
+		dojoServices
+			.getDojoCategories()
+			.then(({ data }) => setTags(data))
+			.catch(err => console.log(err))
+	}
 
-    const loadTags = () => {
+	const getQuestions = category => {
+		dojoServices
+			.getDojoQuestions(category)
+			.then(({ data }) => setQuestions(data))
+			.catch(err => console.log(err))
+	}
 
-        dojoServices
-            .getDojoCategories()
-            .then(({ data }) => setTags(data))
-            .catch(err => console.log(err))
-    }
+	const updateAnswers = newAnswer => {
+		setAnswers([...answers, newAnswer])
+	}
 
-    const getQuestions = (category) => {
+	const correctAnswers = answers.filter(answer => answer === 'right')
 
-        dojoServices
-            .getDojoQuestions(category)
-            .then(({ data }) => setQuestions(data))
-            .catch(err => console.log(err))
-    }
+	return (
+		<Container className='PageContainer'>
+			<section style={{ marginBottom: '5em' }}>
+				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
+					Dojo
+				</h1>
 
-    const checkResponse = (question, userAnswer) => {
+				<h3 className='PageSubHeading'> Select a category and prove yourself! </h3>
+			</section>
 
-        const result = question.validation === userAnswer ? "right" : "wrong"
+			<Row>
+				<section className='mb-5'>
+					<Row>
+						{tags &&
+							tags.map(tag => (
+								<Col
+									id={tag}
+									key={tag}
+									style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
+									<CategoryTags
+										tag={tag}
+										getQuestions={getQuestions}
+										setSelectedTag={setSelectedTag}
+										selectedTag={selectedTag}
+										setAnswers={setAnswers}
+									/>
+								</Col>
+							))}
+					</Row>
+				</section>
 
-        // result === true {
-        //      updateTrue() 
-        // } : updateFalse()
-
-    }
-
-    return (
-
-        <Container className="PageContainer">
-
-            <section style={{ marginBottom: '5em' }}>
-                <h1 className='PageHeading' style={{ fontSize: '3em' }}>
-                    Dojo
-                </h1>
-
-                <h3 className='PageSubHeading'> Select a category and prove yourself! </h3>
-            </section>
-
-            <Row>
-
-                <section className="mb-5">
-
-                    <Row>
-
-                        {
-                            tags &&
-                            tags.map(tag => (
-                                <Col key={tag} style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
-                                    <CategoryTags tag={tag} getQuestions={getQuestions} />
-                                </Col>
-                            ))
-                        }
-
-                    </Row>
-
-                </section>
-
-                <section>
-
-                    {
-                        questions &&
-                        <ListGroup>
-                            {
-                                questions.map(question => (
-
-                                    <ListGroup.Item key={question._id} className="dojoList">
-
-                                        <Row>
-
-                                            {question.statement}
-
-                                        </Row>
-
-                                        <button onClick={() => checkResponse(question, true)} >
-                                            True
-                                        </button>
-
-                                        <button onClick={() => checkResponse(question.validation, false)}>
-                                            False
-                                        </button>
-
-                                    </ListGroup.Item>
-                                ))
-                            }
-                        </ListGroup>
-                    }
-
-                </section>
-
-            </Row >
-
-        </Container >
-    )
+				<section>
+					{questions && (
+						<>
+							{questions.map(question => (
+								<DojoQuestion
+									key={question._id}
+									className='dojoList'
+									question={question}
+									updateAnswers={updateAnswers}></DojoQuestion>
+							))}
+							<Row className='justify-content-center'>
+								<Col md={{ span: 2 }}>
+									<p>
+										Correct answers: {correctAnswers.length}/{questions.length}
+									</p>
+								</Col>
+							</Row>
+						</>
+					)}
+				</section>
+			</Row>
+		</Container>
+	)
 }
 
 export default DojoPage

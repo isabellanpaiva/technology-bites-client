@@ -24,7 +24,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 15px;
 }
 
@@ -38,7 +38,7 @@ body {
     }
 
     to {
-        width: 35%;
+        width: 100%;
         border-right-width: 1.75px;
         /* Reach 35% width and add the border */
     }
@@ -75,19 +75,18 @@ body {
 
 /* home page settings  */
 
-
+/* 
 .columnRight {
     text-align: right !important;
     margin-left: 10em;
     margin-right: 5em;
-    /* background-color: blue; */
-}
+} */
 
-.columnLeft {
+/* .columnLeft {
     text-align: left !important;
     margin-right: 10em;
-    /* background-color: red; */
-}
+
+} */
 
 .mockupImage {
     width: 15em;
@@ -116,7 +115,7 @@ body {
 
 .ContentCard {
     /* height: 10em; */
-    width: 50%;
+    width: 80%;
     margin: 5em auto;
     padding: 2em;
     border: none !important;
@@ -126,11 +125,8 @@ body {
 }
 
 .CommunityCard {
-    margin-top: 3em;
-    margin-bottom: 3em;
-    margin-left: 4em;
-    margin-right: 4em;
-    padding: 2em;
+    margin: 3em 2em;
+    padding: 2em 1em;
     border: none !important;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
     text-align: center;
@@ -228,34 +224,35 @@ body {
 
 .categoryTag {
     padding: 1em !important;
+	letter-spacing: 0;
     background-color: #f1f3f7;
     color: black !important;
     border: none;
     border-radius: 0.8em;
-    /* font-weight: bold; */
     font-weight: 350;
     transition: hover ease .4s;
 }
 
 .categoryTagSelected {
+	letter-spacing: 0;
     padding: 1em !important;
-    /* background-color: rgba(0, 118, 255, 0.7); */
     background-color: rgba(0, 113, 243, 0.886);
     color: white !important;
     border: none;
     border-radius: 0.8em;
-    /* font-weight: bold; */
+	font-weight: 350;
     transition: hover ease 4s;
 
 }
 
 .categoryTagSelected:hover {
-    /* background-color: rgba(8, 113, 234, 0.7); */
+	letter-spacing: 0;
     background-color: rgba(0, 113, 243, 0.886);
     cursor: pointer
 }
 
 .categoryTag:hover {
+	letter-spacing: 0;
     background-color: #e1e3e7;
     cursor: pointer
 }

@@ -41,7 +41,7 @@ const CommunityPage = () => {
 
 	for (let i = 0; i < totalUsers / 6; i++) {
 		buttons.push(
-			<Col md={{ span: 1 }} key={i}>
+			<Col xs={{ span: 1 }} key={i}>
 				<button
 					className='categoryTag'
 					style={{ marginRight: '1em' }}
@@ -77,7 +77,7 @@ const CommunityPage = () => {
 				<Row>
 					{users.length > 0 &&
 						users.map(user => (
-							<Col key={user._id} md={{ span: 4 }}>
+							<Col key={user._id} lg={{ span: 6 }} xl={{ span: 4 }}>
 								<CommunityCard
 									user={user}
 									loadCommunityDetails={loadCommunityDetails}

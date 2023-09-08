@@ -47,30 +47,31 @@ const CommunityCard = ({ user, profilePage, loadUserDetails, loadCommunityDetail
 							<img src={avatar} className='userAvatar mb-' alt='ProfileAvatar' />
 
 							<Card.Title className='CardTitle'>
-								<div>{firstName} {lastName}</div>
-								<div style={{ fontSize: '0.75em', marginTop: '1em' }}>{jobPosition}</div>
-								<div style={{ fontSize: '0.5em', marginTop: '1.5em', color: 'lightgray' }}>
+								<div>
+									{firstName} {lastName}
+								</div>
+								<div style={{ fontSize: '0.75em', marginTop: '1em' }}>
+									{jobPosition}
+								</div>
+								<div
+									style={{
+										fontSize: '0.5em',
+										marginTop: '1.5em',
+										color: 'lightgray',
+									}}>
 									{user.followers.length}{' '}
 									{user.followers.length === 1 ? 'follower' : 'followers'}
-
 								</div>
 							</Card.Title>
-
 						</Col>
 					</Row>
-
 				</Card.Header>
 
 				<Card.Body className='CardBody mb-3'>
-
-					<Card.Text className='CardText'>
-						{description}
-					</Card.Text>
-
+					<Card.Text className='CardText'>{description}</Card.Text>
 				</Card.Body>
 
 				<Card.Footer className='CardFooter'>
-
 					{/* <Row>
 						<div style={{ fontSize: '1.25em', marginBottom: '1.5em' }}>
 							<strong>{user.followers.length}{' '}
@@ -83,7 +84,7 @@ const CommunityCard = ({ user, profilePage, loadUserDetails, loadCommunityDetail
 						{!profilePage && (
 							<Col>
 								<button className='socialActionButton' onClick={checkUserProfile}>
-									See profile
+									profile
 								</button>
 							</Col>
 						)}

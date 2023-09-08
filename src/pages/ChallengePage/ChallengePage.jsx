@@ -24,8 +24,8 @@ const ChallengePage = () => {
 
 	const loadChallenge = () => {
 		challengeServices
-			// .getDailyChallenge()
-			.getOneRandomChallenge()
+			.getDailyChallenge()
+			// .getOneRandomChallenge()
 			.then(({ data }) => {
 				setChallenge(data)
 				getResponses()

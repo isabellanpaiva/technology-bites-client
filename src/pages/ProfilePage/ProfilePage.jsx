@@ -72,11 +72,15 @@ const ProfilePage = () => {
 								: 'Inspire and be inspired'}
 						</h3>
 					</section>
-					<CommunityCard
-						user={user}
-						profilePage={true}
-						loadUserDetails={loadUserDetails}
-					/>
+					<Row className='justify-content-center'>
+						<Col>
+							<CommunityCard
+								user={user}
+								profilePage={true}
+								loadUserDetails={loadUserDetails}
+							/>
+						</Col>
+					</Row>
 
 					<section className=' ProfileCards mt-5'>
 						<Row>

@@ -33,7 +33,7 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 	}
 
 	return (
-		<Card className='ContentCard'>
+		<Card className='ContentCard' md={{ span: 6 }}>
 			{type === 'challenge' && (
 				<Card.Header className='CardHeader'>
 					<img

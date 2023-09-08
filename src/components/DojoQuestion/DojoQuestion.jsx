@@ -18,27 +18,23 @@ const DojoQuestion = ({ question, updateAnswers }) => {
 		<>
 			<Row
 				className='dojoQuestion justify-content-between align-items-center'
-			// style={{
-			// 	padding: '24px',
-			// 	backgroundColor:
-			// 		questionState === 'right'
-			// 			? '#c3e6bb'
-			// 			: questionState === 'wrong'
-			// 				? '#e6bdbb'
-			// 				: '#f1f3f7',
-			// }}
+				// style={{
+				// 	padding: '24px',
+				// 	backgroundColor:
+				// 		questionState === 'right'
+				// 			? '#c3e6bb'
+				// 			: questionState === 'wrong'
+				// 				? '#e6bdbb'
+				// 				: '#f1f3f7',
+				// }}
 			>
-
 				<Col md={{ span: 9 }}>
-					<p
-						className="CardText"
-						style={{ marginTop: '2em', lineHeight: '2.5em' }}
-
-					>
-						{question.statement}</p>
+					<p className='CardText' style={{ marginTop: '1em', lineHeight: '2em' }}>
+						{question.statement}
+					</p>
 				</Col>
 
-				<Col md={{ span: 2 }}>
+				<Col md={{ span: 3 }}>
 					<Row className='justify-content-center'>
 						{questionState === 'pending' && (
 							<>

@@ -1,5 +1,5 @@
 .Footer {
-    width: 100%;
+    width: 100vw;
     padding: 2.5em;
     margin-top: 6.5em;
     margin-right: 3em;
@@ -22,6 +22,6 @@
 }
 
 .logo {
-    width: 200px;
+    min-width: 200px;
     height: 200px;
 }

@@ -25,24 +25,18 @@ const HomePage = () => {
 	}
 
 	return (
-
 		<Container fluid>
-
-			<section >
-
+			<section>
 				<Row className='justify-content-center'>
-
-					<Col>
-
+					<Col md={{ span: 12 }}>
 						<h1 className='PageHeading'>
 							<span className='typing-animation'>{appName}. </span>
 						</h1>
 
 						<h1 className='PageSubHeading mt-3'> Nerd stuff made easy  💻</h1>
-
 					</Col>
 
-					<Col xs={12} style={{ marginTop: '3em' }}>
+					<Col lg={{ span: 7 }} md={{ span: 10 }} style={{ marginTop: '3em' }}>
 						<ContentCard bites={bites}>
 							<p className='plainText mb-3'>{bites.definition}</p>
 
@@ -51,9 +45,7 @@ const HomePage = () => {
 							</Button>
 						</ContentCard>
 					</Col>
-
 				</Row>
-
 			</section>
 
 			<h1 className='PageSubHeading' style={{ marginBottom: '5em' }}>
@@ -62,12 +54,14 @@ const HomePage = () => {
 			</h1>
 
 			<section>
-
 				<article>
 					<Row className='justify-content-center'>
 						<Col>
-							<Row className='d-flex align-items-center'>
-								<Col className='columnRight'>
+							<Row className='d-flex align-items-center justify-content-center'>
+								<Col
+									className='d-flex columnRight'
+									md={{ span: 4, justifyContent: 'end' }}
+									sm={{ justifyContent: 'center' }}>
 									<Figure.Image
 										className='mockupImage'
 										alt='Mockup'
@@ -76,10 +70,9 @@ const HomePage = () => {
 									/>
 								</Col>
 
-								<Col className='columnLeft' md={{ span: 6 }}>
+								<Col className='columnLeft' md={{ span: 5 }}>
 									<h2 className='FeaturesHeading'> Bites 🍿 </h2>
 									<h2 className='FeaturesSubHeading'>
-										{' '}
 										Technology concepts with one click.
 									</h2>
 									<h2 className='FeaturesSubHeading2'> Grab your bite! </h2>
@@ -87,14 +80,16 @@ const HomePage = () => {
 							</Row>
 						</Col>
 					</Row>
-
 				</article>
 
 				<article style={{ paddingTop: '15em' }}>
 					<Row className='justify-content-center'>
 						<Col>
-							<Row className='d-flex align-items-center'>
-								<Col className='columnRight' md={{ span: 6 }}>
+							<Row className='d-flex justify-content-center align-items-center'>
+								<Col
+									className=' columnRight '
+									md={{ span: 6, offset: 1 }}
+									sm={{ justifyContent: 'center' }}>
 									<h2 className='FeaturesHeading'> Challenges 🥇</h2>
 									<h2 className='FeaturesSubHeading'>
 										{' '}
@@ -106,7 +101,7 @@ const HomePage = () => {
 									</h2>
 								</Col>
 
-								<Col className='columnLeft'>
+								<Col className='columnLeft' md={{ span: 5 }}>
 									<Figure.Image
 										className='mockupImage'
 										alt='Mockup'
@@ -122,8 +117,11 @@ const HomePage = () => {
 				<article style={{ paddingTop: '15em' }}>
 					<Row className='justify-content-center'>
 						<Col>
-							<Row className='d-flex align-items-center ms-5'>
-								<Col className='columnRight'>
+							<Row className='d-flex align-items-center justify-content-center ms-5'>
+								<Col
+									className='d-flex columnRight'
+									md={{ span: 4, justifyContent: 'end' }}
+									sm={{ justifyContent: 'center' }}>
 									<Figure.Image
 										className='memeMockup'
 										alt='Mockup'
@@ -132,13 +130,16 @@ const HomePage = () => {
 									/>
 								</Col>
 
-								<Col className='columnLeft ms-5' md={{ span: 6 }}>
+								<Col className='columnLeft' md={{ span: 5 }}>
 									<h2 className='FeaturesHeading ms-5'> Dojo 🥋 </h2>
 									<h2 className='FeaturesSubHeading ms-5'>
 										{' '}
 										10 questions, true or false.{' '}
 									</h2>
-									<h2 className='FeaturesSubHeading2 ms-5'> How many can you get? </h2>
+									<h2 className='FeaturesSubHeading2 ms-5'>
+										{' '}
+										How many can you get?{' '}
+									</h2>
 								</Col>
 							</Row>
 						</Col>
@@ -146,8 +147,6 @@ const HomePage = () => {
 				</article>
 			</section>
 		</Container>
-
-
 	)
 }
 

@@ -24,8 +24,8 @@ const ChallengePage = () => {
 
 	const loadChallenge = () => {
 		challengeServices
-			// .getDailyChallenge()
-			.getOneRandomChallenge()
+			.getDailyChallenge()
+			// .getOneRandomChallenge()
 			.then(({ data }) => {
 				setChallenge(data)
 				getResponses()
@@ -63,8 +63,8 @@ const ChallengePage = () => {
 				</h1>
 				<h3 className='PageSubHeading'> A new technology question everyday </h3>
 			</section>
-			<Row>
-				<Col>
+			<Row className='justify-content-center'>
+				<Col lg={{ span: 7 }} md={{ span: 10 }}>
 					<ContentCard challenge={challenge}>
 						{myResponse ? (
 							<>
@@ -85,22 +85,24 @@ const ChallengePage = () => {
 				</Col>
 			</Row>
 
-			<Row>
-				{myResponse &&
-					(responses.length !== 0 ? (
-						<CarouselResponses
-							responses={responses}
-							getResponses={getResponses}
-							type={'challenge'}></CarouselResponses>
-					) : (
-						<Row>
-							<Col>
-								<h4 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
-									Cool! You are the first the respond this challenge 🥇{' '}
-								</h4>
-							</Col>
-						</Row>
-					))}
+			<Row className='justify-content-center'>
+				<Col md={{ span: 8 }}>
+					{myResponse &&
+						(responses.length !== 0 ? (
+							<CarouselResponses
+								responses={responses}
+								getResponses={getResponses}
+								type={'challenge'}></CarouselResponses>
+						) : (
+							<Row>
+								<Col>
+									<h4 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
+										Cool! You are the first the respond this challenge 🥇{' '}
+									</h4>
+								</Col>
+							</Row>
+						))}
+				</Col>
 			</Row>
 			<Modal show={modalShow} onHide={() => setModalShow(false)}>
 				<Modal.Header closeButton>Feedback from our robot:</Modal.Header>

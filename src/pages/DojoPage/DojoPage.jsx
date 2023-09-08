@@ -58,35 +58,29 @@ const DojoPage = () => {
 										getQuestions={getQuestions}
 										setSelectedTag={setSelectedTag}
 										selectedTag={selectedTag}
-										setAnswers={setAnswers}
-									>
-									</CategoryTags>
-
+										setAnswers={setAnswers}></CategoryTags>
 								</Col>
 							))}
 					</Row>
 				</section>
 
-				<section className="mt-5">
-
+				<section className='mt-5'>
 					{questions && (
-
 						<>
-
 							<h3 className='PageSubHeading' style={{ marginBottom: '3em' }}>
 								Ready... Set... Go!
 							</h3>
 
-							{questions.map(question => (
-								<DojoQuestion
-									key={question._id}
-									question={question}
-									updateAnswers={updateAnswers}
-								>
-
-								</DojoQuestion>
-
-							))}
+							<Row className='justify-content-center'>
+								<Col md={{ span: 10 }}>
+									{questions.map(question => (
+										<DojoQuestion
+											key={question._id}
+											question={question}
+											updateAnswers={updateAnswers}></DojoQuestion>
+									))}
+								</Col>
+							</Row>
 
 							<Row>
 								<Col md={{ span: 12 }}>
@@ -95,11 +89,8 @@ const DojoPage = () => {
 									</p>
 								</Col>
 							</Row>
-
 						</>
-
 					)}
-
 				</section>
 			</Row>
 		</Container>

@@ -19,13 +19,14 @@ const CommentCard = ({ comment, getComments }) => {
 	}
 	return (
 		<Card className='ContentCard' style={{ fontSize: '0.8em' }}>
-
 			<Card.Body>
-
 				<Row>
-					<Col md={{ span: 2 }}>
+					<Col
+						md={{ span: 2 }}
+						style={{ textAlign: 'middle' }}
+						className='text-align-center'>
 						<div>
-							<img className='userAvatar' src={owner.avatar} alt='ProfileAvatar' />
+							<img className='userAvatar2' src={owner.avatar} alt='ProfileAvatar' />
 						</div>
 
 						<div className='mt-2'>
@@ -61,9 +62,7 @@ const CommentCard = ({ comment, getComments }) => {
 						</div>
 					</Col>
 				</Row>
-
 			</Card.Body>
-
 		</Card>
 	)
 }

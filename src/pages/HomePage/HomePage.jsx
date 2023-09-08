@@ -59,14 +59,14 @@ const HomePage = () => {
 						<Col>
 							<Row className='d-flex align-items-center justify-content-center'>
 								<Col
-									className='d-flex columnRight'
+									className='d-flex columnRight justify-content-end'
 									md={{ span: 4, justifyContent: 'end' }}
 									sm={{ justifyContent: 'center' }}>
 									<Figure.Image
 										className='mockupImage'
 										alt='Mockup'
 										src={IDontKnowWhatImDoing4}
-										style={{ width: '350px' }}
+										style={{ width: '350px', marginRight: '2em' }}
 									/>
 								</Col>
 
@@ -88,16 +88,15 @@ const HomePage = () => {
 							<Row className='d-flex justify-content-center align-items-center'>
 								<Col
 									className=' columnRight '
-									md={{ span: 6, offset: 1 }}
-									sm={{ justifyContent: 'center' }}>
+									md={{ span: 6, offset: 0 }}
+									sm={{ justifyContent: 'center' }}
+									style={{ textAlign: 'end', marginRight: '2em' }}>
 									<h2 className='FeaturesHeading'> Challenges 🥇</h2>
 									<h2 className='FeaturesSubHeading'>
-										{' '}
 										A fresh question everyday.
 									</h2>
 									<h2 className='FeaturesSubHeading2'>
-										{' '}
-										Connect, discuss and get inspired!{' '}
+										Connect, discuss and get inspired!
 									</h2>
 								</Col>
 
@@ -119,14 +118,18 @@ const HomePage = () => {
 						<Col>
 							<Row className='d-flex align-items-center justify-content-center ms-5'>
 								<Col
-									className='d-flex columnRight'
+									className='d-flex columnRight justify-content-end'
 									md={{ span: 4, justifyContent: 'end' }}
 									sm={{ justifyContent: 'center' }}>
 									<Figure.Image
 										className='memeMockup'
 										alt='Mockup'
 										src={memeMockup}
-										style={{ width: '400px', filter: 'grayscale(100%' }}
+										style={{
+											width: '400px',
+											filter: 'grayscale(100%',
+											marginRight: '2em',
+										}}
 									/>
 								</Col>
 

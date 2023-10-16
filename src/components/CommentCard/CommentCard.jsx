@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react'
 import { Card, Row, Col, Button, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import commentServices from '../../services/comment.services'
 import EditCommentForm from '../CommentForm/EditCommentForm'
 
-const CommentCard = ({ comment, getComments }) => {
+const CommentCard = ({ comment, getComments, getCommentsUp }) => {
 	const { loggedUser } = useContext(AuthContext)
 
 	const [editing, setEditing] = useState(false)
@@ -14,7 +15,10 @@ const CommentCard = ({ comment, getComments }) => {
 	const handleDeleteComment = () => {
 		commentServices
 			.deleteComment(comment._id)
-			.then(() => getComments())
+			.then(() => {
+				getComments()
+				getCommentsUp()
+			})
 			.catch(err => console.log(err))
 	}
 	return (
@@ -22,19 +26,19 @@ const CommentCard = ({ comment, getComments }) => {
 			<Card.Body>
 				<Row>
 					<Col
-						md={{ span: 2 }}
+						lg={{ span: 4 }}
 						style={{ textAlign: 'middle' }}
 						className='text-align-center'>
-						<div>
+						<Link to={`/profile/${owner._id}`} className='nav-link'>
 							<img className='userAvatar2' src={owner.avatar} alt='ProfileAvatar' />
-						</div>
+						</Link>
 
 						<div className='mt-2'>
 							<strong>{owner.firstName}</strong>
 						</div>
 					</Col>
 
-					<Col md={{ span: 8 }}>
+					<Col lg={{ span: 8 }}>
 						{!editing ? (
 							<Card.Text className='CardText'>{content} </Card.Text>
 						) : (

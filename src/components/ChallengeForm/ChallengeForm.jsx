@@ -36,31 +36,32 @@ const ChallengeForm = ({ challenge, setMyResponse, getResponses, getApiResponse 
 				})
 				.catch(err => setErrors(err.response.data.errorMessages))
 		} else {
-			setErrors(['Ops, your answer must be at leas five characters long'])
+			setErrors(['Ops, your answer must be at least five characters long'])
 		}
 	}
 
 	return (
 		<>
 			<Form onSubmit={handleSubmitForm}>
-				<Form.Group className='mt-5 mb-3' controlId='userResponse'>
+				<Form.Group className='mt-4 mb-3' controlId='userResponse'>
 					<Form.Control
 						type='text'
+						style={{ width: '80%', margin: '0 auto' }}
 						name='userResponse'
 						value={userResponse}
 						placeholder='Type your answer here!'
 						onChange={handleInputChange}
 					/>
 					{errors.length > 0 && (
-						<FormError>
+						<FormError className='mb-0'>
 							{errors.map(elm => (
-								<p key={elm} style={{ margin: 0, fontSize: '.8em' }}>
+								<p key={elm} style={{ fontSize: '.8em' }}>
 									{elm}
 								</p>
 							))}
 						</FormError>
 					)}
-					<Button variant='primary' type='submit' className='callToAction mt-5'>
+					<Button variant='primary' type='submit' className='callToAction mt-3'>
 						Submit answer
 					</Button>
 				</Form.Group>

@@ -20,7 +20,6 @@ const AppRoutes = () => {
 			</Route>
 
 			<Route path={'*'} element={<NotFoundPage />} />
-
 		</Routes>
 	)
 }

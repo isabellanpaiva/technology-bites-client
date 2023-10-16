@@ -41,11 +41,8 @@ const CommunityPage = () => {
 
 	for (let i = 0; i < totalUsers / 6; i++) {
 		buttons.push(
-			<Col xs={{ span: 1 }} key={i}>
-				<button
-					className='categoryTag'
-					style={{ marginRight: '1em' }}
-					onClick={() => loadCommunityDetails(i)}>
+			<Col key={i} xs={1} className='d-flex justify-content-center'>
+				<button className='categoryTag m-1' onClick={() => loadCommunityDetails(i)}>
 					{i + 1}
 				</button>
 			</Col>
@@ -55,29 +52,28 @@ const CommunityPage = () => {
 	return (
 		<>
 			<Container fluid>
-				<section style={{ marginBottom: '5em' }}>
-					<h1 className='PageHeading' style={{ fontSize: '3em' }}>
-						Community
-					</h1>
-
+				<section className='section-header'>
+					<h1 className='PageHeading'>Community</h1>
 					<h3 className='PageSubHeading'>Meet your neighbors </h3>
 				</section>
-
 				<Form
-					className='CardTitle'
+					className='mb-4'
 					style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 					<Form.Check
 						type='checkbox'
 						id='custom-switch'
-						label='People I follow'
+						label='Only people I follow'
 						onChange={handleCheck}
 					/>
 				</Form>
-
-				<Row>
+				<Row className='mx-5'>
 					{users.length > 0 &&
 						users.map(user => (
-							<Col key={user._id} lg={{ span: 6 }} xl={{ span: 4 }}>
+							<Col
+								key={user._id}
+								md={{ span: 6 }}
+								xl={{ span: 4 }}
+								style={{ padding: '1em' }}>
 								<CommunityCard
 									user={user}
 									loadCommunityDetails={loadCommunityDetails}
@@ -86,9 +82,7 @@ const CommunityPage = () => {
 						))}
 				</Row>
 				<Container>
-					<Row className='justify-content-center' style={{ marginTop: '3.5em' }}>
-						{buttons}
-					</Row>
+					<Row className='justify-content-center mt-4'>{buttons}</Row>
 				</Container>
 			</Container>
 		</>

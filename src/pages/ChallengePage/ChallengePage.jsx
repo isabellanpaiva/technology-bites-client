@@ -57,18 +57,16 @@ const ChallengePage = () => {
 
 	return (
 		<Container fluid>
-			<section style={{ marginBottom: '5em' }}>
-				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
-					Challenges
-				</h1>
+			<section className='section-header'>
+				<h1 className='PageHeading'>Challenges</h1>
 				<h3 className='PageSubHeading'> A new technology question everyday </h3>
 			</section>
 			<Row className='justify-content-center'>
-				<Col lg={{ span: 7 }} md={{ span: 10 }}>
+				<Col xxl={{ span: 7 }} md={{ span: 10 }}>
 					<ContentCard challenge={challenge}>
 						{myResponse ? (
 							<>
-								<p className='plainText mt-5 mb-5'>
+								<p className='plainText mt-3 mb-5'>
 									You already answered this one ✅
 								</p>
 								<p className='CardResponse'> "{myResponse.response}"</p>
@@ -86,18 +84,21 @@ const ChallengePage = () => {
 			</Row>
 
 			<Row className='justify-content-center'>
-				<Col md={{ span: 8 }}>
+				<Col lg={{ span: 8 }} md={{ span: 10 }}>
 					{myResponse &&
 						(responses.length !== 0 ? (
-							<CarouselResponses
-								responses={responses}
-								getResponses={getResponses}
-								type={'challenge'}></CarouselResponses>
+							<>
+								<h2 className='PageSubHeading'> Check out other's responses</h2>
+								<CarouselResponses
+									responses={responses}
+									getResponses={getResponses}
+									type={'challenge'}></CarouselResponses>
+							</>
 						) : (
 							<Row>
 								<Col>
-									<h4 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
-										Cool! You are the first the respond this challenge 🥇{' '}
+									<h4 className='PageSubHeading m-5' style={{ color: 'gray' }}>
+										Cool! You are the first to respond this challenge 🥇
 									</h4>
 								</Col>
 							</Row>
@@ -107,9 +108,9 @@ const ChallengePage = () => {
 			<Modal show={modalShow} onHide={() => setModalShow(false)}>
 				<Modal.Header closeButton>Feedback from our robot:</Modal.Header>
 				<Modal.Body>
-					{!apiResponse ? (
+					{modalShow && !apiResponse ? (
 						<Row className='justify-content-center'>
-							<Col md={{ span: 1 }}>
+							<Col xs={{ span: 1 }}>
 								<Spinner animation='border' size='sm' role='status' />
 							</Col>
 						</Row>

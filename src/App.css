@@ -1,16 +1,22 @@
 /* global settings */
 
 body {
-    letter-spacing: 0.1em;
-    padding-top: 15em;
+    letter-spacing: 1px;
+    /* letter-spacing: .1em; */
+    padding-top: 12em;
+}
+
+.section-header {
+	margin-bottom: 4em;
 }
 
 .PageHeading {
-    font-size: 5em;
+    font-size: 2.9em;
     text-align: center;
 }
 
 .PageSubHeading {
+	font-size: 1.3em;
     text-align: center;
     margin-top: 1em;
     color: #0070f3;
@@ -28,49 +34,8 @@ body {
     margin: 15px;
 }
 
-/* home page animation  */
-
-@keyframes typing {
-    from {
-        width: 0;
-        border-right-width: 0;
-        /* Start with no border */
-    }
-
-    to {
-        width: 100%;
-        border-right-width: 1.75px;
-        /* Reach 35% width and add the border */
-    }
-}
-
-@keyframes border-blink {
-
-    0%,
-    100% {
-        border-color: transparent;
-        /* Hide the border */
-    }
-
-    50% {
-        border-color: #00000080;
-        /* Show the border */
-    }
-}
-
-.typing-animation {
-    display: inline-block;
-    overflow: hidden;
-    animation: typing 2.5s steps(40, end) forwards, border-blink 0.75s infinite alternate;
-    white-space: nowrap;
-    border-right: 2px solid #00000080;
-    padding-right: 3px;
-}
-
-@keyframes typing-delay {
-    to {
-        width: 0;
-    }
+.typed {
+	font-size: 1.3em;
 }
 
 /* home page settings  */
@@ -114,23 +79,21 @@ body {
 /* card settings */
 
 .ContentCard {
-    /* height: 10em; */
-    width: 90%;
-    margin: 5em auto;
+	width:90%;
+	margin: 3em auto;
     padding: 2em;
     border: none !important;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
     text-align: center;
-    line-height: 2.5em;
+    line-height: 2em;
 }
 
-.CommunityCard {
-    margin: 3em 2em;
+.CommunityCard{
     padding: 2em 1em;
     border: none !important;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
     text-align: center;
-    line-height: 2.5em;
+    line-height: 1.5em;
 }
 
 .CardHeader {
@@ -144,10 +107,8 @@ body {
 }
 
 .CardText {
-    padding-right: 2em;
-    padding-left: 2em;
-    font-size: 1.25em !important;
-    color: gray;
+    font-size: 1.1em !important;
+    color: rgb(72, 72, 72);
     font-weight: 500;
 }
 
@@ -159,22 +120,24 @@ body {
 .CardResponse {
     color: gray;
     font-style: italic;
-    font-weight: bold;
+	font-size: .9em;
+
 }
 
 .plainText {
-    line-height: 2.5em;
+	font-size: .8em;
 }
 
 .userAvatar {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .userAvatar2 {
-	width: 100%;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
 	object-fit: cover;
 }
@@ -183,9 +146,10 @@ body {
 
 .socialActionButton {
     border: none;
+	font-size: .9em;
     font-weight: bold;
     background: none;
-    letter-spacing: 0.1em;
+    letter-spacing: 1px;
     /* text-decoration: underline; */
     text-transform: uppercase;
     color: rgba(0, 118, 255, 0.9);
@@ -232,6 +196,7 @@ body {
     padding: 1em !important;
 	letter-spacing: 0;
     background-color: #f1f3f7;
+	font-size: .9em;
     color: black !important;
     border: none;
     border-radius: 0.8em;
@@ -242,6 +207,7 @@ body {
 .categoryTagSelected {
 	letter-spacing: 0;
     padding: 1em !important;
+	font-size: .9em;
     background-color: rgba(0, 113, 243, 0.886);
     color: white !important;
     border: none;
@@ -293,4 +259,23 @@ body {
 .alert-danger {
     background-color: white !important;
     border: none !important;
+}
+
+.full-spinner {
+	display: flex;
+	justify-content: center;
+}
+
+@media screen and (width <=720px) {
+	body {
+		letter-spacing: 0.1em;
+		padding-top: 10em;
+	}
+
+	.userAvatar {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
 }

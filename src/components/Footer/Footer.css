@@ -1,19 +1,18 @@
 .Footer {
     width: 100vw;
-    padding: 2.5em;
-    margin-top: 6.5em;
-    margin-right: 3em;
+    padding: 5em;
+    margin-top: 3.5em;
     background-color: #191919;
     color: white;
-    font-size: 2em;
 }
 
 .Footer h1 {
+	font-size: 2em;
     margin-bottom: 1em;
 }
 
 .Footer p {
-    font-size: 0.65em;
+    font-size: 1.2em;
     font-weight: 250
 }
 
@@ -22,6 +21,19 @@
 }
 
 .logo {
-    min-width: 200px;
+    width: 200px;
     height: 200px;
+}
+
+@media screen and (width <= 767px) {
+.Footer {
+		text-align: center;
+	}
+}
+
+@media screen and (width <= 480px ){
+	
+	.Footer p {
+			font-size: .9em;
+		}
 }

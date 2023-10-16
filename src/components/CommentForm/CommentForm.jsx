@@ -3,7 +3,7 @@ import { Alert, Card, FloatingLabel, Form } from 'react-bootstrap'
 import commentServices from '../../services/comment.services'
 import { AuthContext } from '../../contexts/auth.context'
 
-const CommentForm = ({ response, getComments }) => {
+const CommentForm = ({ response, getComments, getCommentsUp }) => {
 	const [comment, setComment] = useState('')
 	const { loggedUser } = useContext(AuthContext)
 	const [errors, setErrors] = useState([])
@@ -29,35 +29,26 @@ const CommentForm = ({ response, getComments }) => {
 			.then(() => {
 				setComment('')
 				getComments()
+				getCommentsUp()
 				setErrors([])
 			})
 			.catch(err => setErrors(err.response.data.errorMessages))
 	}
 
 	return (
-
 		<Card>
-
 			<Card.Header className='CardHeader'>
-
 				<Form onSubmit={handleSubmitForm}>
-
-					<Form.Group className='mt-5' controlId='userResponse'>
-
-						<FloatingLabel
-							controlId='floatingTextarea2'
-							label='Have something to say about this response?'
-						>
-
+					<Form.Group className='mt-2' controlId='userResponse'>
+						<FloatingLabel className='floating-label' label='Say something!'>
 							<Form.Control
-								className="CommentForm"
+								className='CommentForm'
 								as='textarea'
 								placeholder='userComment'
 								value={comment}
 								onChange={handleInputChange}
 								maxLength={140}
 							/>
-
 						</FloatingLabel>
 
 						<p style={{ color: 'lightGray' }}>{comment.length}/140</p>
@@ -67,19 +58,15 @@ const CommentForm = ({ response, getComments }) => {
 						)}
 
 						<button
-							className='socialActionButton mt-3'
+							className='socialActionButton mt-1'
 							type='submit'
 							style={{ fontSize: '1em' }}>
 							Publish
 						</button>
-
 					</Form.Group>
-
 				</Form>
-
 			</Card.Header>
-
-		</Card >
+		</Card>
 	)
 }
 

@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from 'react'
 import userService from '../../services/user.services'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Spinner } from 'react-bootstrap'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
 import CarouselResponses from '../../components/CarouselResponses/CarouselResponses'
 import CommunityCard from '../../components/CommunityCard/CommunityCard'
 import * as MESSAGES from './../../consts/messages.consts'
 
-const ProfilePage = () => {
+const ProfilePage = name => {
 	const { user_id } = useParams()
-
 	const { loggedUser, logout } = useContext(AuthContext)
 
 	const [user, setUser] = useState(null)
@@ -57,11 +56,13 @@ const ProfilePage = () => {
 	return (
 		<Container fluid>
 			{!user ? (
-				<p> cargando.......</p>
+				<Container fluid className='full-spinner'>
+					<Spinner animation='border' size='sm' role='status' />
+				</Container>
 			) : (
 				<>
-					<section style={{ marginBottom: '5em' }}>
-						<h1 className='PageHeading' style={{ fontSize: '3em' }}>
+					<section className='section-header'>
+						<h1 className='PageHeading'>
 							{user && user._id === loggedUser._id
 								? `Welcome, ${user.firstName}!`
 								: `${user.firstName} ${user.lastName} profile`}
@@ -73,7 +74,7 @@ const ProfilePage = () => {
 						</h3>
 					</section>
 					<Row className='justify-content-center'>
-						<Col>
+						<Col sm={{ span: 10 }}>
 							<CommunityCard
 								user={user}
 								profilePage={true}
@@ -82,40 +83,37 @@ const ProfilePage = () => {
 						</Col>
 					</Row>
 
-					<section className=' ProfileCards mt-5'>
-						<Row>
-							<h1
-								className='PageHeading'
-								style={{
-									fontSize: '3em',
-									marginTop: '2em',
-									marginBottom: '0.5em',
-								}}>
-								Library
-							</h1>
-
+					<section className='ProfileCards mt-5'>
+						<Row className='justify-content-center'>
+							<h1 className='PageHeading mb-3'>Library</h1>
 							<h3 className='PageSubHeading'>
 								{user._id === loggedUser._id
 									? 'Your previous responses'
 									: `Previous responses from ${user.firstName}`}
 							</h3>
-							{userResponses ? (
-								userResponses.length > 0 ? (
-									<CarouselResponses
-										responses={userResponses}
-										getResponses={getResponses}
-										type={'profile'}
-										data-bs-theme='dark'></CarouselResponses>
+							<Col lg={{ span: 9 }} md={{ span: 10 }}>
+								{userResponses ? (
+									userResponses.length > 0 ? (
+										<CarouselResponses
+											responses={userResponses}
+											getResponses={getResponses}
+											type={'profile'}
+											data-bs-theme='dark'></CarouselResponses>
+									) : (
+										<h4
+											className='PageSubHeading mt-5'
+											style={{ color: 'gray' }}>
+											{user._id === loggedUser._id
+												? 'No challenges resolved yet. What about start now?'
+												: `Ops... ${user.firstName} don't have any responsers yet 🔎`}
+										</h4>
+									)
 								) : (
-									<h4 className='PageSubHeading mt-5' style={{ color: 'gray' }}>
-										{user._id === loggedUser._id
-											? 'No challenges resolved yet. What about start now?'
-											: `Ops... ${user.firstName} don't have any responsers yet 🔎`}
-									</h4>
-								)
-							) : (
-								<p>Loading...</p>
-							)}
+									<Container fluid className='full-spinner'>
+										<Spinner animation='border' size='sm' role='status' />
+									</Container>
+								)}
+							</Col>
 						</Row>
 					</section>
 

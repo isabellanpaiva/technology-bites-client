@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import userService from '../../services/user.services'
 import { AuthContext } from '../../contexts/auth.context'
 import responseService from '../../services/response.services'
+import commentServices from '../../services/comment.services'
 
 const ResponseCard = ({ challenge, response, type, getResponses }) => {
 	const { loggedUser } = useContext(AuthContext)
@@ -12,6 +13,11 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 	const [responseOwner, setResponseOwner] = useState(null)
 	const [showComments, setShowComments] = useState(false)
 	const [isFav, setFav] = useState(response.likes.includes(loggedUser._id))
+	const [comments, setComments] = useState([])
+
+	useEffect(() => {
+		getCommentsUp()
+	}, [])
 
 	useEffect(() => {
 		userService
@@ -20,7 +26,16 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 				setResponseOwner(data)
 			})
 			.catch(err => setErrors(err.response.data.errorMessages))
+
+		getCommentsUp()
 	}, [])
+
+	const getCommentsUp = () => {
+		commentServices
+			.getAllComments(response._id)
+			.then(({ data }) => setComments(data))
+			.catch(err => setErrors(err.response.data.errorMessages))
+	}
 
 	const handleFav = (response_id, { action }) => {
 		responseService
@@ -41,23 +56,21 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 						src={responseOwner?.avatar}
 						alt='ProfileAvatar'
 					/>
-
-					<Card.Title className='CardTitle' style={{ marginBottom: '-1rem' }}>
-						{responseOwner?.firstName}
-					</Card.Title>
+					<Card.Title className='CardTitle mt-2'>{responseOwner?.firstName}</Card.Title>
 				</Card.Header>
 			)}
-
-			<Card.Body className='CardBody'>
+			<Card.Body className='py-0'>
 				<Card.Title>
-					<h4 className='PageSubHeading mb-5' style={{ lineHeight: '2', color: 'black' }}>
-						{challenge.question}
-					</h4>
+					{type !== 'challenge' && (
+						<h4
+							className='PageSubHeading mb-3'
+							style={{ lineHeight: '1.4', color: 'black' }}>
+							{challenge.question}
+						</h4>
+					)}
 				</Card.Title>
-
-				<Card.Text className='CardText mb-5'>{response.response}</Card.Text>
+				<Card.Text className='CardResponse mb-2 px-1'>"{response.response}"</Card.Text>
 			</Card.Body>
-
 			<Card.Footer className='CardFooter'>
 				<Row>
 					<Col>
@@ -78,13 +91,18 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 						<button
 							className='socialActionButton'
 							onClick={() => setShowComments(!showComments)}>
-							Comment ✋🏽
+							Comments {comments.length}
 						</button>
 					</Col>
 				</Row>
 			</Card.Footer>
-
-			{showComments && <CommentsSection response={response} getResponses={getResponses} />}
+			{showComments && (
+				<CommentsSection
+					response={response}
+					getResponses={getResponses}
+					getCommentsUp={getCommentsUp}
+				/>
+			)}
 		</Card>
 	)
 }

@@ -31,17 +31,20 @@ const Navigation = () => {
 	return (
 		<>
 			<Navbar expand='lg' fixed='top' className='Navigation'>
+				<Nav>
+					<Link to={'/'} className='nav-link'>
+						<img
+							src={logo}
+							alt='logo'
+							style={{ width: '5em', height: 'auto', filter: 'invert(100%)' }}
+						/>
+					</Link>
+				</Nav>
+				<Navbar.Toggle
+					aria-controls='responsive-navbar-nav'
+					style={{ marginRight: '5vw' }}
+				/>
 				<Navbar.Collapse>
-					<Nav>
-						<Link to={'/'} className='nav-link'>
-							<img
-								src={logo}
-								alt='logo'
-								style={{ width: '5em', height: 'auto', filter: 'invert(100%)' }}
-							/>
-						</Link>
-					</Nav>
-
 					<Nav className='AuthLinks'>
 						<Link to={'/'} className='nav-link'>
 							Bites

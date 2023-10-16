@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './../../App.css'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -24,12 +24,12 @@ const DojoQuestion = ({ question, updateAnswers }) => {
 				// 		questionState === 'right'
 				// 			? '#c3e6bb'
 				// 			: questionState === 'wrong'
-				// 				? '#e6bdbb'
+				// 				? '#e6bdbbac'
 				// 				: '#f1f3f7',
 				// }}
 			>
 				<Col md={{ span: 9 }}>
-					<p className='CardText' style={{ marginTop: '1em', lineHeight: '2em' }}>
+					<p className='CardText' style={{ marginTop: '1em', lineHeight: '1.5em' }}>
 						{question.statement}
 					</p>
 				</Col>
@@ -38,20 +38,22 @@ const DojoQuestion = ({ question, updateAnswers }) => {
 					<Row className='justify-content-center'>
 						{questionState === 'pending' && (
 							<>
-								<Col>
-									<button
-										className='socialActionButton'
-										onClick={() => checkResponse(true)}>
-										True
-									</button>
-								</Col>
-								<Col>
-									<button
-										className='socialActionButton'
-										onClick={() => checkResponse(false)}>
-										False
-									</button>
-								</Col>
+								<Row className='justify-content-center'>
+									<Col md={{ span: 6 }} xs={{ span: 2 }}>
+										<button
+											className='socialActionButton'
+											onClick={() => checkResponse(true)}>
+											True
+										</button>
+									</Col>
+									<Col md={{ span: 6 }} xs={{ span: 2 }}>
+										<button
+											className='socialActionButton'
+											onClick={() => checkResponse(false)}>
+											False
+										</button>
+									</Col>
+								</Row>
 							</>
 						)}
 						{questionState === 'right' && (

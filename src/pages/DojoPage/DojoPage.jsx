@@ -22,6 +22,8 @@ const DojoPage = () => {
 	}
 
 	const getQuestions = category => {
+		setAnswers([])
+		setQuestions([])
 		dojoServices
 			.getDojoQuestions(category)
 			.then(({ data }) => setQuestions(data))
@@ -36,16 +38,13 @@ const DojoPage = () => {
 
 	return (
 		<Container>
-			<section style={{ marginBottom: '5em' }}>
-				<h1 className='PageHeading' style={{ fontSize: '3em' }}>
-					Dojo
-				</h1>
-
+			<section className='section-header'>
+				<h1 className='PageHeading'>Dojo</h1>
 				<h3 className='PageSubHeading'> Select a category and prove yourself! </h3>
 			</section>
 
 			<Row>
-				<section className='mt-5 mb-5'>
+				<section className='mt-2 mb-5'>
 					<Row>
 						{tags &&
 							tags.map(tag => (
@@ -64,7 +63,7 @@ const DojoPage = () => {
 					</Row>
 				</section>
 
-				<section className='mt-5'>
+				<section>
 					{questions && (
 						<>
 							<h3 className='PageSubHeading' style={{ marginBottom: '3em' }}>
@@ -72,7 +71,7 @@ const DojoPage = () => {
 							</h3>
 
 							<Row className='justify-content-center'>
-								<Col md={{ span: 10 }}>
+								<Col xs={{ span: 11 }} md={{ span: 10 }}>
 									{questions.map(question => (
 										<DojoQuestion
 											key={question._id}

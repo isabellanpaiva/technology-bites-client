@@ -11,7 +11,7 @@ const HomePage = () => {
 	const appName = import.meta.env.VITE_APP_NAME
 
 	const [bites, setBites] = useState({})
-	const [errors, setErrors] = useState([])
+	// const [errors, setErrors] = useState([])
 
 	useEffect(() => {
 		loadBites()
@@ -53,7 +53,7 @@ const HomePage = () => {
 						</h1>
 					</Col>
 
-					<Col lg={{ span: 7 }} md={{ span: 10 }} style={{ marginTop: '3em' }}>
+					<Col lg={{ span: 6 }} md={{ span: 6 }} style={{ marginTop: '5em' }}>
 						<ContentCard bites={bites}>
 							<Button className='callToAction mt-4' type='submit' onClick={loadBites}>
 								Get Another Bite
@@ -121,6 +121,7 @@ const HomePage = () => {
 								</Col>
 								<Col className='columnLeft' md={{ span: 5 }}>
 									<h2 className='FeaturesHeading'> Bites </h2>
+									<h2 className='FeaturesHeading'> Bites </h2>
 									<h2 className='FeaturesSubHeading'>
 										Technology concepts with one click.
 									</h2>
@@ -130,6 +131,7 @@ const HomePage = () => {
 						</Col>
 					</Row>
 				</article>
+
 				<article
 					style={{
 						marginTop: '10em',
@@ -139,9 +141,10 @@ const HomePage = () => {
 					}}>
 					<h1 className='PageSubHeading' style={{ color: 'white' }}>
 						{' '}
-						Powered by Open IA :cerebro:
+						Powered by Open IA 🧠
 					</h1>
 				</article>
+
 				<article style={{ paddingTop: '15em' }}>
 					<Row className='justify-content-center'>
 						<Col>
@@ -171,6 +174,7 @@ const HomePage = () => {
 						</Col>
 					</Row>
 				</article>
+
 				<article
 					style={{
 						marginTop: '10em',
@@ -180,9 +184,10 @@ const HomePage = () => {
 					}}>
 					<h1 className='PageSubHeading' style={{ color: 'white' }}>
 						{' '}
-						Designed for begginers :mochila:
+						Designed for begginers 🎒
 					</h1>
 				</article>
+
 				<article style={{ paddingTop: '15em', marginBottom: '15em' }}>
 					<Row className='justify-content-center'>
 						<Col>

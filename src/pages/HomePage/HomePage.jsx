@@ -11,7 +11,7 @@ const HomePage = () => {
 	const appName = import.meta.env.VITE_APP_NAME
 
 	const [bites, setBites] = useState({})
-	const [errors, setErrors] = useState([])
+	// const [errors, setErrors] = useState([])
 
 	useEffect(() => {
 		loadBites()
@@ -25,18 +25,25 @@ const HomePage = () => {
 	}
 
 	return (
+
 		<Container fluid>
+
 			<section>
+
 				<Row className='justify-content-center'>
-					<Col md={{ span: 12 }}>
-						<h1 className='PageHeading'>
+					<Col md={{ span: 12 }} style={{ marginTop: '3em' }}>
+
+						<h1 className='PageHeading' style={{ color: 'black' }}>
 							<span className='typing-animation'>{appName}. </span>
 						</h1>
 
-						<h1 className='PageSubHeading mt-3'> Nerd stuff made easy  💻</h1>
+						<h1 className='PageSubHeading mt-3' style={{ color: 'black' }}>
+							Your online platform to learn and explore tech concepts   💻
+						</h1>
+
 					</Col>
 
-					<Col lg={{ span: 7 }} md={{ span: 10 }} style={{ marginTop: '3em' }}>
+					<Col lg={{ span: 6 }} md={{ span: 6 }} style={{ marginTop: '5em' }}>
 						<ContentCard bites={bites}>
 							<p className='plainText mb-3'>{bites.definition}</p>
 
@@ -46,14 +53,49 @@ const HomePage = () => {
 						</ContentCard>
 					</Col>
 				</Row>
+
+				<h1 className='PageSubHeading' style={{ marginTop: '2em', color: 'black' }}>
+					{' '}
+					Nerd stuff made easy 🤓
+				</h1>
+
 			</section>
 
-			<h1 className='PageSubHeading' style={{ marginBottom: '5em' }}>
-				{' '}
-				Learn. Validate. Connect.
-			</h1>
+			<section style={{ paddingTop: '10em', paddingBottom: '10em', marginTop: '15em', marginBottom: '15em', backgroundColor: '#191919', color: 'white' }}>
 
-			<section>
+				<h1 className='PageSubHeading' style={{ marginBottom: '5em', color: 'white' }}>
+					{' '}
+					How does it work
+					{/* Simple as this */}
+				</h1>
+
+				<Row className="justify-content-center">
+					<Col className="text-center" md={3}>
+						<h2 style={{ marginBottom: '1em' }}> 1</h2>
+						<h3 style={{ marginBottom: '2em' }}>Subscribe</h3>
+						<h4 style={{ marginBottom: '1em' }}>Create your profile</h4>
+						<h4 style={{ marginBottom: '1em' }}>and get started</h4>
+					</Col>
+
+					<Col className="text-center" md={3}>
+						<h2 style={{ marginBottom: '1em' }}>2</h2>
+						<h3 style={{ marginBottom: '2em' }}>Learn</h3>
+						<h4 style={{ marginBottom: '1em' }}>Push your brain </h4>
+						<h4 style={{ marginBottom: '1em' }}>to the next level</h4>
+					</Col>
+
+					<Col className="text-center" md={3}>
+						<h2 style={{ marginBottom: '1em' }}>3</h2>
+						<h3 style={{ marginBottom: '2em' }}>Connect</h3>
+						<h4 style={{ marginBottom: '1em' }}>Meet new people </h4>
+						<h4 style={{ marginBottom: '1em' }}>while discussing technology </h4>
+					</Col>
+				</Row>
+
+			</section >
+
+			<section className='mb-5'>
+
 				<article>
 					<Row className='justify-content-center'>
 						<Col>
@@ -71,7 +113,7 @@ const HomePage = () => {
 								</Col>
 
 								<Col className='columnLeft' md={{ span: 5 }}>
-									<h2 className='FeaturesHeading'> Bites 🍿 </h2>
+									<h2 className='FeaturesHeading'> Bites </h2>
 									<h2 className='FeaturesSubHeading'>
 										Technology concepts with one click.
 									</h2>
@@ -80,6 +122,15 @@ const HomePage = () => {
 							</Row>
 						</Col>
 					</Row>
+				</article>
+
+				<article style={{ marginTop: '10em', paddingTop: '20em', paddingBottom: '20em', backgroundColor: '#191919' }}>
+
+					<h1 className='PageSubHeading' style={{ color: 'white' }}>
+						{' '}
+						Powered by Open IA 🧠
+					</h1>
+
 				</article>
 
 				<article style={{ paddingTop: '15em' }}>
@@ -91,7 +142,7 @@ const HomePage = () => {
 									md={{ span: 6, offset: 0 }}
 									sm={{ justifyContent: 'center' }}
 									style={{ textAlign: 'end', marginRight: '2em' }}>
-									<h2 className='FeaturesHeading'> Challenges 🥇</h2>
+									<h2 className='FeaturesHeading'> Challenges</h2>
 									<h2 className='FeaturesSubHeading'>
 										A fresh question everyday.
 									</h2>
@@ -113,7 +164,14 @@ const HomePage = () => {
 					</Row>
 				</article>
 
-				<article style={{ paddingTop: '15em' }}>
+				<article style={{ marginTop: '10em', paddingTop: '20em', paddingBottom: '20em', backgroundColor: '#191919' }}>
+					<h1 className='PageSubHeading' style={{ color: 'white' }}>
+						{' '}
+						Designed for begginers 🎒
+					</h1>
+				</article>
+
+				<article style={{ paddingTop: '15em', marginBottom: '15em' }}>
 					<Row className='justify-content-center'>
 						<Col>
 							<Row className='d-flex align-items-center justify-content-center ms-5'>
@@ -134,10 +192,10 @@ const HomePage = () => {
 								</Col>
 
 								<Col className='columnLeft' md={{ span: 5 }}>
-									<h2 className='FeaturesHeading ms-5'> Dojo 🥋 </h2>
+									<h2 className='FeaturesHeading ms-5'> Dojo </h2>
 									<h2 className='FeaturesSubHeading ms-5'>
 										{' '}
-										10 questions, true or false.{' '}
+										True or false questions.{' '}
 									</h2>
 									<h2 className='FeaturesSubHeading2 ms-5'>
 										{' '}
@@ -149,7 +207,8 @@ const HomePage = () => {
 					</Row>
 				</article>
 			</section>
-		</Container>
+
+		</Container >
 	)
 }
 

@@ -45,7 +45,7 @@ const EditCommentForm = ({ comment, setEditing, getComments }) => {
 							className='socialActionButton'
 							type='submit'
 							style={{ fontSize: '1em' }}>
-							Save
+							Save 📩
 						</button>
 					</Form.Group>
 				</Form>

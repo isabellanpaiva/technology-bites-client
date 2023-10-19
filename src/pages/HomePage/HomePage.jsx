@@ -39,21 +39,18 @@ const HomePage = () => {
 	}
 
 	return (
-		<Container fluid>
+		<Container fluid className='fullw'>
 			<section>
 				<Row className='justify-content-center'>
 					<Col md={{ span: 12 }}>
 						<h1 className='PageHeading'>
-							{/* <span className='typing-animation'>{appName}. </span> */}
 							<span className='typed'></span>
 						</h1>
-
 						<h1 className='PageSubHeading mt-3' style={{ color: 'black' }}>
 							Your online platform to learn and explore tech concepts 💻
 						</h1>
 					</Col>
-
-					<Col lg={{ span: 6 }} md={{ span: 6 }} style={{ marginTop: '5em' }}>
+					<Col xl={{ span: 6 }} lg={{ span: 8 }} md={{ span: 10 }}>
 						<ContentCard bites={bites}>
 							<Button className='callToAction mt-4' type='submit' onClick={loadBites}>
 								Get Another Bite
@@ -61,44 +58,39 @@ const HomePage = () => {
 						</ContentCard>
 					</Col>
 				</Row>
-
 				<h1 className='PageSubHeading' style={{ marginTop: '2em', color: 'black' }}>
-					{' '}
 					Nerd stuff made easy 🤓
 				</h1>
 			</section>
-
 			<section
 				style={{
 					paddingTop: '10em',
 					paddingBottom: '10em',
-					marginTop: '15em',
-					marginBottom: '15em',
+					marginTop: '5em',
+					marginBottom: '5em',
 					backgroundColor: '#191919',
 					color: 'white',
 				}}>
 				<h1 className='PageSubHeading' style={{ marginBottom: '5em', color: 'white' }}>
-					{' '}
 					How does it work
-					{/* Simple as this */}
 				</h1>
 				<Row className='justify-content-center'>
 					<Col className='text-center' md={3}>
 						<h2 style={{ marginBottom: '1em' }}> 1</h2>
 						<h3 style={{ marginBottom: '2em' }}>Subscribe</h3>
-						<h4 style={{ marginBottom: '1em' }}>Create your profile</h4>
+						<h4>Create your profile</h4>
 						<h4 style={{ marginBottom: '1em' }}>and get started</h4>
 					</Col>
 					<Col className='text-center' md={3}>
 						<h2 style={{ marginBottom: '1em' }}>2</h2>
 						<h3 style={{ marginBottom: '2em' }}>Learn</h3>
-						<h4 style={{ marginBottom: '1em' }}>Push your brain </h4>
+						<h4>Push your brain </h4>
 						<h4 style={{ marginBottom: '1em' }}>to the next level</h4>
 					</Col>
 					<Col className='text-center' md={3}>
 						<h2 style={{ marginBottom: '1em' }}>3</h2>
 						<h3 style={{ marginBottom: '2em' }}>Connect</h3>
-						<h4 style={{ marginBottom: '1em' }}>Meet new people </h4>
+						<h4>Meet new people </h4>
 						<h4 style={{ marginBottom: '1em' }}>while discussing technology </h4>
 					</Col>
 				</Row>
@@ -120,7 +112,6 @@ const HomePage = () => {
 									/>
 								</Col>
 								<Col className='columnLeft' md={{ span: 5 }}>
-									<h2 className='FeaturesHeading'> Bites </h2>
 									<h2 className='FeaturesHeading'> Bites </h2>
 									<h2 className='FeaturesSubHeading'>
 										Technology concepts with one click.
@@ -183,8 +174,7 @@ const HomePage = () => {
 						backgroundColor: '#191919',
 					}}>
 					<h1 className='PageSubHeading' style={{ color: 'white' }}>
-						{' '}
-						Designed for begginers 🎒
+						Designed for beginners 🎒
 					</h1>
 				</article>
 

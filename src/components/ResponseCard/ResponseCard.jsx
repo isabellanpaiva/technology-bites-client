@@ -59,7 +59,7 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 					<Card.Title className='CardTitle mt-2'>{responseOwner?.firstName}</Card.Title>
 				</Card.Header>
 			)}
-			<Card.Body className='py-0'>
+			<Card.Body className='py-0 px-5'>
 				<Card.Title>
 					{type !== 'challenge' && (
 						<h4
@@ -69,7 +69,7 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 						</h4>
 					)}
 				</Card.Title>
-				<Card.Text className='CardResponse mb-2 px-1'>"{response.response}"</Card.Text>
+				<Card.Text className='CardResponse mb-2 px-4'>"{response.response}"</Card.Text>
 			</Card.Body>
 			<Card.Footer className='CardFooter'>
 				<Row>

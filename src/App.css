@@ -6,6 +6,10 @@ body {
     padding-top: 12em;
 }
 
+.fullw {
+	padding: 0 !important;
+}
+
 .section-header {
 	margin-bottom: 4em;
 }
@@ -60,12 +64,12 @@ body {
 
 .FeaturesHeading {
     font-size: 4em;
-    line-height: 2;
+    line-height: 1.5 ;
 }
 
 .FeaturesSubHeading {
     font-size: 2.5em;
-    line-height: 2;
+    line-height: 1.5;
     color: black;
 }
 
@@ -120,7 +124,7 @@ body {
 .CardResponse {
     color: gray;
     font-style: italic;
-	font-size: .9em;
+	font-size: 1em;
 
 }
 
@@ -277,5 +281,20 @@ body {
 		height: 100px;
 		border-radius: 50%;
 		object-fit: cover;
+	}
+
+	.FeaturesHeading {
+		font-size: 3em;
+		line-height: 1.2;
+	}
+
+	.FeaturesSubHeading {
+		font-size: 2em;
+		line-height: 1.2;
+	}
+
+	.FeaturesSubHeading2 {
+		font-size: 2em;
+		line-height: 1.5;
 	}
 }

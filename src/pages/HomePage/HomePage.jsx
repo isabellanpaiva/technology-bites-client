@@ -58,7 +58,7 @@ const HomePage = () => {
 						</ContentCard>
 					</Col>
 				</Row>
-				<h1 className='PageSubHeading' style={{ marginTop: '2em', color: 'black' }}>
+				<h1 className='FeaturesSubHeading' style={{ marginTop: '2em', color: 'black', textAlign: 'center' }}>
 					Nerd stuff made easy 🤓
 				</h1>
 			</section>
@@ -71,7 +71,8 @@ const HomePage = () => {
 					backgroundColor: '#191919',
 					color: 'white',
 				}}>
-				<h1 className='PageSubHeading' style={{ marginBottom: '5em', color: 'white' }}>
+				<h1 className='FeaturesSubHeading' style={{ color: 'white', textAlign: 'center', marginBottom: '3em' }}>
+					{' '}
 					How does it work
 				</h1>
 				<Row className='justify-content-center'>
@@ -130,7 +131,7 @@ const HomePage = () => {
 						paddingBottom: '20em',
 						backgroundColor: '#191919',
 					}}>
-					<h1 className='PageSubHeading' style={{ color: 'white' }}>
+					<h1 className='FeaturesSubHeading' style={{ color: 'white', textAlign: 'center' }}>
 						{' '}
 						Powered by Open IA 🧠
 					</h1>
@@ -173,7 +174,7 @@ const HomePage = () => {
 						paddingBottom: '20em',
 						backgroundColor: '#191919',
 					}}>
-					<h1 className='PageSubHeading' style={{ color: 'white' }}>
+					<h1 className='FeaturesSubHeading' style={{ color: 'white', textAlign: 'center' }}>
 						Designed for beginners 🎒
 					</h1>
 				</article>

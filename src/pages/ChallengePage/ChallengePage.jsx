@@ -72,12 +72,18 @@ const ChallengePage = () => {
 								<p className='CardResponse'> "{myResponse.response}"</p>
 							</>
 						) : (
-							<ChallengeForm
-								challenge={challenge}
-								setMyResponse={setMyResponse}
-								getResponses={getResponses}
-								getApiResponse={getApiResponse}
-							/>
+							<>
+
+								<p className='mt-5 mb-3' style={{ color: 'black' }}>
+									Share your thoughs and get access to the community responses!</p>
+
+								<ChallengeForm
+									challenge={challenge}
+									setMyResponse={setMyResponse}
+									getResponses={getResponses}
+									getApiResponse={getApiResponse}
+								/>
+							</>
 						)}
 					</ContentCard>
 				</Col>

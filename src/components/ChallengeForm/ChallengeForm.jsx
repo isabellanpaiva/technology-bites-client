@@ -61,7 +61,8 @@ const ChallengeForm = ({ challenge, setMyResponse, getResponses, getApiResponse 
 							))}
 						</FormError>
 					)}
-					<Button variant='primary' type='submit' className='callToAction mt-3'>
+
+					<Button variant='primary' type='submit' className='callToAction mt-4'>
 						Submit answer
 					</Button>
 				</Form.Group>

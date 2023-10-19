@@ -91,7 +91,7 @@ const ResponseCard = ({ challenge, response, type, getResponses }) => {
 						<button
 							className='socialActionButton'
 							onClick={() => setShowComments(!showComments)}>
-							Comments {comments.length}
+							Comments ({comments.length}) ✉️
 						</button>
 					</Col>
 				</Row>
